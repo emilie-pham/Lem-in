@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   check_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/07/10 17:31:21 by epham            ###   ########.fr       */
+/*   Created: 2019/07/10 17:15:35 by epham             #+#    #+#             */
+/*   Updated: 2019/07/10 17:41:51 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int		main(int ac, char **av)
-{
-	t_env *env;
+/*
+***		CHECK ANTS VALUE
+*/
 
-	initialize_env(&env);
-	get_input(env);
-	// IF input is OK
-	ft_putstr(env->input);
-	//
-	check_input(env);
-	free(env->input);
-	free(env);
+int		check_ants(t_env *env, char **value)
+{
+	int i;
+	
+	i = 0;
+	while (value[0][i])
+	{
+		if (ft_isdigit(value[0][i]) == 0 && value[0][i] != '+')
+			return (-1);
+		i++;
+	}
+	env->ant_nb = ft_atol(value[0]);
 	return (0);
 }
