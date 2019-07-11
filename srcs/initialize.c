@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:12:56 by epham             #+#    #+#             */
-/*   Updated: 2019/07/10 17:04:24 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/11 11:17:05 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ t_env	*initialize_env(t_env **env)
 	if (!(*env = (t_env *)malloc(sizeof(t_env))))
 		return (NULL);
 	if (!((*env)->input = (char *)malloc(sizeof(char))))
+		return (NULL);
+	if (!((*env)->start = (t_room *)malloc(sizeof(t_room))))
+		return (NULL);
+	if (!((*env)->end = (t_room *)malloc(sizeof(t_room))))
 		return (NULL);
 	return (*env);
 }

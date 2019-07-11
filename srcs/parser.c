@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/10 17:43:38 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/11 12:16:15 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ void		get_input(t_env *env)
 
 /*
 ***		CHECK IF INPUT IS VALID
+***		-1 : INVALID ANT NB
+***		-2 : NO START OR END
+***		-3 : EMPTY LINES
 */
 	#include <stdio.h>
 
@@ -42,8 +45,19 @@ int			check_input(t_env *env)
 
 	i = 0;
 	args = ft_strsplit(env->input, '\n');
+	printf("ARGLEN = %zu\n\n", ft_tablen(args));
+	printf("WORDNB = %d\n\n", ft_count_words(env->input, '\n'));
 	if (check_ants(env, args) == -1)
 		return (-1);
+	if (get_start_end(env, args, "start") == -1 || get_start_end(env, args, "end") == -1)
+		return (-2);
+	while (args[i])
+	{
+		printf("LINE : %s\n", args[i]);
+		if (ft_strlen(args[i]) == 0)
+			return (-3);
+		i++;
+	}
 	// checker les rooms
 	// checker les links
 	return (0);

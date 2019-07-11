@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/07/10 17:31:21 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/11 11:36:52 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ int		main(int ac, char **av)
 	initialize_env(&env);
 	get_input(env);
 	// IF input is OK
-	ft_putstr(env->input);
-	//
-	check_input(env);
+	if (check_input(env) == 0)
+		ft_putstr(env->input);
+	else
+		ft_putendl("ERROR");
 	free(env->input);
 	free(env);
 	return (0);

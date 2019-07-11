@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 09:09:50 by anradix           #+#    #+#             */
-/*   Updated: 2019/06/26 17:55:51 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/11 11:23:09 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
 int					ft_isdigit(int c);
+int					ft_strdigit(char *str);
 int					ft_isprint(int c);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(long long value, int base);

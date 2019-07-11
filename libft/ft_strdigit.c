@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count_words.c                                   :+:      :+:    :+:   */
+/*   ft_strdigit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 14:17:38 by epham             #+#    #+#             */
-/*   Updated: 2019/07/11 12:10:20 by epham            ###   ########.fr       */
+/*   Created: 2019/07/11 11:21:00 by epham             #+#    #+#             */
+/*   Updated: 2019/07/11 11:23:47 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_count_words(const char *s, char c)
+int		ft_strdigit(char *str)
 {
-	size_t nb_words;
-	size_t i;
-
-	nb_words = 0;
-	i = 0;
-	if (s[0] != c)
-		nb_words++;
-	while (s[i])
+	while (*str)
 	{
-		if (c == '\n' && s[i] == c && s[i + 1] == c)
-			nb_words++;
-		if (s[i] == c && s[i + 1] != c && s[i + 1] != '\0')
-			nb_words++;
-		i++;
+		if (ft_isdigit(*str) == 0)
+			return (0);
+		str++;
 	}
-	return (nb_words);
+	return (1);
 }

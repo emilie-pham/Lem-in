@@ -6,7 +6,7 @@
 #    By: epham <epham@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/08 09:05:15 by anradix           #+#    #+#              #
-#    Updated: 2019/06/18 16:07:02 by epham            ###   ########.fr        #
+#    Updated: 2019/07/11 11:23:26 by epham            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC = 	ft_atoi.c\
 		ft_isalpha.c\
 		ft_isascii.c\
 		ft_isdigit.c\
+		ft_strdigit.c\
 		ft_isprint.c\
 		ft_itoa.c\
 		ft_itoa_base.c\
