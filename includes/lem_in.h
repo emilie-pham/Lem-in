@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/11 13:48:00 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/11 14:25:36 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ int				check_input(t_env *env);
 ***		CHECK ERRORS
 */
 
-int				check_ants(t_env *env, char **value);
-int				get_start_end(t_env *env, char **args, char *startend);
+int				check_ants(t_env *env, char *line);
+int				is_comment(t_env *env, char *line, char *startend);
+int				get_start_end(t_env *env, char *line, char *startend);
 
 /*
 ***		yoyo
