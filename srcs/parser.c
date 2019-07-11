@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/11 13:47:22 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/11 22:05:59 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,35 @@ void	print_split(char **tab)
 	i = 0;
 }
 
+t_room	*create_room(char *line)
+{
+	char	**split;
+	t_room	*room;
+
+	split = ft_strsplit(line, ' ');
+	room = ft_memalloc(sizeof(t_room));
+	room->name = ft_strdup();
+	room->coord_x = //
+	room->coord_y = //
+	room->next = NULL;
+	// free split
+	return (room);
+
+}
+
+void	add_room(t_env *env, t_room *room)
+{
+	
+}
+
 void	parse_rooms(t_env *env)
 {
 	char	**split;
 
 	while (get_next_line(0, &env->line) == 1)
 	{
-		split = ft_strsplit(env->line, ' ');
+		// split = ft_strsplit(env->line, ' ');
+		create_room(env->line);
 		print_split(split);
 	}
 }
