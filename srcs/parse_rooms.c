@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:19:34 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/12 15:36:00 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/12 16:20:31 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int		is_room(char *line)
 		count++;
 	if (count == 3)
 	{
-		if (is_room_name(split[0]) && ft_isdigit(split[1][0]))
+		if (is_room_name(split[0]) && ft_strdigit(split[1]) &&
+			ft_strdigit(split[2]))
 			ret = 1;
 	}
 	return (ret);

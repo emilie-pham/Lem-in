@@ -1,23 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   parse_links.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/12 16:32:51 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/12 16:09:56 by yoribeir         ###   ########.fr       */
+/*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
+/*   Updated: 2019/07/12 16:19:20 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "../includes/lem_in.h"
 
-# include <fcntl.h>
-# include "libft.h"
-
-# define BUFF_SIZE 100
-
-int		get_next_line(const int fd, char **line);
-
-#endif

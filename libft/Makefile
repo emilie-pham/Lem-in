@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: epham <epham@student.42.fr>                +#+  +:+       +#+         #
+#    By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/08 09:05:15 by anradix           #+#    #+#              #
-#    Updated: 2019/07/11 11:23:26 by epham            ###   ########.fr        #
+#    Updated: 2019/07/12 16:10:49 by yoribeir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,8 @@ SRC = 	ft_atoi.c\
 		ft_sqrt.c\
 		ft_tabdel.c\
 		ft_triple_tabdel.c\
-		ft_power.c
+		ft_power.c\
+		ft_strndup.c
 
 OBJ = $(SRC:.c=.o)
 

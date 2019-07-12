@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 09:09:50 by anradix           #+#    #+#             */
-/*   Updated: 2019/07/11 11:23:09 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/12 16:10:41 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ int					*ft_init_int(int len);
 int					ft_sqrt(int nb);
 size_t				ft_triple_tablen(char ***tab);
 int					ft_power(int num, int pow);
+char				*ft_strndup(char const *src, int n);
 
 #endif

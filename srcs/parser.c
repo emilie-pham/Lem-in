@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/12 15:34:56 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/12 16:20:43 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,38 +24,6 @@ void		get_input(t_env *env)
 		free(tmp);
 		ft_strdel(&line);
 	}
-}
-
-/*
-***		CHECK IF INPUT IS VALID
-***		-1 : INVALID ANT NB
-***		-2 : NO START OR END
-***		-3 : EMPTY LINES
-*/
-
-int			check_input(t_env *env)
-{
-	char	**args;
-	int		i;
-
-	i = 0;
-	args = ft_strsplit(env->input, '\n');
-	printf("ARGLEN = %zu\n\n", ft_tablen(args));
-	printf("WORDNB = %d\n\n", ft_count_words(env->input, '\n'));
-	if (check_ants(env, args) == -1)
-		return (-1);
-	if (get_start_end(env, args, "start") == -1 || get_start_end(env, args, "end") == -1)
-		return (-2);
-	while (args[i])
-	{
-		printf("LINE : %s\n", args[i]);
-		if (ft_strlen(args[i]) == 0)
-			return (-3);
-		i++;
-	}
-	// checker les rooms
-	// checker les links
-	return (0);
 }
 
 void	ft_error(int error)
@@ -98,6 +66,57 @@ void	print_split(char **tab)
 	}
 	i = 0;
 }
+
+/*
+***		COMMENT LINE OR START/END OR EMPTY LINE
+***		0 : REGULAR COMMENT
+***		1 : START
+***		2 : END
+*/
+
+int		comment_type(t_env *env, char *line)
+{
+	if (line[1] == '#' && ft_strstr(line, "start") != NULL)
+	{
+		printf("START\n");
+		return (1);
+	}
+	if (line[1] == '#' && ft_strstr(line, "end") != NULL)
+	{
+		printf("END\n");
+		return (2);
+	}
+	printf("COMMENT\n");
+	return (0);
+}
+
+/*
+***		GET TYPE OF LINE
+***		-1 : EMPTY, 0 : COMMENT, 1 : START, 2 : END, 3 : ROOM, 4 : LINK
+*/
+
+int		get_data_type(t_env *env, char *line)
+{
+	char	**room;
+	char	**links;
+	int		ret;
+
+	ret = 0;
+	room = ft_strsplit(line, ' ');
+	links = ft_strsplit(line, '-');
+	if (ft_strlen(line) == 0)
+		ret = -1;
+	else if (line[0] == '#')
+		ret = comment_type(env, line);
+	else if (ft_tablen(room) == 3)
+		ret = 3;
+	else if (ft_tablen(links) == 2)
+		ret = 4;
+	ft_tabdel(room);
+	ft_tabdel(links);
+	return (ret);
+}
+
 
 void	parse(t_env *env)
 {
