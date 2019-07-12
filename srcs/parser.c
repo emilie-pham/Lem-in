@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/12 16:20:43 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/12 16:47:10 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,47 +24,6 @@ void		get_input(t_env *env)
 		free(tmp);
 		ft_strdel(&line);
 	}
-}
-
-void	ft_error(int error)
-{
-	if (error)
-	{
-		ft_putstr_fd("ERROR\n", 2);
-		exit(1);
-	}
-}
-
-void	parse_ants(t_env *env)
-{
-	if (get_next_line(0, &env->line) < 1)
-		ft_error(1);
-	if (!ft_isdigit(*env->line))
-		ft_error(1);
-	env->ant_nb = ft_atoi(env->line);
-	if (env->ant_nb <= 0)
-		ft_error(1);
-	printf("ants	%d\n", env->ant_nb);
-	ft_strdel(&env->line);
-}
-
-void	print_split(char **tab)
-{
-	int		i = 0;
-	int		y = 0;
-
-	while (tab[i])
-	{
-		while (tab[i][y])
-		{
-			printf("%c", tab[i][y]);
-			y++;
-		}
-		printf(" ");
-		y = 0;
-		i++;
-	}
-	i = 0;
 }
 
 /*
@@ -117,6 +76,73 @@ int		get_data_type(t_env *env, char *line)
 	return (ret);
 }
 
+void	ft_error(int error)
+{
+	if (error)
+	{
+		ft_putstr_fd("ERROR\n", 2);
+		exit(1);
+	}
+}
+
+void	parse_ants(t_env *env)
+{
+	if (get_next_line(0, &env->line) < 1)
+		ft_error(1);
+	if (!ft_isdigit(*env->line))
+		ft_error(1);
+	env->ant_nb = ft_atoi(env->line);
+	if (env->ant_nb <= 0)
+		ft_error(1);
+	printf("ants	%d\n", env->ant_nb);
+	ft_strdel(&env->line);
+}
+
+void	print_split(char **tab)
+{
+	int		i = 0;
+	int		y = 0;
+
+	while (tab[i])
+	{
+		while (tab[i][y])
+		{
+			printf("%c", tab[i][y]);
+			y++;
+		}
+		printf(" ");
+		y = 0;
+		i++;
+	}
+	i = 0;
+}
+
+int		is_command(char *line)
+{
+	if (line && ft_strlen(line) >= 2)
+		if (!ft_strncmp(line, "##", 2))
+			return (1);
+	return (0);
+}
+
+int		is_comment(char *line)
+{
+	if (line && ft_strlen(line))
+		if (!is_command(line) && !ft_strncmp(line, "#", 1))
+			return (1);
+	return (0);
+}
+
+int		is_link(char *line)
+{
+	if (line)
+	{
+		if (!is_comment(line)
+			&& !is_command(line)
+			&& !is_room(line))
+	}
+	if (!is_comment(line) && !is_command(line) && !is_room(line))
+}
 
 void	parse(t_env *env)
 {

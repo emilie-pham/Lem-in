@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/12 13:55:34 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/12 16:52:28 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef	struct		s_room
 	char			*name;
 	int				coord_x;
 	int				coord_y;
+	int				is_full;
+	int				level;
 	struct	s_room	*next;
 }					t_room;
 
@@ -71,5 +73,8 @@ int				get_start_end(t_env *env, char **args, char *startend);
 
 void	parse_rooms(t_env *env);
 void	parse(t_env *env);
+int		is_room(char *line);
+int		is_command(char *line);
+int		is_comment(char *line);
 
 #endif
