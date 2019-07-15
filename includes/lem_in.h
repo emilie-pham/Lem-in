@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/12 16:52:28 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/15 21:13:14 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ typedef	struct		s_room
 
 typedef struct	s_link
 {
-	t_room		*start;
-	t_room		*end;
+	t_room			*start;
+	t_room			*end;
+	char			*start;
+	char			*end;
+	struct	s_link	*next;
 }				t_link;
 
 typedef struct	s_env
@@ -42,6 +45,7 @@ typedef struct	s_env
 	char		*line;
 	char		*input;
 	int			ant_nb;
+	t_link		*links;
 	t_room		*rooms;
 	t_room		*start;
 	t_room		*end;
@@ -73,8 +77,15 @@ int				get_start_end(t_env *env, char **args, char *startend);
 
 void	parse_rooms(t_env *env);
 void	parse(t_env *env);
+void	print_list(t_room *head);
+
+/*
+***		checkers
+*/
+
 int		is_room(char *line);
 int		is_command(char *line);
 int		is_comment(char *line);
+int		is_link(char *line);
 
 #endif

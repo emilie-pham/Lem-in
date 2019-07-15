@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/12 16:47:10 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:45:04 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,33 +115,6 @@ void	print_split(char **tab)
 		i++;
 	}
 	i = 0;
-}
-
-int		is_command(char *line)
-{
-	if (line && ft_strlen(line) >= 2)
-		if (!ft_strncmp(line, "##", 2))
-			return (1);
-	return (0);
-}
-
-int		is_comment(char *line)
-{
-	if (line && ft_strlen(line))
-		if (!is_command(line) && !ft_strncmp(line, "#", 1))
-			return (1);
-	return (0);
-}
-
-int		is_link(char *line)
-{
-	if (line)
-	{
-		if (!is_comment(line)
-			&& !is_command(line)
-			&& !is_room(line))
-	}
-	if (!is_comment(line) && !is_command(line) && !is_room(line))
 }
 
 void	parse(t_env *env)
