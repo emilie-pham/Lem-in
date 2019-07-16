@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/07/12 13:48:28 by yoribeir         ###   ########.fr       */
+/*   Created: 2019/07/12 16:09:05 by yoribeir          #+#    #+#             */
+/*   Updated: 2019/07/12 16:10:02 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+char	*ft_strndup(char const *src, int n)
 {
-	t_env *env;
+	char	*ret;
+	int		len;
+	int		i;
 
-	initialize_env(&env);
-
-	parse(env);
-	// get_input(env);
-	// IF input is OK
-	// if (check_input(env) == 0)
-		// ft_putstr(env->input);
-	// else
-		// ft_putendl("ERROR");
-	free(env->input);
-	free(env);
-	return (0);
+	len = ft_strlen(src);
+	ret = malloc(sizeof(char) * (len + 1));
+	if (!ret)
+		return (0);
+	i = 0;
+	while (src[i] && n)
+	{
+		ret[i] = src[i];
+		n--;
+		i++;
+	}
+	ret[i] = '\0';
+	return (ret);
 }

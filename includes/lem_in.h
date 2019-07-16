@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
 /*   Updated: 2019/07/11 14:25:36 by epham            ###   ########.fr       */
+=======
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
+/*   Updated: 2019/07/15 21:13:14 by anonymous        ###   ########.fr       */
+>>>>>>> da0ba7d256da3f1363fba25408069782c843475c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +33,18 @@ typedef	struct		s_room
 	char			*name;
 	int				coord_x;
 	int				coord_y;
+	int				is_full;
+	int				level;
 	struct	s_room	*next;
 }					t_room;
 
 typedef struct	s_link
 {
-	t_room		*start;
-	t_room		*end;
+	t_room			*start;
+	t_room			*end;
+	char			*start;
+	char			*end;
+	struct	s_link	*next;
 }				t_link;
 
 typedef struct	s_env
@@ -40,6 +52,8 @@ typedef struct	s_env
 	char		*line;
 	char		*input;
 	int			ant_nb;
+	t_link		*links;
+	t_room		*rooms;
 	t_room		*start;
 	t_room		*end;
 }				t_env;
@@ -69,6 +83,17 @@ int				get_start_end(t_env *env, char *line, char *startend);
 ***		yoyo
 */
 
+void	parse_rooms(t_env *env);
 void	parse(t_env *env);
+void	print_list(t_room *head);
+
+/*
+***		checkers
+*/
+
+int		is_room(char *line);
+int		is_command(char *line);
+int		is_comment(char *line);
+int		is_link(char *line);
 
 #endif

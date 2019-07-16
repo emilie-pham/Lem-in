@@ -3,134 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/20 13:08:50 by epham             #+#    #+#             */
-/*   Updated: 2019/07/08 12:07:37 by epham            ###   ########.fr       */
+/*   Created: 2018/11/12 16:38:10 by yoribeir          #+#    #+#             */
+/*   Updated: 2019/07/12 16:09:54 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		save_remainder_into_list(t_gnl **list, int fd, char *buffer, int i)
+t_list	*get_fd(t_list **head, int fd)
 {
-	t_gnl		*current;
-	t_gnl		*new;
+	t_list	*tmp;
 
-	new = NULL;
-	current = *list;
-	while (current && current->next && current->fd != fd)
-		current = current->next;
-	if (current && current->fd == fd && buffer[i + 1] != '\0')
-		current->str = ft_strdup(buffer + i + 1);
-	else if (buffer[i + 1] != '\0')
+	tmp = *head;
+	while (tmp)
 	{
-		if (!(new = (t_gnl*)malloc(sizeof(*new))))
-			return (-1);
-		new->str = ft_strdup(buffer + i + 1);
-		new->fd = fd;
-		new->next = NULL;
-		if (!*list)
-			*list = new;
-		else
-			current->next = new;
+		if ((int)tmp->content_size == fd)
+			return (tmp);
+		tmp = tmp->next;
 	}
-	free(buffer);
-	return (1);
+	tmp = ft_lstnew("", fd);
+	ft_lstadd(head, tmp);
+	return (tmp);
 }
 
-int		line_memory_allocation(char **line, int new_size)
+char	*read_line(t_list *list, char *buffer, int sz)
 {
-	char			*tmp;
-	size_t			to_return;
+	char	*tmp;
+	char	*ret;
 
-	to_return = 0;
-	if (!*line)
-	{
-		if (!(*line = ft_strnew(new_size)))
-			return (-1);
-	}
-	else
-	{
-		if (!(tmp = ft_strdup(*line)))
-			return (-1);
-		free(*line);
-		to_return = ft_strlen(tmp);
-		if (!(*line = ft_strnew(new_size + to_return)))
-			return (-1);
-		ft_strcpy(*line, tmp);
-		free(tmp);
-	}
-	return ((int)to_return);
+	buffer[sz] = '\0';
+	tmp = list->content;
+	ret = ft_strjoin(list->content, buffer);
+	free(tmp);
+	return (ret);
 }
 
-int		put_buffer_into_line(char *buffer, char **line, t_gnl **list,
-		int fd)
+char	*save_rest(t_list *list, int sz)
 {
-	int		i;
-	int		j;
+	char *tmp;
+	char *ret;
 
-	i = 0;
-	while (buffer[i] != '\n' && buffer[i] != EOF && buffer[i] != '\0')
-		i++;
-	if ((j = line_memory_allocation(line, i + (buffer[i] == '\n'))) == -1)
-		return (-1);
-	ft_strncpy((*line) + j, buffer, i + (buffer[i] == '\n'));
-	if (buffer[i] == '\n')
-		return (save_remainder_into_list(list, fd, buffer, i));
-	else if (buffer[i] == '\0')
-		return (read_from_fd(buffer, line, list, fd));
-	free(buffer);
-	return (1);
-}
-
-int		read_from_fd(char *buffer, char **line, t_gnl **list, int fd)
-{
-	int		check_read;
-
-	if (buffer)
-		free(buffer);
-	if (!(buffer = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))))
-		return (-1);
-	check_read = read(fd, buffer, BUFF_SIZE);
-	if (check_read <= 0 || buffer[0] == '\0')
-	{
-		free(buffer);
-		if (check_read < 0)
-			return (-1);
-		if (check_read == 0 && *line && ft_strlen(*line) != 0)
-			return (1);
-		return (0);
-	}
-	buffer[check_read] = '\0';
-	return (put_buffer_into_line(buffer, line, list, fd));
+	tmp = list->content;
+	ret = ft_strdup(list->content + sz);
+	free(tmp);
+	return (ret);
 }
 
 int		get_next_line(const int fd, char **line)
 {
-	static t_gnl	*list;
-	t_gnl			*prev_or_curr[2];
-	char			*buffer;
+	int				sz;
+	char			buffer[BUFF_SIZE + 1];
+	static	t_list	*str;
+	t_list			*head;
 
-	if (fd < 0 || !line)
+	if (fd < 0 || !line || read(fd, buffer, 0) < 0)
 		return (-1);
-	*line = NULL;
-	prev_or_curr[1] = list;
-	prev_or_curr[0] = prev_or_curr[1];
-	while (prev_or_curr[1] != NULL && prev_or_curr[1]->fd != fd)
+	head = str;
+	str = get_fd(&head, fd);
+	while ((sz = read(fd, buffer, BUFF_SIZE)))
 	{
-		prev_or_curr[0] = prev_or_curr[1];
-		prev_or_curr[1] = prev_or_curr[1]->next;
+		str->content = read_line(str, buffer, sz);
+		if (ft_strchr(str->content, '\n'))
+			break ;
 	}
-	if (prev_or_curr[1] != NULL)
-	{
-		if (prev_or_curr[0] == prev_or_curr[1])
-			list = list->next;
-		buffer = ft_strdup(prev_or_curr[1]->str);
-		prev_or_curr[0]->next = prev_or_curr[1]->next;
-		free(prev_or_curr[1]->str);
-		free(prev_or_curr[1]);
-		return (put_buffer_into_line(buffer, line, &list, fd));
-	}
-	return (read_from_fd(buffer = NULL, line, &list, fd));
+	sz = 0;
+	while (((char *)str->content)[sz] != '\n' && ((char *)str->content)[sz])
+		sz++;
+	*line = ft_strndup(str->content, sz);
+	if (((char *)str->content)[sz] == '\n')
+		sz++;
+	str->content = save_rest(str, sz);
+	str = head;
+	return (sz > 0 ? 1 : 0);
 }

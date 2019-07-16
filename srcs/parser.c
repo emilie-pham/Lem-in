@@ -3,24 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/11 13:47:22 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:45:04 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-/*
-***		READ AND SAVE INPUT INTO STRUCTURE
-*/
-
 void		get_input(t_env *env)
 {
 	char	*line;
 	char	*tmp;
-	
+
 	while (get_next_line(0, &line) == 1)
 	{
 		tmp = env->input;
@@ -31,35 +27,53 @@ void		get_input(t_env *env)
 }
 
 /*
-***		CHECK IF INPUT IS VALID
-***		-1 : INVALID ANT NB
-***		-2 : NO START OR END
-***		-3 : EMPTY LINES
+***		COMMENT LINE OR START/END OR EMPTY LINE
+***		0 : REGULAR COMMENT
+***		1 : START
+***		2 : END
 */
 
-int			check_input(t_env *env)
+int		comment_type(t_env *env, char *line)
 {
-	char	**args;
-	int		i;
-
-	i = 0;
-	args = ft_strsplit(env->input, '\n');
-	printf("ARGLEN = %zu\n\n", ft_tablen(args));
-	printf("WORDNB = %d\n\n", ft_count_words(env->input, '\n'));
-	if (check_ants(env, args) == -1)
-		return (-1);
-	if (get_start_end(env, args, "start") == -1 || get_start_end(env, args, "end") == -1)
-		return (-2);
-	while (args[i])
+	if (line[1] == '#' && ft_strstr(line, "start") != NULL)
 	{
-		printf("LINE : %s\n", args[i]);
-		if (ft_strlen(args[i]) == 0)
-			return (-3);
-		i++;
+		printf("START\n");
+		return (1);
 	}
-	// checker les rooms
-	// checker les links
+	if (line[1] == '#' && ft_strstr(line, "end") != NULL)
+	{
+		printf("END\n");
+		return (2);
+	}
+	printf("COMMENT\n");
 	return (0);
+}
+
+/*
+***		GET TYPE OF LINE
+***		-1 : EMPTY, 0 : COMMENT, 1 : START, 2 : END, 3 : ROOM, 4 : LINK
+*/
+
+int		get_data_type(t_env *env, char *line)
+{
+	char	**room;
+	char	**links;
+	int		ret;
+
+	ret = 0;
+	room = ft_strsplit(line, ' ');
+	links = ft_strsplit(line, '-');
+	if (ft_strlen(line) == 0)
+		ret = -1;
+	else if (line[0] == '#')
+		ret = comment_type(env, line);
+	else if (ft_tablen(room) == 3)
+		ret = 3;
+	else if (ft_tablen(links) == 2)
+		ret = 4;
+	ft_tabdel(room);
+	ft_tabdel(links);
+	return (ret);
 }
 
 void	ft_error(int error)
@@ -80,7 +94,7 @@ void	parse_ants(t_env *env)
 	env->ant_nb = ft_atoi(env->line);
 	if (env->ant_nb <= 0)
 		ft_error(1);
-	printf("nb ants %d\n", env->ant_nb);
+	printf("ants	%d\n", env->ant_nb);
 	ft_strdel(&env->line);
 }
 
@@ -103,21 +117,8 @@ void	print_split(char **tab)
 	i = 0;
 }
 
-void	parse_rooms(t_env *env)
-{
-	char	**split;
-
-	while (get_next_line(0, &env->line) == 1)
-	{
-		split = ft_strsplit(env->line, ' ');
-		print_split(split);
-	}
-}
-
-
 void	parse(t_env *env)
 {
-
 	parse_ants(env);
 	parse_rooms(env);
 	// parse_links();
