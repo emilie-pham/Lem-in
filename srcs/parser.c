@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/16 13:10:33 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:20:09 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,5 @@ void	parse(t_env *env)
 {
 	parse_ants(env);
 	parse_rooms(env);
-	parse_links(env);
+	// parse_links(env);
 }

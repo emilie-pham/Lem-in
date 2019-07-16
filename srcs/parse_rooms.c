@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:19:34 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/16 13:27:04 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:38:38 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ void	parse_rooms(t_env *env)
 		}
 		if (is_link(env->line))
 		{
-			printf("%s\n", env->line);
-			get_link(env, env->line);
 			add_link(env, get_link(env, env->line));
 		}
 		// print_links(env->links);
@@ -111,6 +109,6 @@ void	parse_rooms(t_env *env)
 		// if (is_link(env->line))
 		// 	printf("link %s\n", env->line);
 	}
-	// print_list(env->rooms);
+	print_list(env->rooms);
 	print_links(env->links);
 }
