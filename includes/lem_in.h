@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/15 21:13:14 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/16 13:31:14 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ typedef struct	s_link
 {
 	t_room			*start;
 	t_room			*end;
-	char			*start;
-	char			*end;
+	char			*start_name;
+	char			*end_name;
 	struct	s_link	*next;
 }				t_link;
 
@@ -71,13 +71,24 @@ int				check_input(t_env *env);
 int				check_ants(t_env *env, char **value);
 int				get_start_end(t_env *env, char **args, char *startend);
 
+
+void	parse(t_env *env);
+
 /*
-***		yoyo
+***		rooms
 */
 
 void	parse_rooms(t_env *env);
-void	parse(t_env *env);
 void	print_list(t_room *head);
+
+/*
+***		links
+*/
+
+void	add_link(t_env *env, t_link *link);
+t_link	*get_link(t_env *env, char *line);
+void	print_links(t_link *head);
+void	parse_links(t_env *env);
 
 /*
 ***		checkers
