@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/16 16:21:04 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:58:00 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	print_links(t_link *head)
 	current = head;
 	while (current)
 	{
-		printf("link	 %s %s\n", current->start->name, current->start->name);
+		printf("link	 %s %s\n", current->start->name, current->end->name);
 		current = current->next;
 	}
 }

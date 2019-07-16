@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/16 16:21:02 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:57:46 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ typedef struct	s_link
 	t_room			*start;
 	t_room			*end;
 	int				capacity;
-	// char			*start_name;
-	// char			*end_name;
 	struct	s_link	*next;
 }				t_link;
 

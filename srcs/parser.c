@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/16 15:20:09 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:06:51 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,6 @@ void		get_input(t_env *env)
 		free(tmp);
 		ft_strdel(&line);
 	}
-}
-
-/*
-***		COMMENT LINE OR START/END OR EMPTY LINE
-***		0 : REGULAR COMMENT
-***		1 : START
-***		2 : END
-*/
-
-int		comment_type(t_env *env, char *line)
-{
-	if (line[1] == '#' && ft_strstr(line, "start") != NULL)
-	{
-		printf("START\n");
-		return (1);
-	}
-	if (line[1] == '#' && ft_strstr(line, "end") != NULL)
-	{
-		printf("END\n");
-		return (2);
-	}
-	printf("COMMENT\n");
-	return (0);
 }
 
 /*
