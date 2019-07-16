@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/15 16:45:04 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/16 15:20:09 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,5 @@ void	parse(t_env *env)
 {
 	parse_ants(env);
 	parse_rooms(env);
-	// parse_links();
+	// parse_links(env);
 }

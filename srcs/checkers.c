@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:44:50 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/15 21:07:53 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/16 13:24:12 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ int		is_comment(char *line)
 
 int		is_link(char *line)
 {
-	if (line)
+	if (line && ft_strlen(line) >= 3)
 	{
-		if (!is_comment(line)
-			&& !is_command(line)
-			&& !is_room(line))
+		if (!is_comment(line) && !is_command(line) && !is_room(line))
 			return (1);
 		return (0);
 	}
+	return (0);
 }

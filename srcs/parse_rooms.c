@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:19:34 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/15 21:09:15 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/16 15:38:38 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	print_list(t_room *head)
 void	parse_rooms(t_env *env)
 {
 	env->rooms = NULL;
+	env->links = NULL;
 	while (get_next_line(0, &env->line) == 1)
 	{
 		if (is_room(env->line))
@@ -96,12 +97,18 @@ void	parse_rooms(t_env *env)
 			add_room(env, create_room(env->line));
 			// printf("room %s\n", env->line);
 		}
+		if (is_link(env->line))
+		{
+			add_link(env, get_link(env, env->line));
+		}
+		// print_links(env->links);
 		// if (is_command(env->line))
 		// 	printf("command %s\n", env->line);
 		// if (is_comment(env->line))
 		// 	printf("comment %s\n", env->line);
-		// if (!is_comment(env->line) && !is_command(env->line) && !is_room(env->line))
+		// if (is_link(env->line))
 		// 	printf("link %s\n", env->line);
 	}
 	print_list(env->rooms);
+	print_links(env->links);
 }
