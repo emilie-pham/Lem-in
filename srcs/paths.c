@@ -6,13 +6,10 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/07/17 17:14:05 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/17 17:56:44 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-t_link		find_links(t_room room)
-{
-	
-}
+
