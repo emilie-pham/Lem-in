@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/17 13:15:43 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/17 19:12:17 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,28 @@ typedef	struct		s_room
 	int				coord_x;
 	int				coord_y;
 	int				is_full;
-	int				level;
+	t_link			*linked_rooms;	
 	struct	s_room	*next;
 }					t_room;
 
 typedef struct	s_link
 {
-	t_room			*start;
-	t_room			*end;
-	int				capacity;
+	t_room			*r1;
+	t_room			*r2;
+	int				c12;
+	int				c21;
+	int				ignore;
 	struct	s_link	*next;
 }				t_link;
+
+typedef struct	s_path
+{
+	t_room			*room;
+	t_link			*link;
+	int				ant_index;
+	struct	s_path	*prev;
+	struct	s_path	*next;
+}				t_path;
 
 typedef struct	s_env
 {
