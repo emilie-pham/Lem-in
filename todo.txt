@@ -1,0 +1,13 @@
+- fonction islink
+- ajouter liste de links dans la structure de chaque room
+
+Gestion d'erreur
+
+ROOM
+- name room start with L
+- name already exists
+
+LINKS
+- link already exists
+- inexisting room
+- room to itself
