@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/16 16:58:00 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/17 13:11:27 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,6 @@ t_link	*get_link(t_env *env, char *line)
 			return (create_link(start_room, end_room));
 	}
 	return (NULL);
-}
-
-void	print_links(t_link *head)
-{
-	t_link *current;
-
-	current = head;
-	while (current)
-	{
-		printf("link	 %s %s\n", current->start->name, current->end->name);
-		current = current->next;
-	}
 }
 
 void	parse_links(t_env *env)

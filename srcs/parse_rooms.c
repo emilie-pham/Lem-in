@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:19:34 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/16 18:15:41 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/17 13:08:40 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,18 @@ void	add_room(t_env *env, t_room *room)
 	}
 }
 
-void	print_list(t_room *head)
+void	parse_startend(t_env *env)
 {
-	t_room *current;
-
-	current = head;
-	while (current)
+	if (command_type(env->line) == 1)
 	{
-		printf("room	%s %d %d\n", current->name, current->coord_x, current->coord_y);
-		current = current->next;
+		get_next_line(0, &env->line);
+		env->start = create_room(env->line);
+		printf("start	%s %d %d\n", env->start->name, env->start->coord_x, env->start->coord_y);
 	}
-}
-
-void	parse_rooms(t_env *env)
-{
-	env->rooms = NULL;
-	env->links = NULL;
-	while (get_next_line(0, &env->line) == 1)
+	if (command_type(env->line) == 2)
 	{
-		if (is_room(env->line))
-			add_room(env, create_room(env->line));
-		if (is_link(env->line))
-			add_link(env, get_link(env, env->line));
-		if (is_command(env->line))
-		if (is_comment(env->line))
-			printf("comment %s\n", env->line);
+		get_next_line(0, &env->line);
+		env->end = create_room(env->line);
+		printf("end	%s %d %d\n", env->end->name, env->end->coord_x, env->end->coord_y);
 	}
-	print_list(env->rooms);
-	print_links(env->links);
 }

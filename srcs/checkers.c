@@ -6,18 +6,26 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:44:50 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/16 18:15:37 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/17 13:00:49 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
 
 int		is_command(char *line)
 {
 	if (line && ft_strlen(line) >= 2)
 		if (!ft_strncmp(line, "##", 2))
 			return (1);
+	return (0);
+}
+
+int		command_type(char *line)
+{
+	if (!ft_strcmp("##start", line))
+		return (1);
+	if (!ft_strcmp("##end", line))
+		return (2);
 	return (0);
 }
 
