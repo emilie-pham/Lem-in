@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:19:34 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/17 13:08:40 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/17 15:51:58 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,21 @@ void	add_room(t_env *env, t_room *room)
 
 void	parse_startend(t_env *env)
 {
+	t_room	*room;
+
+	room = NULL;
 	if (command_type(env->line) == 1)
 	{
 		get_next_line(0, &env->line);
-		env->start = create_room(env->line);
+		add_room(env, room = create_room(env->line));
+		env->start = room;
 		printf("start	%s %d %d\n", env->start->name, env->start->coord_x, env->start->coord_y);
 	}
 	if (command_type(env->line) == 2)
 	{
 		get_next_line(0, &env->line);
-		env->end = create_room(env->line);
+		add_room(env, room = create_room(env->line));
+		env->end = room;
 		printf("end	%s %d %d\n", env->end->name, env->end->coord_x, env->end->coord_y);
 	}
 }

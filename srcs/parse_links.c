@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/17 15:31:09 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/17 15:51:56 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_room	*find_room(t_env *env, char *room_name)
 	current = env->rooms;
 	while (current)
 	{
-		// if (!ft_strcmp(current->name))
 		if (!ft_strcmp(current->name, room_name))
 			return (current);
 		current = current->next;
