@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/17 14:00:56 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/17 17:05:31 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,15 @@ void	parse(t_env *env)
 {
 	env->rooms = NULL;
 	env->links = NULL;
+	t_room	*room;
 
 	parse_ants(env);
 	while (get_next_line(0, &env->line) == 1)
 	{
 		if (is_room(env->line))
 		{
-			printf("ROOM %s\n", env->line);
-			add_room(env, create_room(env->line));
+			room = create_room(env->line);
+			add_room(env, room);
 		}
 		if (is_link(env->line))
 		{
@@ -48,8 +49,11 @@ void	parse(t_env *env)
 			printf("COMMAND %s\n", env->line);
 			parse_startend(env);
 		}
-		// if (is_comment(env->line))
-			// printf("comment %s\n", env->line);
+		if (is_comment(env->line))
+			printf("comment %s\n", env->line);
+		if (!is_room(env->line) && !is_link(env->line) && !is_comment(env->line)
+			&& !is_command(env->line))
+			break ;
 	}
 	print_rooms(env->rooms);
 	print_links(env->links);
