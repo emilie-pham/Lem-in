@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/17 13:11:27 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/17 15:31:09 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_room	*find_room(t_env *env, char *room_name)
 	current = env->rooms;
 	while (current)
 	{
+		// if (!ft_strcmp(current->name))
 		if (!ft_strcmp(current->name, room_name))
 			return (current);
 		current = current->next;
@@ -71,18 +72,4 @@ t_link	*get_link(t_env *env, char *line)
 			return (create_link(start_room, end_room));
 	}
 	return (NULL);
-}
-
-void	parse_links(t_env *env)
-{
-	env->links = NULL;
-	while (get_next_line(0, &env->line) == 1)
-	{
-		if (is_link(env->line))
-		{
-			get_link(env, env->line);
-			add_link(env, get_link(env, env->line));
-		}
-	}
-	print_links(env->links);
 }
