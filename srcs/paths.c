@@ -6,7 +6,7 @@
 /*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/07/18 18:16:31 by anradixt         ###   ########.fr       */
+/*   Updated: 2019/07/18 18:33:29 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,6 @@ t_path      *start_path(t_room *start)
     path->prev = NULL;
     path->next = NULL;
     return (path);
-}
-
-/*
-***     GET NEXT ROOM
-*/
-
-t_room      get_next_room(t_room *source)
-{
-    
 }
 
 /*
@@ -111,8 +102,11 @@ t_path      *append_node(t_path *path, t_path *newroom)
 
 void        remove_path(t_path *head)
 {
+    t_path  *tmp;
     while (head->next != NULL)
     {
-        
+        tmp = head->next;
+        head = NULL;
+        head = tmp;
     }
 }
