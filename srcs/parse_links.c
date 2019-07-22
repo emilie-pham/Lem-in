@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/19 13:54:41 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/19 14:19:42 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_room	*find_room(t_env *env, char *room_name)
 	}
 	return (NULL);
 }
+
+//	version avec split, a voir si c'est pas trop lourd
 
 t_link	*get_link(t_env *env, char *line)
 {

@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/19 13:45:30 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/22 21:32:01 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,14 @@ typedef	struct		s_room
 	int				coord_x;
 	int				coord_y;
 	int				is_full;
-	// t_link			*linked_rooms;
 	struct	s_room	*next;
 }					t_room;
+
+typedef struct		s_hash
+{
+	t_room			*node;
+	struct s_hash	*next;
+}					t_hash;
 
 typedef struct	s_link
 {
@@ -52,14 +57,22 @@ typedef struct	s_env
 {
 	char		*line;
 	int			ant_nb;
+	size_t		table_size;
 	t_link		*links;
 	t_room		*rooms;
 	t_room		*start;
 	t_room		*end;
-}				t_env;
+}				t_env; 
 
 
 void	parse(t_env *env);
+
+/*
+***		hash
+*/
+
+t_hash	*create_hash_table(t_env *env);
+t_hash	*fill_hash_table(t_env *env, t_hash *table);
 
 /*
 ***		rooms

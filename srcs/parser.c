@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/19 14:07:04 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/22 20:55:46 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	parse(t_env *env)
 		}
 		if (is_comment(env->line))
 			printf("comment %s\n", env->line);
-		if (!is_room(env->line) && !is_link(env->line) && !is_comment(env->line)
-			&& !is_command(env->line))
-			break ;
+		// if (!is_room(env->line) && !is_link(env->line) && !is_comment(env->line)
+		// 	&& !is_command(env->line))
+		// 	break ;
 	}
 	print_rooms(env->rooms);
 	print_links(env->links);
