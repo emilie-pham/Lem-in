@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/22 21:32:01 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/23 10:33:12 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,17 @@
 
 # include <stdio.h>
 
+/*
+***		NEXT POUR HASH, PREV POUR BFS
+*/
+
 typedef	struct		s_room
 {
 	char			*name;
 	int				coord_x;
 	int				coord_y;
 	int				is_full;
+	struct	s_room	*prev;
 	struct	s_room	*next;
 }					t_room;
 
@@ -34,13 +39,14 @@ typedef struct		s_hash
 	struct s_hash	*next;
 }					t_hash;
 
+/*
+***		FLOW MODIFIED BY EDMUND KARP ALGO
+*/
+
 typedef struct	s_link
 {
-	t_room			*r1;
-	t_room			*r2;
-	int				c12;
-	int				c21;
-	int				ignore;
+	t_room			*dest;
+	int				flow;
 	struct	s_link	*next;
 }				t_link;
 
@@ -63,7 +69,6 @@ typedef struct	s_env
 	t_room		*start;
 	t_room		*end;
 }				t_env; 
-
 
 void	parse(t_env *env);
 
