@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 14:19:54 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/23 14:34:21 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/23 15:57:54 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ unsigned long long hash_value(char *key, int size)
 	hashedvalue = 0;
 	while (*key)
 	{
-		hashedvalue = *key + 42 * hashedvalue;
+		hashedvalue = *key + 31 * hashedvalue;
 		key++;
 	}
 	return (hashedvalue % size);
@@ -38,16 +38,11 @@ size_t		list_size(t_room *rooms)
 	return (count);
 }
 
-void	print_hash(t_hash *table)
+void	print_hash(t_hash *table, size_t size)
 {
 	t_hash	*current;
 
-	current = table;
-	while (current)
-	{
-		// printf("%s\n", );
-		current = current->next;
-	}
+	
 }
 
 t_hash	*create_hash_table(t_env *env)
@@ -61,6 +56,23 @@ t_hash	*create_hash_table(t_env *env)
 	return (table);
 }
 
+void	insert_hash_table(t_hash *table, t_room *current, size_t hashedvalue)
+{
+	t_hash	*tmp;
+
+	if (table[hashedvalue].node == NULL)
+		table[hashedvalue].node = current;
+	else
+	{
+		tmp = &table[hashedvalue];
+		while (tmp->next)
+		{
+			tmp = tmp->next;
+		}
+		tmp->next->node = current;
+	}
+}
+
 t_hash	*fill_hash_table(t_env *env, t_hash *table)
 {
 	t_room	*current;
@@ -70,8 +82,7 @@ t_hash	*fill_hash_table(t_env *env, t_hash *table)
 	while (current)
 	{
 		hashedvalue = hash_value(current->name, env->table_size);
-		table[hashedvalue].node = current;
-		table->node = current;
+		insert_hash_table(table, current, hashedvalue);
 		current = current->next;
 	}
 	return (table);

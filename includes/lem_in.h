@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/23 14:37:27 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/23 14:44:11 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct		s_env
 	t_room			*start;
 	t_room			*end;
 	t_hash			*hashtable;
-}					t_env; 
+}					t_env;
 
 void	parse(t_env *env);
 
