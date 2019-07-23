@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 14:19:54 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/23 18:07:37 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/23 18:38:15 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,49 @@ size_t		list_size(t_room *rooms)
 	return (count);
 }
 
+// void	_print_hash(t_hash *table, size_t size)
+// {
+// 	t_room	*collisions;
+// 	size_t i;
+
+// 	i = 0;
+// 	while (i < size)
+// 	{
+// 		if (table[i].node)
+// 		{
+// 			printf("room hash %s", table[i].node->name);
+// 			collisions = table[i].node;
+// 			while (collisions->next)
+// 			{
+// 				collisions = collisions->next;
+// 				printf("+ %s\n", collisions->name);
+// 			}
+// 		}
+// 		printf("\n");
+// 		i++;
+// 	}
+// }
+
+
 void	print_hash(t_hash *table, size_t size)
 {
-	t_hash	*current;
-	size_t i;
+	t_hash	*collisions;
+	size_t	i;
 
 	i = 0;
 	while (i < size)
 	{
 		if (table[i].node)
-			printf("room hash %s\n", table[i].node->name);
+		{
+			printf("hash	%s", table[i].node->name);
+			collisions = &table[i];
+			while (collisions->next)
+			{
+				collisions = collisions->next;
+				printf(" -> %s\n", collisions->node->name);
+			}
+			printf("\n");
+		}
 		i++;
 	}
 }
@@ -58,7 +91,7 @@ t_hash	*create_hash_table(t_env *env)
 
 	env->table_size = list_size(env->rooms);
 	printf("table size %zu\n", env->table_size);
-	table = malloc(sizeof(t_hash) * env->table_size);
+	table = ft_memalloc(sizeof(t_hash) * env->table_size);
 	fill_hash_table(env, table);
 	print_hash(table, env->table_size);
 	table->next = NULL;
@@ -68,15 +101,18 @@ t_hash	*create_hash_table(t_env *env)
 void	insert_hash_table(t_hash *table, t_room *current, size_t hashedvalue)
 {
 	t_hash	*tmp;
+	t_hash	*newnode;
 
 	if (table[hashedvalue].node == NULL)
 		table[hashedvalue].node = current;
 	else
 	{
+		newnode = ft_memalloc(sizeof(t_hash));
+		newnode->node = current;
 		tmp = &table[hashedvalue];
 		while (tmp->next)
 			tmp = tmp->next;
-		tmp->node = current;
+		tmp->next = newnode;
 	}
 }
 
