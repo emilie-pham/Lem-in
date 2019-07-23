@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/23 10:35:32 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/23 11:02:10 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ typedef struct	s_link
 typedef struct	s_path
 {
 	t_room			*room;
-	t_link			*link;
 	int				ant_index;
-	struct	s_path	*prev;
 	struct	s_path	*next;
 }				t_path;
 
