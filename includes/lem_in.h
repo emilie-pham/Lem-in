@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/23 11:02:10 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/23 14:14:08 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@
 ***		NEXT POUR HASH, PREV POUR BFS
 */
 
+typedef struct 		s_link *linked_rooms;
+
 typedef	struct		s_room
 {
 	char			*name;
 	int				coord_x;
 	int				coord_y;
-	int				is_full;
+	int				visited;
 	t_link			*linked_rooms;
 	struct	s_room	*prev;
 	struct	s_room	*next;
@@ -44,30 +46,38 @@ typedef struct		s_hash
 ***		FLOW MODIFIED BY EDMUND KARP ALGO
 */
 
-typedef struct	s_link
+typedef struct		s_link
 {
 	t_room			*dest;
 	int				flow;
 	struct	s_link	*next;
-}				t_link;
+}					t_link;
 
-typedef struct	s_path
+typedef struct		s_path
 {
 	t_room			*room;
 	int				ant_index;
 	struct	s_path	*next;
-}				t_path;
+}					t_path;
 
-typedef struct	s_env
+typedef	struct 		s_queue
 {
-	char		*line;
-	int			ant_nb;
-	size_t		table_size;
-	t_link		*links;
-	t_room		*rooms;
-	t_room		*start;
-	t_room		*end;
-}				t_env; 
+	t_room			*room;
+	struct 	s_queue	*next;
+}					t_queue;
+
+
+typedef struct		s_env
+{
+	char			*line;
+	int				ant_nb;
+	size_t			table_size;
+	t_link			*links;
+	t_room			*rooms;
+	t_room			*start;
+	t_room			*end;
+	t_hash			*hashtable;
+}					t_env; 
 
 void	parse(t_env *env);
 

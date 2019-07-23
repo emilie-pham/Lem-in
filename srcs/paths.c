@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/07/18 18:37:53 by anradixt         ###   ########.fr       */
+/*   Updated: 2019/07/23 12:34:43 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,88 +25,59 @@ CAS ERREUR
 
 t_path      *start_path(t_room *start)
 {
-    t_path  path;
+    t_path  *path;
 
-    if (start->linked_rooms == NULL)
+    if (!start || start->linked_rooms == NULL)
         return (NULL);
-    if (!(path = malloc(sizeof(t_path))))
+    if (!(path = malloc(sizeof(t_path *))))
         return (NULL);
     path->room = start;
-    path->link = NULL;
-    path->prev = NULL;
     path->next = NULL;
     return (path);
 }
 
 /*
-***     CHECKS THAT ROOM IS NOT ALREADY IN PATH
+***     BFS
 */
 
-t_path         check_pathroom(t_room *room, t_path *path)
+t_path      *bfs(t_env *env)
 {
-    t_room *head;
+    t_path  *path;
+    t_queue *queue;
+    t_queue *tmp;
+    t_room  *current;
+    t_link  *links;
 
-    head = path;
-    while (path->next == NULL)
-    {
-        if (path->room == room)
-        {
-            remove_path(head);
-            return (NULL);
-        }
-        path = path->next;
-    }
-    return (head);
-}
-
-/*
-***     CREATE PATHNODE WITH NEW ROOM
-*/
-
-t_path      *create_pathroom(t_room *room, t_link *link)
-{
-    t_path  pathroom;
-
-    if (!(pathroom = malloc(sizeof(t_path))))
+    if (!(queue = malloc(sizeof(t_queue *))))
         return (NULL);
-    pathroom->room = room;
-    pathroom->link = link;
-    pathroom->next = NULL;
-    return (pathroom);
-}
-
-/*
-***     ADD PATH NODE TO PATH
-*/
-
-t_path      *append_node(t_path *path, t_path *newroom)
-{
-    t_path  *head;
-    t_path  *prev;
-
-    head = path;
-    while (path->next != NULL)
+    current = env->start;
+    links = current->linked_rooms;
+    env->start->prev = NULL;
+    env->start->visited = 1;
+    // adds all room attached to start to queue
+    while (links->next != NULL)
     {
-        if (path->next->next == NULL)
-            prev = path;
-        path = path->next;
+        links->dest->prev = current;
+        if (links->flow != 1)
+            add_to_queue(&queue, links->dest);
+        links = links->next;
     }
-    path = newroom;
-    path->prev = prev;
-    return (head);
-}
-
-/*
-***     DELETING INVALID PATH
-*/
-
-void        remove_path(t_path *head)
-{
-    t_path  *tmp;
-    while (head->next != NULL)
+    tmp = queue;
+    current = queue->room;
+    while (queue->next != NULL || current == env->end)
     {
-        tmp = head->next;
-        head = NULL;
-        head = tmp;
+        if (current == env->end)
+            break;
+        links = current->linked_rooms;
+        while (links->next != NULL)
+        {
+            if (links->flow != 1)
+            {
+                if (links->dest->prev == NULL)
+                    links->dest->prev = current;
+                if (links->dest->visited != 1)
+                    add_to_queue(&queue, links->dest);
+            }
+        }
     }
 }
