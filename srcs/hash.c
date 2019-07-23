@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 14:19:54 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/22 21:57:39 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/23 14:34:21 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	print_hash(t_hash *table)
 	current = table;
 	while (current)
 	{
-		printf("%s\n", );
+		// printf("%s\n", );
 		current = current->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 13:06:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/19 13:46:15 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/23 14:38:28 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_links(t_link *head)
 	current = head;
 	while (current)
 	{
-		printf("link	 %s %s\n", current->r1->name, current->r2->name);
+		printf("link dest	 %s\n", current->dest->name);
 		current = current->next;
 	}
 }
