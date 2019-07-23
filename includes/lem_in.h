@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/23 10:33:12 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/23 10:35:32 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef	struct		s_room
 	int				coord_x;
 	int				coord_y;
 	int				is_full;
+	t_link			*linked_rooms;
 	struct	s_room	*prev;
 	struct	s_room	*next;
 }					t_room;
