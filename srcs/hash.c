@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 14:19:54 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/23 15:57:54 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/23 18:07:37 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,15 @@ size_t		list_size(t_room *rooms)
 void	print_hash(t_hash *table, size_t size)
 {
 	t_hash	*current;
+	size_t i;
 
-	
+	i = 0;
+	while (i < size)
+	{
+		if (table[i].node)
+			printf("room hash %s\n", table[i].node->name);
+		i++;
+	}
 }
 
 t_hash	*create_hash_table(t_env *env)
@@ -50,8 +57,10 @@ t_hash	*create_hash_table(t_env *env)
 	t_hash	*table;
 
 	env->table_size = list_size(env->rooms);
+	printf("table size %zu\n", env->table_size);
 	table = malloc(sizeof(t_hash) * env->table_size);
 	fill_hash_table(env, table);
+	print_hash(table, env->table_size);
 	table->next = NULL;
 	return (table);
 }
@@ -66,10 +75,8 @@ void	insert_hash_table(t_hash *table, t_room *current, size_t hashedvalue)
 	{
 		tmp = &table[hashedvalue];
 		while (tmp->next)
-		{
 			tmp = tmp->next;
-		}
-		tmp->next->node = current;
+		tmp->node = current;
 	}
 }
 
@@ -82,6 +89,7 @@ t_hash	*fill_hash_table(t_env *env, t_hash *table)
 	while (current)
 	{
 		hashedvalue = hash_value(current->name, env->table_size);
+		printf("%s = %zu\n", current->name, hashedvalue);
 		insert_hash_table(table, current, hashedvalue);
 		current = current->next;
 	}
