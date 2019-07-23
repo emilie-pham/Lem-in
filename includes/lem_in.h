@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/23 17:45:08 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/23 19:56:19 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdlib.h>
 
 # include <stdio.h>
+
+
+#define TABLE_SIZE 997
 
 /*
 ***		NEXT POUR HASH, PREV POUR BFS
@@ -83,8 +86,9 @@ void	parse(t_env *env);
 ***		hash
 */
 
-t_hash	*create_hash_table(t_env *env);
-t_hash	*fill_hash_table(t_env *env, t_hash *table);
+void	init_table(t_room *table);
+void	insert_hash_table(t_room *table, t_room *room, size_t hashedvalue);
+void	fill_hash_table(t_env *env, t_room *table, t_room *room);
 
 /*
 ***		rooms
