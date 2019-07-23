@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/07/17 13:15:25 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/22 21:25:21 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ static	t_env	*init_env(void)
 
 int		main(int ac, char **av)
 {
-	t_env *env;
+	t_env 	*env;
+	t_hash	*table;
 
 	if (!(env = init_env()))
 		return (0);
 	parse(env);
+	table = create_hash_table(env);
 	return (0);
 }

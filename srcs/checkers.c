@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:44:50 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/17 13:00:49 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/19 14:06:19 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,50 @@ int		is_comment(char *line)
 	return (0);
 }
 
+// int		is_link(char *line)
+// {
+// 	if (line && ft_strlen(line) >= 3)
+// 	{
+// 		if (!is_comment(line) && !is_command(line) && !is_room(line))
+// 			return (1);
+// 		return (0);
+// 	}
+// 	return (0);
+// }
+
+int		count_letter(char *line, char letter)
+{
+	int		count;
+
+	count = 0;
+	while (*line)
+	{
+			if (*line == letter)
+				count++;
+			line++;
+	}
+	return (count);
+}
+
 int		is_link(char *line)
 {
-	if (line && ft_strlen(line) >= 3)
-	{
-		if (!is_comment(line) && !is_command(line) && !is_room(line))
-			return (1);
+	char	**split;
+	int		count;
+	int		ret;
+
+	count = 0;
+	ret = 0;
+	if (!(split = ft_strsplit(line, '-')))
 		return (0);
+	while (split[count])
+		count++;
+	if (count == 2)
+	{
+		if (!ft_strcmp(split[0], split[1]))
+			return (0);
+		if (count_letter(line, '-') > 1)
+			return (0);
+		return (1);
 	}
 	return (0);
 }
