@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/23 18:00:23 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/23 18:51:26 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ void	parse(t_env *env)
 			&& !is_command(env->line))
 			break ;
 	}
-	print_rooms(env->rooms);
+	// print_rooms(env->rooms);
 	// print_links(env->links);
 }

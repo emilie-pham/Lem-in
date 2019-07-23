@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 14:19:54 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/23 18:38:15 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/23 19:00:14 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,11 @@ void	print_hash(t_hash *table, size_t size)
 			while (collisions->next)
 			{
 				collisions = collisions->next;
-				printf(" -> %s\n", collisions->node->name);
+				printf(" -> %s", collisions->node->name);
 			}
-			printf("\n");
 		}
+		if (table[i].node)
+			printf("\n");
 		i++;
 	}
 }
@@ -93,7 +94,7 @@ t_hash	*create_hash_table(t_env *env)
 	printf("table size %zu\n", env->table_size);
 	table = ft_memalloc(sizeof(t_hash) * env->table_size);
 	fill_hash_table(env, table);
-	print_hash(table, env->table_size);
+	// print_hash(table, env->table_size);
 	table->next = NULL;
 	return (table);
 }
@@ -125,7 +126,7 @@ t_hash	*fill_hash_table(t_env *env, t_hash *table)
 	while (current)
 	{
 		hashedvalue = hash_value(current->name, env->table_size);
-		printf("%s = %zu\n", current->name, hashedvalue);
+		// printf("%s = %zu\n", current->name, hashedvalue);
 		insert_hash_table(table, current, hashedvalue);
 		current = current->next;
 	}
