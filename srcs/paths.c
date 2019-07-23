@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/07/23 14:39:21 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/23 15:48:42 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ t_path      *start_path(t_room *start)
 }
 
 /*
+***     ADD ROOM TO QUEUE
+*/
+
+t_queue     *add_to_queue(t_queue **queue, t_room *room)
+{
+    
+}
+
+/*
 ***     BFS
 */
 
@@ -64,8 +73,9 @@ t_path      *bfs(t_env *env)
     }
     tmp = queue;
     current = queue->room;
-    while (queue->next != NULL || current == env->end)
+    while (queue->next != NULL)
     {
+        current->visited = 1;
         if (current == env->end)
             break;
         links = current->linked_rooms;
