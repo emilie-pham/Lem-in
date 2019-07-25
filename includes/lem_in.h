@@ -6,7 +6,11 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/07/23 15:59:40 by epham            ###   ########.fr       */
+=======
+/*   Updated: 2019/07/23 19:56:19 by yoribeir         ###   ########.fr       */
+>>>>>>> 155ddd171d859f48125d10f0fc3721cd9e9b766a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +22,9 @@
 # include <stdlib.h>
 
 # include <stdio.h>
+
+
+#define TABLE_SIZE 997
 
 /*
 ***		NEXT POUR HASH, PREV POUR BFS
@@ -75,7 +82,7 @@ typedef struct		s_env
 	t_room			*start;
 	t_room			*end;
 	t_hash			*hashtable;
-}					t_env; 
+}					t_env;
 
 void	parse(t_env *env);
 
@@ -83,8 +90,9 @@ void	parse(t_env *env);
 ***		hash
 */
 
-t_hash	*create_hash_table(t_env *env);
-t_hash	*fill_hash_table(t_env *env, t_hash *table);
+void	init_table(t_room *table);
+void	insert_hash_table(t_room *table, t_room *room, size_t hashedvalue);
+void	fill_hash_table(t_env *env, t_room *table, t_room *room);
 
 /*
 ***		rooms

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/22 20:55:46 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/23 20:01:32 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	parse(t_env *env)
 	env->rooms = NULL;
 	env->links = NULL;
 	t_room	*room;
+	t_room	*table[TABLE_SIZE];
 
 	parse_ants(env);
 	while (get_next_line(0, &env->line) == 1)
@@ -37,7 +38,9 @@ void	parse(t_env *env)
 		if (is_room(env->line))
 		{
 			room = create_room(env->line);
-			add_room(env, room);
+			init_table(table);
+			fill_hash_table(env, table, room);
+			// add_room(env, room);
 		}
 		if (is_link(env->line))
 		{
@@ -49,11 +52,11 @@ void	parse(t_env *env)
 			// printf("COMMAND %s\n", env->line);
 			parse_startend(env);
 		}
-		if (is_comment(env->line))
-			printf("comment %s\n", env->line);
-		// if (!is_room(env->line) && !is_link(env->line) && !is_comment(env->line)
-		// 	&& !is_command(env->line))
-		// 	break ;
+		// if (is_comment(env->line))
+			// printf("comment %s\n", env->line);
+		if (!is_room(env->line) && !is_link(env->line) && !is_comment(env->line)
+			&& !is_command(env->line))
+			break ;
 	}
 	print_rooms(env->rooms);
 	print_links(env->links);
