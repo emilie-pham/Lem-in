@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/23 20:01:32 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/24 19:29:22 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,37 +27,40 @@ void	parse_ants(t_env *env)
 
 void	parse(t_env *env)
 {
-	env->rooms = NULL;
 	env->links = NULL;
 	t_room	*room;
 	t_room	*table[TABLE_SIZE];
 
+	init_table(table);
 	parse_ants(env);
 	while (get_next_line(0, &env->line) == 1)
 	{
 		if (is_room(env->line))
 		{
+			printf("ROOM %s\n", env->line);
 			room = create_room(env->line);
-			init_table(table);
-			fill_hash_table(env, table, room);
-			// add_room(env, room);
+			insert_hash_table(table, room);
 		}
 		if (is_link(env->line))
 		{
-			// printf("LINK %s\n", env->line);
-			add_link(env, get_link(env, env->line));
+			printf("LINK %s\n", env->line);
+			add_link(env, get_link(env, table, env->line));
 		}
 		if (is_command(env->line))
 		{
-			// printf("COMMAND %s\n", env->line);
-			parse_startend(env);
+			printf("COMMAND %s\n", env->line);
+			parse_startend(env, table);
 		}
-		// if (is_comment(env->line))
-			// printf("comment %s\n", env->line);
+		if (is_comment(env->line))
+			printf("comment %s\n", env->line);
 		if (!is_room(env->line) && !is_link(env->line) && !is_comment(env->line)
 			&& !is_command(env->line))
+		{
+			printf("BREAK\n");
 			break ;
+		}
 	}
-	print_rooms(env->rooms);
-	print_links(env->links);
+	printf("READ\n");
+	// print_links(env->links);
+	// print_hash(table, TABLE_SIZE);
 }

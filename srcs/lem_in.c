@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/07/23 19:21:00 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/24 14:26:56 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static	t_env	*init_env(void)
 	env->line = NULL;
 	env->ant_nb = 0;
 	env->links = NULL;
-	env->rooms = NULL;
 	env->start = NULL;
 	env->end = NULL;
 	return (env);

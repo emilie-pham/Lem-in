@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_links.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/23 14:33:34 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/24 19:23:32 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 void	add_link(t_env *env, t_link *link)
 {
-	t_link	*current;
+	t_link			*current;
+	static t_link	*tail;
 
 	current = env->links;
 	if (!env->links)
+	{
 		env->links = link;
+		tail = link;
+	}
 	else
 	{
-		while (current->next)
-			current = current->next;
-		current->next = link;
+		tail->next = link;
+		tail = link;
 	}
 }
 
@@ -33,27 +36,30 @@ t_link	*create_link(t_room *start, t_room *end)
 
 	if (!(link = ft_memalloc(sizeof(t_link))))
 		return (NULL);
-	// link->r1 = start;
 	link->dest = end;
+	link->from = start;
 	link->next = NULL;
 	return (link);
 }
 
-t_room	*find_room(t_env *env, char *room_name)
+t_room	*find_room(t_env *env, t_room **table, char *room_name)
 {
 	t_room	*current;
+	int		index;
 
-	current = env->rooms;
+	index = hash_value(room_name);
+	current = table[index];
+	if (!current->name)
+		return (NULL);
 	while (current)
 	{
 		if (!ft_strcmp(current->name, room_name))
 			return (current);
 		current = current->next;
 	}
-	return (NULL);
 }
 
-t_link	*get_link(t_env *env, char *line)
+t_link	*get_link(t_env *env, t_room **table, char *line)
 {
 	char	*start;
 	char	*end;
@@ -65,8 +71,8 @@ t_link	*get_link(t_env *env, char *line)
 	{
 		start = ft_strdup(split[0]);
 		end = ft_strdup(split[1]);
-		start_room = find_room(env, start);
-		end_room = find_room(env, end);
+		start_room = find_room(env, table, start);
+		end_room = find_room(env, table, end);
 		if (start_room && end_room)
 			return (create_link(start_room, end_room));
 	}

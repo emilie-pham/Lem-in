@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/23 19:56:19 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/25 17:36:04 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 
 
-#define TABLE_SIZE 997
+#define TABLE_SIZE 10007
 
 /*
 ***		NEXT POUR HASH, PREV POUR BFS
@@ -50,6 +50,7 @@ typedef struct		s_hash
 typedef struct		s_link
 {
 	t_room			*dest;
+	t_room			*from;
 	int				flow;
 	struct	s_link	*next;
 }					t_link;
@@ -72,12 +73,9 @@ typedef struct		s_env
 {
 	char			*line;
 	int				ant_nb;
-	size_t			table_size;
 	t_link			*links;
-	t_room			*rooms;
 	t_room			*start;
 	t_room			*end;
-	t_hash			*hashtable;
 }					t_env;
 
 void	parse(t_env *env);
@@ -86,9 +84,10 @@ void	parse(t_env *env);
 ***		hash
 */
 
-void	init_table(t_room *table);
-void	insert_hash_table(t_room *table, t_room *room, size_t hashedvalue);
-void	fill_hash_table(t_env *env, t_room *table, t_room *room);
+unsigned long long hash_value(char *key);
+void	init_table(t_room **table);
+void	insert_hash_table(t_room **table, t_room *room);
+void	print_hash(t_room **table, size_t size);
 
 /*
 ***		rooms
@@ -96,14 +95,14 @@ void	fill_hash_table(t_env *env, t_room *table, t_room *room);
 
 t_room	*create_room(char *line);
 void	add_room(t_env *env, t_room *room);
-void	parse_startend(t_env *env);
+void	parse_startend(t_env *env, t_room **table);
 
 /*
 ***		links
 */
 
 void	add_link(t_env *env, t_link *link);
-t_link	*get_link(t_env *env, char *line);
+t_link	*get_link(t_env *env, t_room **table, char *line);
 
 void	parse_links(t_env *env);
 
@@ -124,4 +123,5 @@ int		command_type(char *line);
 void	ft_error(int error);
 void	print_links(t_link *head);
 void	print_rooms(t_room *head);
+
 #endif
