@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:19:34 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/23 17:54:24 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/24 19:37:08 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,7 @@ t_room	*create_room(char *line)
 	return (room);
 }
 
-void	add_room(t_env *env, t_room *room)
-{
-	t_room	*current;
-
-	current = env->rooms;
-	if (!env->rooms)
-		env->rooms = room;
-	else
-	{
-		while (current->next)
-			current = current->next;
-		current->next = room;
-	}
-}
-
-void	parse_startend(t_env *env)
+void	parse_startend(t_env *env, t_room **table)
 {
 	t_room	*room;
 
@@ -51,15 +36,19 @@ void	parse_startend(t_env *env)
 	if (command_type(env->line) == 1)
 	{
 		get_next_line(0, &env->line);
-		add_room(env, room = create_room(env->line));
+		if (!is_room(env->line))
+			ft_error(1);
+		room = create_room(env->line);
+		insert_hash_table(table, room);
 		env->start = room;
-		// printf("start	%s %d %d\n", env->start->name, env->start->coord_x, env->start->coord_y);
 	}
 	if (command_type(env->line) == 2)
 	{
 		get_next_line(0, &env->line);
-		add_room(env, room = create_room(env->line));
+		if (!is_room(env->line))
+			ft_error(1);
+		room = create_room(env->line);
+		insert_hash_table(table, room);
 		env->end = room;
-		// printf("end	%s %d %d\n", env->end->name, env->end->coord_x, env->end->coord_y);
 	}
 }
