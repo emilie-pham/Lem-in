@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/25 17:32:40 by epham            ###   ########.fr       */
-=======
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/25 17:36:04 by anonymous        ###   ########.fr       */
->>>>>>> aab2b58a1e6eadcf7560241def97009411810ed6
+/*   Updated: 2019/07/25 17:57:07 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +76,10 @@ typedef struct		s_env
 	t_link			*links;
 	t_room			*start;
 	t_room			*end;
-<<<<<<< HEAD
 	t_hash			*hashtable;
 	t_queue			*queue;
+	t_queue			*end_queue;
 	int				current_flow;
-=======
->>>>>>> aab2b58a1e6eadcf7560241def97009411810ed6
 }					t_env;
 
 void	parse(t_env *env);
