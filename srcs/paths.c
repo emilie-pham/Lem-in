@@ -6,88 +6,84 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/07/23 15:48:42 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/25 17:45:29 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
 /*
-CAS ERREUR
-
-- Pas de link sortant de start
+***     INITIALIZE BFS : PREV TO NULL AND VISITED TO 0
 */
 
-
-/*
-***     CREATING PATH WITH START ROOM
-*/
-
-t_path      *start_path(t_room *start)
+void        initialize_bfs(t_env *env)
 {
-    t_path  *path;
-
-    if (!start || start->linked_rooms == NULL)
-        return (NULL);
-    if (!(path = malloc(sizeof(t_path *))))
-        return (NULL);
-    path->room = start;
-    path->next = NULL;
-    return (path);
+    t_queue  *head;
+    
+    head = env->queue;
+    if (env->queue)
+    {
+        while (head)
+        {
+            head->room->prev = NULL;
+            head->room->visited = 0;
+            head = head->next;
+        }
+    }
 }
 
 /*
-***     ADD ROOM TO QUEUE
+***     CREATE QUEUE MAILLON
 */
 
-t_queue     *add_to_queue(t_queue **queue, t_room *room)
+t_queue     *create_queue(t_link *link)
 {
-    
+    t_queue *queue;
+
+    if (!(queue = malloc(sizeof(t_queue*))))
+        return (NULL);
+    queue->room = link->dest;
+    queue->next = NULL;
+    return (queue);
+}
+
+/*
+***     GET LINKS TO ADD TO QUEUE
+*/
+
+void        get_queue(t_env *env, t_room *current)
+{
+    t_link  *current_link;
+    t_queue *last;
+
+    current_link = current->linked_rooms;
+    while (current_link)
+    {
+        if (current_link->flow == -1 && current_link->dest->visited == 0)
+            break;
+        current_link = current_link->next;
+    }
+    if (current_link->next == NULL)
+    {
+        current_link = current->linked_rooms;
+        while (current_link)
+        {
+            if (current_link->dest->visited == 0 && current_link->flow != 1)
+            {
+                last = create_queue(current_link);
+                env->end_queue->next = last;
+                env->end_queue = last;
+            }
+            current_link = current_link->next;
+        }
+    }
 }
 
 /*
 ***     BFS
 */
 
-t_path      *bfs(t_env *env)
+int         bfs(t_env *env)
 {
-    t_path  *path;
-    t_queue *queue;
-    t_queue *tmp;
-    t_room  *current;
-    t_link  *links;
-
-    if (!(queue = malloc(sizeof(t_queue *))))
-        return (NULL);
-    current = env->start;
-    links = current->linked_rooms;
-    env->start->prev = NULL;
-    env->start->visited = 1;
-    // adds all room attached to start to queue
-    while (links->next != NULL)
-    {
-        links->dest->prev = current;
-        if (links->flow != 1)
-            add_to_queue(&queue, links->dest);
-        links = links->next;
-    }
-    tmp = queue;
-    current = queue->room;
-    while (queue->next != NULL)
-    {
-        current->visited = 1;
-        if (current == env->end)
-            break;
-        links = current->linked_rooms;
-        while (links->next != NULL)
-        {
-            if (links->flow != 1)
-            {
-                if (links->dest->prev == NULL)
-                    links->dest->prev = current;
-                if (links->dest->visited != 1)
-                    add_to_queue(&queue, links->dest);
-            }
-        }
-    }
+    initialize_bfs(env);
 }

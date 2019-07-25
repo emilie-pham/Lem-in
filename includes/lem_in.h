@@ -6,11 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/07/23 15:59:40 by epham            ###   ########.fr       */
-=======
-/*   Updated: 2019/07/23 19:56:19 by yoribeir         ###   ########.fr       */
->>>>>>> 155ddd171d859f48125d10f0fc3721cd9e9b766a
+/*   Updated: 2019/07/25 17:32:40 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +78,8 @@ typedef struct		s_env
 	t_room			*start;
 	t_room			*end;
 	t_hash			*hashtable;
+	t_queue			*queue;
+	int				current_flow;
 }					t_env;
 
 void	parse(t_env *env);
