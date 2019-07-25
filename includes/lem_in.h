@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/25 17:57:07 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/25 19:53:05 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct		s_path
 typedef	struct 		s_queue
 {
 	t_room			*room;
+	int				prev_flow;
 	struct 	s_queue	*next;
 }					t_queue;
 
@@ -79,7 +80,6 @@ typedef struct		s_env
 	t_hash			*hashtable;
 	t_queue			*queue;
 	t_queue			*end_queue;
-	int				current_flow;
 }					t_env;
 
 void	parse(t_env *env);
