@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/25 19:53:05 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/29 13:33:12 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,8 @@ typedef	struct		s_room
 	int				visited;
 	struct 	s_link	*linked_rooms;
 	struct	s_room	*prev;
-	struct	s_room	*next;
+	struct	s_room	*next;      // separate chaining
 }					t_room;
-
-typedef struct		s_hash
-{
-	t_room			*node;
-	struct s_hash	*next;
-}					t_hash;
 
 /*
 ***		FLOW MODIFIED BY EDMUND KARP ALGO
@@ -77,7 +71,6 @@ typedef struct		s_env
 	t_link			*links;
 	t_room			*start;
 	t_room			*end;
-	t_hash			*hashtable;
 	t_queue			*queue;
 	t_queue			*end_queue;
 }					t_env;

@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 13:06:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/24 19:20:38 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/29 14:30:02 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,48 @@ void	print_split(char **tab)
 		i++;
 	}
 	i = 0;
+}
+
+void	print_linked(t_room *room)
+{
+	t_room *current;
+
+	current = room;
+	if (current)
+		printf("linked rooms ");
+	while (current)
+	{
+		printf("[%s]", current->name);
+		if (current->next)
+			printf("->");
+		current = current->next;
+	}
+	printf("\n");
+}
+
+void	print_hash(t_room **table, size_t size)
+{
+	t_room	*collisions;
+	size_t i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (table[i]->name)
+		{
+			print_linked(collisions);
+			printf("hash %s", table[i]->name);
+			collisions = table[i];
+			while (collisions->next)
+			{
+				collisions = collisions->next;
+				printf(" -> %s", collisions->name);
+			}
+		}
+		if (table[i]->name)
+			printf("\n");
+		i++;
+	}
 }
 
 void	ft_error(int error)

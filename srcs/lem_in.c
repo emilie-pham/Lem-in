@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/07/24 14:26:56 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/29 13:19:48 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static	t_env	*init_env(void)
 int		main(int ac, char **av)
 {
 	t_env 	*env;
-	t_hash	*table;
 
 	if (!(env = init_env()))
 		return (0);

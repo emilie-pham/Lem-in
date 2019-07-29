@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/24 19:29:22 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/29 13:21:59 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ void	parse(t_env *env)
 		}
 	}
 	printf("READ\n");
-	// print_links(env->links);
-	// print_hash(table, TABLE_SIZE);
+	print_links(env->links);
+	print_hash(table, TABLE_SIZE);
 }
