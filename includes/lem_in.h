@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/29 13:33:12 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/29 19:10:45 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct		s_link
 	t_room			*dest;
 	t_room			*from;
 	int				flow;
+	struct 	s_link	*rev;
 	struct	s_link	*next;
 }					t_link;
 
@@ -98,8 +99,8 @@ void	parse_startend(t_env *env, t_room **table);
 ***		links
 */
 
-void	add_link(t_env *env, t_link *link);
-t_link	*get_link(t_env *env, t_room **table, char *line);
+void	add_link(t_room *room, t_link *link);
+void	*get_link(t_env *env, t_room **table, char *line);
 
 void	parse_links(t_env *env);
 

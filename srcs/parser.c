@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/29 13:21:59 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/29 19:10:02 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	parse(t_env *env)
 		if (is_link(env->line))
 		{
 			printf("LINK %s\n", env->line);
-			add_link(env, get_link(env, table, env->line));
+			get_link(env, table, env->line);
 		}
 		if (is_command(env->line))
 		{
@@ -61,6 +61,6 @@ void	parse(t_env *env)
 		}
 	}
 	printf("READ\n");
-	print_links(env->links);
+	// print_links(env->links);
 	print_hash(table, TABLE_SIZE);
 }

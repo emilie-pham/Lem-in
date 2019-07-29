@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 13:06:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/29 14:30:02 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/29 16:03:27 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	print_hash(t_room **table, size_t size)
 	{
 		if (table[i]->name)
 		{
+			printf("hash %s : ", table[i]->name);
 			print_linked(collisions);
-			printf("hash %s", table[i]->name);
 			collisions = table[i];
 			while (collisions->next)
 			{

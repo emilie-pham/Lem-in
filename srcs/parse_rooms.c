@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:19:34 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/29 14:27:24 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/29 15:53:33 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	parse_startend(t_env *env, t_room **table)
 		room = create_room(env->line);
 		insert_hash_table(table, room);
 		env->start = room;
+		printf("START %s\n", env->start->name);
 	}
 	if (command_type(env->line) == 2)
 	{
@@ -54,5 +55,6 @@ void	parse_startend(t_env *env, t_room **table)
 		room = create_room(env->line);
 		insert_hash_table(table, room);
 		env->end = room;
+		printf("END %s\n", env->end->name);
 	}
 }
