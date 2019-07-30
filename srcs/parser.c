@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/07/29 16:11:28 by anonymous        ###   ########.fr       */
+=======
+/*   Updated: 2019/07/29 19:10:02 by epham            ###   ########.fr       */
+>>>>>>> 38debf39d9083b0986dd396db76cee3227c57659
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +47,13 @@ void	parse(t_env *env)
 		}
 		if (is_link(env->line))
 		{
+<<<<<<< HEAD
 			// printf("LINK %s\n", env->line);
 			add_link(env, get_link(env, table, env->line));
+=======
+			printf("LINK %s\n", env->line);
+			get_link(env, table, env->line);
+>>>>>>> 38debf39d9083b0986dd396db76cee3227c57659
 		}
 		if (is_command(env->line))
 		{
@@ -60,7 +69,11 @@ void	parse(t_env *env)
 			break ;
 		}
 	}
+<<<<<<< HEAD
 	// printf("READ\n");
+=======
+	printf("READ\n");
+>>>>>>> 38debf39d9083b0986dd396db76cee3227c57659
 	// print_links(env->links);
 	print_hash(table, TABLE_SIZE);
 }

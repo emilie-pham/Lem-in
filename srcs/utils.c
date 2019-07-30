@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 13:06:14 by yoribeir          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/07/29 16:09:33 by anonymous        ###   ########.fr       */
+=======
+/*   Updated: 2019/07/29 16:03:27 by epham            ###   ########.fr       */
+>>>>>>> 38debf39d9083b0986dd396db76cee3227c57659
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +69,12 @@ void	print_hash(t_room **table, size_t size)
 	{
 		if (table[i]->name)
 		{
+<<<<<<< HEAD
 			printf("hash %s", table[i]->name);
+=======
+			printf("hash %s : ", table[i]->name);
+			print_linked(collisions);
+>>>>>>> 38debf39d9083b0986dd396db76cee3227c57659
 			collisions = table[i];
 			while (collisions->next)
 			{
