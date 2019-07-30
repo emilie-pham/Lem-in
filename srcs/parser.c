@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/29 19:10:02 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/30 15:05:05 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	parse(t_env *env)
 			parse_startend(env, table);
 		}
 		if (is_comment(env->line))
-			printf("comment %s\n", env->line);
+			printf("COMMENT %s\n", env->line);
 		if (!is_room(env->line) && !is_link(env->line) && !is_comment(env->line)
 			&& !is_command(env->line))
 		{
@@ -61,6 +61,5 @@ void	parse(t_env *env)
 		}
 	}
 	printf("READ\n");
-	// print_links(env->links);
 	print_hash(table, TABLE_SIZE);
 }

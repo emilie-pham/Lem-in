@@ -6,23 +6,11 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 13:06:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/29 16:03:27 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/30 15:02:02 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-void	print_links(t_link *head)
-{
-	t_link *current;
-
-	current = head;
-	while (current)
-	{
-		printf("link	 %s-%s\n", current->from->name, current->dest->name);
-		current = current->next;
-	}
-}
 
 void	print_rooms(t_room *head)
 {

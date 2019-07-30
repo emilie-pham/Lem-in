@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/29 19:10:45 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/30 15:02:10 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	parse_startend(t_env *env, t_room **table);
 */
 
 void	add_link(t_room *room, t_link *link);
-void	*get_link(t_env *env, t_room **table, char *line);
+int		get_link(t_env *env, t_room **table, char *line);
 
 void	parse_links(t_env *env);
 
@@ -119,7 +119,6 @@ int		command_type(char *line);
 */
 
 void	ft_error(int error);
-void	print_links(t_link *head);
 void	print_rooms(t_room *head);
 
 #endif
