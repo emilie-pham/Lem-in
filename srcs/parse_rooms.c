@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/12 13:19:34 by yoribeir          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/07/29 16:11:02 by anonymous        ###   ########.fr       */
-=======
-/*   Updated: 2019/07/29 15:53:33 by epham            ###   ########.fr       */
->>>>>>> 38debf39d9083b0986dd396db76cee3227c57659
+/*   Created: 2019/07/12 18:25:56 by anonymous         #+#    #+#             */
+/*   Updated: 2019/07/30 15:14:46 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +25,6 @@ t_room	*create_room(char *line)
 	room->coord_x = ft_atoi(split[1]);
 	room->coord_y = ft_atoi(split[2]);
 	room->visited = 0;
-	//if (!(room->linked_rooms = ft_memalloc(sizeof(t_link))))
-	//	return (NULL);
 	room->next = NULL;
 	room->prev = NULL;
 	return (room);
@@ -49,7 +43,7 @@ void	parse_startend(t_env *env, t_room **table)
 		room = create_room(env->line);
 		insert_hash_table(table, room);
 		env->start = room;
-		printf("START %s\n", env->start->name);
+		printf("START %s %d %d\n", env->start->name, env->start->coord_x, env->start->coord_y);
 	}
 	if (command_type(env->line) == 2)
 	{
@@ -59,6 +53,6 @@ void	parse_startend(t_env *env, t_room **table)
 		room = create_room(env->line);
 		insert_hash_table(table, room);
 		env->end = room;
-		printf("END %s\n", env->end->name);
+		printf("END   %s %d %d\n", env->end->name, env->end->coord_x, env->end->coord_y);
 	}
 }
