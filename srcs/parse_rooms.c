@@ -6,7 +6,11 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:19:34 by yoribeir          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2019/07/29 16:11:02 by anonymous        ###   ########.fr       */
+=======
 /*   Updated: 2019/07/29 15:53:33 by epham            ###   ########.fr       */
+>>>>>>> 38debf39d9083b0986dd396db76cee3227c57659
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +29,8 @@ t_room	*create_room(char *line)
 	room->coord_x = ft_atoi(split[1]);
 	room->coord_y = ft_atoi(split[2]);
 	room->visited = 0;
-	if (!(room->linked_rooms = ft_memalloc(sizeof(t_link))))
-		return (NULL);
+	//if (!(room->linked_rooms = ft_memalloc(sizeof(t_link))))
+	//	return (NULL);
 	room->next = NULL;
 	room->prev = NULL;
 	return (room);
