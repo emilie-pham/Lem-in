@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/07/29 13:19:48 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/30 16:20:57 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static	t_env	*init_env(void)
 		return (NULL);
 	env->line = NULL;
 	env->ant_nb = 0;
+	env->flag_link = 0;
 	env->links = NULL;
 	env->start = NULL;
 	env->end = NULL;
@@ -33,5 +34,6 @@ int		main(int ac, char **av)
 	if (!(env = init_env()))
 		return (0);
 	parse(env);
+	free(env);
 	return (0);
 }

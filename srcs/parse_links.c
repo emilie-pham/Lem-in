@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 18:25:56 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/30 15:01:11 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/30 16:08:57 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	*create_links(t_room *start, t_room *end)
 	secondlink->next = NULL;
 	add_link(start, firstlink);
 	add_link(end, secondlink);
+	return (firstlink); // return non NULL sinon le parsing s'arrete
 	// printf("FIRSTLINK : from %s to %s\n", start->name, firstlink->dest->name);
 	// printf("SECONDLINK : from %s to %s\n\n", end->name, secondlink->dest->name);
 }
@@ -85,14 +86,18 @@ void	*get_link(t_env *env, t_room **table, char *line)
 
 	if ((split = (ft_strsplit(line, '-'))))
 	{
+		env->flag_link = 1;
 		start = ft_strdup(split[0]);
 		end = ft_strdup(split[1]);
 		start_room = find_room(env, table, start);
 		end_room = find_room(env, table, end);
+		free(start);
+		free(end);
+		ft_tabdel(split);
 		if (start_room && end_room)
 			return (create_links(start_room, end_room));
 		else
-			return (NULL);
+			ft_error(2);
 	}
 	return (NULL);
 }

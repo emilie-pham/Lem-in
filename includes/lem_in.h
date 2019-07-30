@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/29 19:10:45 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/30 16:15:17 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct		s_env
 {
 	char			*line;
 	int				ant_nb;
+	int				flag_link;
 	t_link			*links;
 	t_room			*start;
 	t_room			*end;
@@ -119,6 +120,8 @@ int		command_type(char *line);
 */
 
 void	ft_error(int error);
+void	free_table(t_room **table);
+
 void	print_links(t_link *head);
 void	print_rooms(t_room *head);
 

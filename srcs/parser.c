@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/30 15:15:08 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/30 16:20:01 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	parse_ants(t_env *env)
 	if (get_next_line(0, &env->line) < 1)
 		ft_error(1);
 	if (!ft_isdigit(*env->line))
-		ft_error(1);
+		ft_error(3);
 	env->ant_nb = ft_atoi(env->line);
 	if (env->ant_nb <= 0)
-		ft_error(1);
+		ft_error(3);
 	printf("ants	%d\n", env->ant_nb);
 	ft_strdel(&env->line);
 }
@@ -44,7 +44,8 @@ void	parse(t_env *env)
 		if (is_link(env->line))
 		{
 			printf("LINK %s\n", env->line);
-			get_link(env, table, env->line);
+			if (!(get_link(env, table, env->line)))
+				break ;
 		}
 		if (is_command(env->line))
 		{
@@ -59,8 +60,13 @@ void	parse(t_env *env)
 			printf("BREAK\n");
 			break ;
 		}
+		ft_strdel(&env->line);
 	}
-	printf("READ\n");
+	if (!env->start || !env->end)
+		ft_error(4);
+	if (!env->flag_link)
+		ft_error(1);
+	free_table(table);
 	// print_links(env->links);
 	// print_hash(table, TABLE_SIZE);
 }

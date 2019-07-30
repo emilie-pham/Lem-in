@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 18:25:56 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/30 15:14:46 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/30 16:07:35 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_room	*create_room(char *line)
 	room->visited = 0;
 	room->next = NULL;
 	room->prev = NULL;
+	ft_tabdel(split);
 	return (room);
 }
 
@@ -39,7 +40,7 @@ void	parse_startend(t_env *env, t_room **table)
 	{
 		get_next_line(0, &env->line);
 		if (!is_room(env->line))
-			ft_error(1);
+			ft_error(4);
 		room = create_room(env->line);
 		insert_hash_table(table, room);
 		env->start = room;
@@ -49,7 +50,7 @@ void	parse_startend(t_env *env, t_room **table)
 	{
 		get_next_line(0, &env->line);
 		if (!is_room(env->line))
-			ft_error(1);
+			ft_error(4);
 		room = create_room(env->line);
 		insert_hash_table(table, room);
 		env->end = room;
