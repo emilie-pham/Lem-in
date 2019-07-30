@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 13:06:14 by yoribeir          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/07/29 16:09:33 by anonymous        ###   ########.fr       */
-=======
-/*   Updated: 2019/07/29 16:03:27 by epham            ###   ########.fr       */
->>>>>>> 38debf39d9083b0986dd396db76cee3227c57659
+/*   Created: 2019/07/19 13:10:46 by anonymous         #+#    #+#             */
+/*   Updated: 2019/07/30 15:06:04 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,29 +59,28 @@ void	print_hash(t_room **table, size_t size)
 {
 	t_room	*collisions;
 	size_t i;
+	int	count = 0;
 
 	i = 0;
 	while (i < size)
 	{
 		if (table[i]->name)
 		{
-<<<<<<< HEAD
 			printf("hash %s", table[i]->name);
-=======
-			printf("hash %s : ", table[i]->name);
-			print_linked(collisions);
->>>>>>> 38debf39d9083b0986dd396db76cee3227c57659
 			collisions = table[i];
 			while (collisions->next)
 			{
+				count++;
 				collisions = collisions->next;
 				printf(" -> %s", collisions->name);
 			}
+			count++;
 		}
 		if (table[i]->name)
 			printf("\n");
 		i++;
 	}
+	printf("room number %d\n", count);
 }
 
 void	ft_error(int error)
