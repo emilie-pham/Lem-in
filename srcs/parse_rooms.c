@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 13:19:34 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/30 15:16:19 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/30 20:57:26 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ t_room	*create_room(char *line)
 	room->name = ft_strdup(split[0]);
 	room->coord_x = ft_atoi(split[1]);
 	room->coord_y = ft_atoi(split[2]);
+	room->linked_rooms = NULL;
 	room->visited = 0;
+	room->inqueue = 0;
 	//if (!(room->linked_rooms = ft_memalloc(sizeof(t_link))))
 	//	return (NULL);
 	room->next = NULL;

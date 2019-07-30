@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/07/29 13:19:48 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/30 19:21:14 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static	t_env	*init_env(void)
 	env->links = NULL;
 	env->start = NULL;
 	env->end = NULL;
+	env->queue = NULL;
+	env->end_queue = env->queue;
+	env->paths = NULL;
 	return (env);
 }
 
@@ -33,5 +36,6 @@ int		main(int ac, char **av)
 	if (!(env = init_env()))
 		return (0);
 	parse(env);
+	edmond(env);
 	return (0);
 }

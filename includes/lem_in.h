@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/30 15:02:10 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/30 21:10:04 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef	struct		s_room
 	int				coord_x;
 	int				coord_y;
 	int				visited;
+	int				inqueue;
 	struct 	s_link	*linked_rooms;
 	struct	s_room	*prev;
 	struct	s_room	*next;      // separate chaining
@@ -49,6 +50,13 @@ typedef struct		s_link
 	struct 	s_link	*rev;
 	struct	s_link	*next;
 }					t_link;
+
+typedef struct 		s_solution
+{
+	struct	s_path	*path;
+	struct	s_solution	*next;
+}					t_solution;
+
 
 typedef struct		s_path
 {
@@ -74,51 +82,66 @@ typedef struct		s_env
 	t_room			*end;
 	t_queue			*queue;
 	t_queue			*end_queue;
+	t_solution		*paths;
 }					t_env;
 
-void	parse(t_env *env);
+void				parse(t_env *env);
 
 /*
 ***		hash
 */
 
-unsigned long long hash_value(char *key);
-void	init_table(t_room **table);
-void	insert_hash_table(t_room **table, t_room *room);
-void	print_hash(t_room **table, size_t size);
+unsigned long long	hash_value(char *key);
+void				init_table(t_room **table);
+void				insert_hash_table(t_room **table, t_room *room);
+void				print_hash(t_room **table, size_t size);
 
 /*
 ***		rooms
 */
 
-t_room	*create_room(char *line);
-void	add_room(t_env *env, t_room *room);
-void	parse_startend(t_env *env, t_room **table);
+t_room				*create_room(char *line);
+void				add_room(t_env *env, t_room *room);
+void				parse_startend(t_env *env, t_room **table);
 
 /*
 ***		links
 */
 
-void	add_link(t_room *room, t_link *link);
-int		get_link(t_env *env, t_room **table, char *line);
+void				add_link(t_room *room, t_link *link);
+int					get_link(t_env *env, t_room **table, char *line);
 
-void	parse_links(t_env *env);
+void				parse_links(t_env *env);
 
 /*
 ***		checkers
 */
 
-int		is_room(char *line);
-int		is_command(char *line);
-int		is_comment(char *line);
-int		is_link(char *line);
-int		command_type(char *line);
+int					is_room(char *line);
+int					is_command(char *line);
+int					is_comment(char *line);
+int					is_link(char *line);
+int					command_type(char *line);
+
+/*
+***		bfs
+*/
+
+int  				bfs(t_env *env);
+int					edmond(t_env *env);
+
 
 /*
 ***		utils
 */
 
-void	ft_error(int error);
-void	print_rooms(t_room *head);
+void				ft_error(int error);
+void				print_paths(t_env *env);
+void				print_queue(t_env *env);
+void				printqueue(t_queue *queue);
+void				print_links(t_room *room);
+void				print_link(t_link *link);
+
+
 
 #endif

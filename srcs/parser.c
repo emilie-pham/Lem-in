@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/30 15:14:30 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/30 20:23:56 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	parse(t_env *env)
 	{
 		if (is_room(env->line))
 		{
-			// printf("ROOM %s\n", env->line);
 			room = create_room(env->line);
+			printf("ROOM %s\n", room->name);
 			insert_hash_table(table, room);
 		}
 		if (is_link(env->line))
 		{
-			printf("LINK %s\n", env->line);
+			// printf("LINK %s\n", env->line);
 			get_link(env, table, env->line);
 		}
 		if (is_command(env->line))
@@ -56,10 +56,10 @@ void	parse(t_env *env)
 		if (!is_room(env->line) && !is_link(env->line) && !is_comment(env->line)
 			&& !is_command(env->line))
 		{
-			printf("BREAK\n");
+			// printf("BREAK\n");
 			break ;
 		}
 	}
-	printf("READ\n");
+	printf("\n");
 	print_hash(table, TABLE_SIZE);
 }
