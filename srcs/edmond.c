@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/07/30 20:30:05 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/30 21:24:28 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ void	get_solution(t_env *env)
 
 int		edmond(t_env *env)
 {
-	printf("\nENTERING EDMOND\n");
 	while (bfs(env) == 1)
 	{
 		update_flows(env);
