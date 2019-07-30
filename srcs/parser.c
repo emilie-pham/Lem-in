@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/29 13:21:59 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/29 16:11:28 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,22 @@ void	parse(t_env *env)
 	{
 		if (is_room(env->line))
 		{
-			printf("ROOM %s\n", env->line);
+			// printf("ROOM %s\n", env->line);
 			room = create_room(env->line);
 			insert_hash_table(table, room);
 		}
 		if (is_link(env->line))
 		{
-			printf("LINK %s\n", env->line);
+			// printf("LINK %s\n", env->line);
 			add_link(env, get_link(env, table, env->line));
 		}
 		if (is_command(env->line))
 		{
-			printf("COMMAND %s\n", env->line);
+			// printf("COMMAND %s\n", env->line);
 			parse_startend(env, table);
 		}
-		if (is_comment(env->line))
-			printf("comment %s\n", env->line);
+		// if (is_comment(env->line))
+			// printf("comment %s\n", env->line);
 		if (!is_room(env->line) && !is_link(env->line) && !is_comment(env->line)
 			&& !is_command(env->line))
 		{
@@ -60,7 +60,7 @@ void	parse(t_env *env)
 			break ;
 		}
 	}
-	printf("READ\n");
-	print_links(env->links);
+	// printf("READ\n");
+	// print_links(env->links);
 	print_hash(table, TABLE_SIZE);
 }

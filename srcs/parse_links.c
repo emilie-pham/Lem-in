@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/29 14:28:06 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/29 16:09:16 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,6 @@ void	add_link(t_env *env, t_link *link)
 	}
 }
 
-void	linked_rooms(t_room *room, t_room *linked)
-{
-	t_room *current;
-
-	current = room->linked_rooms->dest;
-	if (!current)
-	{
-		current = linked;
-	}
-	else
-	{
-		while (current->next)
-			current = current->next;
-		current = linked;
-	}
-}
-
 t_link	*create_link(t_room *start, t_room *end)
 {
 	t_link	*link;
@@ -55,8 +38,6 @@ t_link	*create_link(t_room *start, t_room *end)
 		return (NULL);
 	link->dest = end;
 	link->from = start;
-	linked_rooms(start, end);
-	linked_rooms(end, start);
 	link->next = NULL;
 	return (link);
 }
