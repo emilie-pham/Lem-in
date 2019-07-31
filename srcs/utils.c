@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 13:06:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/30 21:21:14 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/31 15:02:51 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,6 @@ void	print_queue(t_env *env)
 		}
 		printf("room %s\n\n", queue->room->name);
 	}
-}
-
-void	printqueue(t_queue *queue)
-{
-	printf("addr : %s\n", queue->room);
-	printf("room : %s\n", queue->room->name);
-	printf("flow : %d\n", queue->prev_flow);
 }
 
 void	ft_error(int error)

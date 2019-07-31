@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/07/30 21:24:28 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/31 16:18:09 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,23 @@ void	create_solution(t_env *env)
 	t_solution	*head;
 	t_path		*path;
 
-	sol = (t_solution *)ft_memalloc(sizeof(t_solution *));
+	printf("CREATE SOLUTION\n");
+	sol = (t_solution *)ft_memalloc(sizeof(t_solution*));
 	path = (t_path*)ft_memalloc(sizeof(t_path*));
 	path->room = env->start;
 	path->ant_index = 0;
 	path->next = NULL;
 	sol->path = path;
-	head = env->paths;
-	while (head)
-		head = head->next;
-	head = sol;
+	if (env->paths)
+	{
+		head = env->paths;
+		printf("SOLUTION BEFORE WHILE\n");
+		while (head->next)
+			head = head->next;
+		head->next = sol;
+	}
+	else
+		env->paths = sol;
 }
 
 /*
@@ -82,6 +89,7 @@ void	create_path(t_env *env, t_room *room)
 	t_path *path;
 	t_link *link;
 
+	printf("CREATE PATH\n");
 	head = env->paths->path;
 	current = room;
 	path = (t_path*)ft_memalloc(sizeof(t_path*));
@@ -89,7 +97,7 @@ void	create_path(t_env *env, t_room *room)
 	path->ant_index = 0;
 	path->next = NULL;
 	link = current->linked_rooms;
-	while (current != env->end)
+	while (ft_strcmp(current->name, env->end->name))
 	{
 		if (link->flow == 1)
 		{
@@ -104,6 +112,7 @@ void	create_path(t_env *env, t_room *room)
 		else
 			link = link->next;
 	}
+	printf("END PATH\n");
 }
 
 /*
@@ -115,15 +124,19 @@ void	get_solution(t_env *env)
 	t_link		*link;
 
 	link = env->start->linked_rooms;
-	while (link)
+	while (ft_strcmp(link->rev->dest->name, env->end->name))
 	{
+		printf("WHILE GET SOLUTION\n");
 		if (link->flow == 1)
 		{
 			create_solution(env);
 			create_path(env, link->dest);
+			link = link->dest->linked_rooms;
 		}
-		link = link->next;
+		else
+			link = link->next;
 	}
+	print_paths(env);
 }
 
 /*
@@ -134,8 +147,11 @@ int		edmond(t_env *env)
 {
 	while (bfs(env) == 1)
 	{
+		printf("UPDATE FLOWS\n");
 		update_flows(env);
+		printf("GET SOLUTION\n");
 		get_solution(env);
 	}
+	printf("END EDMOND\n");
 	return (1);
 }

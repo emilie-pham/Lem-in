@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:02 by epham             #+#    #+#             */
-/*   Updated: 2019/07/30 20:23:56 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/31 15:02:24 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	parse(t_env *env)
 		if (is_room(env->line))
 		{
 			room = create_room(env->line);
-			printf("ROOM %s\n", room->name);
+			// printf("ROOM %s\n", room->name);
 			insert_hash_table(table, room);
 		}
 		if (is_link(env->line))
