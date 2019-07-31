@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/07/30 21:21:54 by epham            ###   ########.fr       */
+/*   Updated: 2019/07/31 13:23:22 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void     append_queue(t_env *env, t_link *link, t_room *previous)
         return ;
     }
     env->end_queue->next = last;
-    env->end_queue = env->end_queue->next;
+    env->end_queue = last;
     print_queue(env);
 }
 
