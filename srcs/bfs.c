@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/07/31 15:02:06 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/01 14:22:50 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ void        initialize_bfs(t_env *env)
         {
             head->room->prev = NULL;
             head->room->visited = 0;
+            head->room->inqueue = 0;
             tmp = head;
             head = head->next;
-            free(tmp);
+            // free(tmp);
         }
         free(env->queue);
     }
@@ -46,6 +47,7 @@ void     append_queue(t_env *env, t_link *link, t_room *previous)
 {
     t_queue *last;
 
+    printf("APPENDING ROOM %s TO QUEUE\n", link->dest->name);
     if (!(last = (t_queue*)malloc(sizeof(t_queue))))
         return ;
     last->room = link->dest;
@@ -74,6 +76,7 @@ void        get_queue(t_env *env, t_room *current)
     current->visited = 1;
     current->inqueue = 1;
     current_link = current->linked_rooms;
+    printf("GET QUEUE FROM ROOM %s\n", current->name);
     while (current_link)
     {
         if ((current_link->flow == -1 && current_link->dest->visited == 0
@@ -87,6 +90,7 @@ void        get_queue(t_env *env, t_room *current)
     current_link = current->linked_rooms;
     while (current_link)
     {
+        printf("CURRENT LINK DEST : %s\n", current_link->dest->name);
         if (current_link->dest->inqueue == 0 && current_link->flow != 1)
             append_queue(env, current_link, current);
         current_link = current_link->next;
@@ -102,11 +106,15 @@ int         bfs(t_env *env)
     t_room      *current;
     t_queue     *queue;
 
+    printf("BFS\n");
     current = env->start;
     initialize_bfs(env);
     get_queue(env, current);
     if (!env->queue)
+    {
+        printf("NO QUEUE\n");
         return (0);
+    }
     current->visited = 1;
     queue = env->queue;
     current = queue->room;

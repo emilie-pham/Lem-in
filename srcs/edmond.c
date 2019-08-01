@@ -6,7 +6,7 @@
 /*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/08/01 13:57:27 by anradixt         ###   ########.fr       */
+/*   Updated: 2019/08/01 14:03:52 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	create_path(t_env *env, t_room *room)
 	t_path *head;
 	t_path *path;
 	t_solution *sol;
-	// t_link *link;
 
 	printf("CREATE PATH\n");
 	sol = env->paths;
@@ -102,22 +101,6 @@ void	create_path(t_env *env, t_room *room)
 	while (head->next)
 		head = head->next;
 	head->next = path;
-	// link = current->linked_rooms;
-	// while (ft_strcmp(current->name, env->end->name))
-	// {
-	// 	if (link->flow == 1)
-	// 	{
-	// 		path->next = (t_path*)ft_memalloc(sizeof(t_path));
-	// 		path->next->room = current;
-	// 		path->next->ant_index = 0;
-	// 		path->next->next = NULL;
-	// 		path = path->next;
-	// 		current = link->dest;
-	// 		link = current->linked_rooms;
-	// 	}
-	// 	else
-	// 		link = link->next;
-	// }
 }
 
 /*
