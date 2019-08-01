@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 18:25:56 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/30 16:08:57 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/31 12:21:41 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,6 @@ void	add_link(t_room *room, t_link *link)
 	while (tail)
 		tail = tail->next;
 	tail = link;
-	free(tail);
-}
-
-t_link	*create_link(t_room *start, t_room *end)
-{
-	t_link	*link;
-
-	if (!(link = ft_memalloc(sizeof(t_link))))
-		return (NULL);
-	link->dest = end;
-	link->from = start;
-	link->next = NULL;
-	return (link);
 }
 
 void	*create_links(t_room *start, t_room *end)
@@ -41,9 +28,9 @@ void	*create_links(t_room *start, t_room *end)
 	t_link	*secondlink;
 
 	if (!(firstlink = ft_memalloc(sizeof(t_link))))
-		return (NULL);
+		return ;
 	if (!(secondlink = ft_memalloc(sizeof(t_link))))
-		return (NULL);
+		return ;
 	firstlink->dest = end;
 	secondlink->dest = start;
 	firstlink->flow = 0;
@@ -95,7 +82,7 @@ void	*get_link(t_env *env, t_room **table, char *line)
 		free(end);
 		ft_tabdel(split);
 		if (start_room && end_room)
-			return (create_links(start_room, end_room));
+			create_links(start_room, end_room);
 		else
 			ft_error(2);
 	}

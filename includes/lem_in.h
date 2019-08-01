@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/07/30 16:15:17 by anonymous        ###   ########.fr       */
+/*   Created: 2019/07/11 20:26:12 by anonymous         #+#    #+#             */
+/*   Updated: 2019/07/31 12:20:55 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	parse_startend(t_env *env, t_room **table);
 */
 
 void	add_link(t_room *room, t_link *link);
-void	*get_link(t_env *env, t_room **table, char *line);
+int		get_link(t_env *env, t_room **table, char *line);
 
 void	parse_links(t_env *env);
 
