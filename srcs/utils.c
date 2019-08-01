@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 13:06:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/31 15:02:51 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/01 12:49:30 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	print_paths(t_env *env)
 		printf("NEW PATH COMBINATION\n");
 		while (sol->path)
 		{
-			// printf("%s | ", sol->path->room->name);
+			printf("%s | ", sol->path->room->name);
 			sol->path = sol->path->next;
 		}
 		printf("\n");
