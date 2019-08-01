@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 14:19:54 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/29 14:11:32 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/07/30 16:39:04 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	insert_hash_table(t_room **table, t_room *room)
 	size_t	hashedvalue;
 
 	hashedvalue = hash_value(room->name);
-	// printf("room %s = %ld\n", room->name, hashedvalue);
 	if (table[hashedvalue]->name == NULL)
 		table[hashedvalue] = room;
 	else

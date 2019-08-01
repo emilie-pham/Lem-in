@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:44:50 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/23 19:03:51 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/07/30 16:12:36 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,13 @@ int		is_link(char *line)
 	if (count == 2)
 	{
 		if (!ft_strcmp(split[0], split[1]))
-			return (0);
+			ret = 0;
 		if (count_letter(line, '-') > 1)
-			return (0);
-		return (1);
+			ret = 0;
+		ret = 1;
 	}
-	return (0);
+	ft_tabdel(split);
+	return (ret);
 }
 
 int		is_room_name(char *line)
@@ -102,5 +103,6 @@ int		is_room(char *line)
 			ft_strdigit(split[2]))
 			ret = 1;
 	}
+	ft_tabdel(split);
 	return (ret);
 }

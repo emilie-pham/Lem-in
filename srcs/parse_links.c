@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_links.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/30 19:48:57 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/01 14:25:55 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int		get_link(t_env *env, t_room **table, char *line)
 
 	if ((split = (ft_strsplit(line, '-'))))
 	{
+		env->flag_link = 1;
 		start = ft_strdup(split[0]);
 		end = ft_strdup(split[1]);
 		start_room = find_room(env, table, start);

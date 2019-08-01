@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 13:06:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/08/01 12:49:30 by anradixt         ###   ########.fr       */
+/*   Created: 2019/07/19 13:10:46 by anonymous         #+#    #+#             */
+/*   Updated: 2019/08/01 14:22:03 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,27 @@ void	print_queue(t_env *env)
 	}
 }
 
+void	free_table(t_room **table)
+{
+	int i;
+
+	i = 0;
+	while (i < TABLE_SIZE)
+	{
+		free(table[i]);
+		i++;
+	}
+}
+
 void	ft_error(int error)
 {
-	if (error)
-	{
+	if (error == 1)
 		ft_putstr_fd("ERROR\n", 2);
-		exit(1);
-	}
+	if (error == 2)
+		ft_putstr_fd("LINK TO UNKNOWN ROOM\n", 2);
+	if (error == 3)
+		ft_putstr_fd("INVALID ANTS\n", 2);
+	if (error == 4)
+		ft_putstr_fd("ROOM START OR END MISSING\n", 2);
+	exit(1);
 }
