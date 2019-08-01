@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/31 12:20:36 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/08/01 14:38:27 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,4 @@ void	parse(t_env *env)
 	if (!env->flag_link)
 		ft_error(1);
 	print_hash(table, TABLE_SIZE);
-	free_table(table);
 }

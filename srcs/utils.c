@@ -6,22 +6,32 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/31 11:51:18 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/08/01 14:22:03 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	print_rooms(t_room *head)
+void	print_link(t_link *link)
 {
-	t_room *current;
+	printf("\ndest : %s\n", link->dest->name);
+	printf("flow : %d\n", link->flow);
+	printf("from : %s\n\n", link->rev->dest->name);
+}
 
-	current = head;
-	while (current)
+void	print_links(t_room *room)
+{
+	t_link *head;
+
+	head = room->linked_rooms;
+	printf("room %s is connected to : ", room->name);
+	while (head)
 	{
-		printf("link	 %s-%s\n", current->from->name, current->dest->name);
-		printf("room	%s %d %d\n", current->name, current->coord_x, current->coord_y);
-		current = current->next;
+		if (head->next)
+			printf("room %s, ", head->dest->name);
+		else
+			printf("room %s", head->dest->name);
+		head = head->next;
 	}
 }
 
@@ -55,7 +65,8 @@ void	print_hash(t_room **table, size_t size)
 	{
 		if (table[i]->name)
 		{
-			printf("hash %s", table[i]->name);
+			// printf("hash %s", table[i]->name);
+			print_links(table[i]);
 			collisions = table[i];
 			while (collisions->next)
 			{
@@ -70,6 +81,41 @@ void	print_hash(t_room **table, size_t size)
 		i++;
 	}
 	printf("room number %d\n", count);
+}
+
+void	print_paths(t_env *env)
+{
+	t_solution *sol;
+
+	sol = env->paths;
+	while (sol)
+	{
+		printf("NEW PATH COMBINATION\n");
+		while (sol->path)
+		{
+			printf("%s | ", sol->path->room->name);
+			sol->path = sol->path->next;
+		}
+		printf("\n");
+		sol = sol->next;
+	}
+}
+
+void	print_queue(t_env *env)
+{
+	t_queue *queue;
+
+	if (env->queue)
+	{
+		queue = env->queue;
+		printf("\nQUEUE : ");
+		while (queue->next)
+		{
+			printf("room %s || ", queue->room->name);
+			queue = queue->next;
+		}
+		printf("room %s\n\n", queue->room->name);
+	}
 }
 
 void	free_table(t_room **table)
