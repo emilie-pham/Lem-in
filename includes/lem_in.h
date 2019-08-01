@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/08/01 14:26:05 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/08/01 16:54:40 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ void				parse_startend(t_env *env, t_room **table);
 */
 
 void				add_link(t_room *room, t_link *link);
-int					get_link(t_env *env, t_room **table, char *line);
+void				*get_link(t_env *env, t_room **table, char *line);
+// int			get_link(t_env *env, t_room **table, char *line);
 
 void				parse_links(t_env *env);
 

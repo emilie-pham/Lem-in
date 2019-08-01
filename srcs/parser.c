@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by anonymous         #+#    #+#             */
-/*   Updated: 2019/08/01 14:38:27 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/08/01 16:54:29 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void	reader(t_env *env, t_room **table)
 		}
 		if (is_link(env->line))
 			if (!(get_link(env, table, env->line)))
+			{
+				printf("err\n");
 				break ;
+			}
 		if (is_command(env->line))
 			parse_startend(env, table);
 		if (!is_room(env->line) && !is_link(env->line) && !is_comment(env->line)
