@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_links.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/08/01 14:25:55 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/08/02 13:20:17 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ void	add_link(t_room *room, t_link *link)
 	tail->next = link;
 }
 
-void	create_links(t_room **start, t_room **end)
+void	*create_links(t_room **start, t_room **end)
 {
 	t_link	*firstlink;
 	t_link	*secondlink;
 	t_link	*tail;
 
 	if (!(firstlink = ft_memalloc(sizeof(t_link))))
-		return ;
+		return (NULL);
 	if (!(secondlink = ft_memalloc(sizeof(t_link))))
-		return ;
+		return (NULL);
 	firstlink->dest = *end;
 	secondlink->dest = *start;
 	firstlink->flow = 0;
@@ -47,6 +47,7 @@ void	create_links(t_room **start, t_room **end)
 	secondlink->next = NULL;
 	add_link(*start, firstlink);
 	add_link(*end, secondlink);
+	return (firstlink);
 }
 
 t_room	*find_room(t_env *env, t_room **table, char *room_name)
@@ -67,7 +68,7 @@ t_room	*find_room(t_env *env, t_room **table, char *room_name)
 	return (NULL);
 }
 
-int		get_link(t_env *env, t_room **table, char *line)
+void	*get_link(t_env *env, t_room **table, char *line)
 {
 	char	*start;
 	char	*end;
@@ -82,21 +83,15 @@ int		get_link(t_env *env, t_room **table, char *line)
 		end = ft_strdup(split[1]);
 		start_room = find_room(env, table, start);
 		end_room = find_room(env, table, end);
-		if (start_room && end_room)
-		{
-			create_links(&start_room, &end_room);
-			ft_tabdel(split);
+		ft_tabdel(split);
+		if (start_room)
 			free(start);
+		if (end_room)
 			free(end);
-		}
+		if (start_room && end_room)
+			return (create_links(&start_room, &end_room));
 		else
-		{
-			if (start_room)
-				free(start);
-			if (end_room)
-				free(end);
-			return (-1);
-		}
+			ft_error(2);
 	}
-	return (-1);
+	return (NULL);
 }
