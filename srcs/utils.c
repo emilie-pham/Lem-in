@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by anonymous         #+#    #+#             */
-/*   Updated: 2019/08/01 14:22:03 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/08/02 14:29:31 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,17 @@ void	print_hash(t_room **table, size_t size)
 	printf("room number %d\n", count);
 }
 
-void	print_paths(t_env *env)
+void	print_paths(t_solution *current_sol)
 {
-	t_solution *sol;
-
-	sol = env->paths;
-	while (sol)
+	while (current_sol)
 	{
-		printf("NEW PATH COMBINATION\n");
-		while (sol->path)
+		while (current_sol->path)
 		{
-			printf("%s | ", sol->path->room->name);
-			sol->path = sol->path->next;
+			printf("%s | ", current_sol->path->room->name);
+			current_sol->path = current_sol->path->next;
 		}
-		printf("\n");
-		sol = sol->next;
+		printf("\n\n");
+		current_sol = current_sol->next;
 	}
 }
 

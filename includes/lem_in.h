@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/08/02 13:21:28 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/02 14:10:12 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ typedef struct		s_env
 	t_room			*end;
 	t_queue			*queue;
 	t_queue			*end_queue;
-	t_solution		*paths;
+	t_solution		*optimal_sol;
+	t_solution		*current_sol;
 }					t_env;
 
 void				parse(t_env *env);
@@ -138,7 +139,7 @@ int					edmond(t_env *env);
 */
 
 void				ft_error(int error);
-void				print_paths(t_env *env);
+void				print_paths(t_solution *current_sol);
 void				print_queue(t_env *env);
 void				printqueue(t_queue *queue);
 void				print_links(t_room *room);

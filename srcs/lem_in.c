@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/08/02 13:20:08 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/02 14:11:05 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static	t_env	*init_env(void)
 	env->end = NULL;
 	env->queue = NULL;
 	env->end_queue = env->queue;
-	env->paths = NULL;
+	env->optimal_sol = NULL;
 	return (env);
 }
 
