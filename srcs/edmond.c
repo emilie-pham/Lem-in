@@ -6,29 +6,11 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/08/02 14:30:22 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/02 14:35:48 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-/*
-***		FIND CORRESPONDING LINK
-*/
-
-t_link	*findlink(t_room *current, t_room *prev)
-{
-	t_link	*link;
-
-	link = current->linked_rooms;
-	while (link)
-	{
-		if (ft_strcmp(link->dest->name, prev->name) == 0)
-			return (link);
-		link = link->next;
-	}
-	return (NULL);
-}
 
 /*
 ***		UPDATE FLOWS
@@ -42,7 +24,13 @@ void	update_flows(t_env *env)
 	current = env->end;
 	while (current != env->start)
 	{
-		link = findlink(current, current->prev);
+		link = current->linked_rooms;
+		while (link)
+		{
+			if (ft_strcmp(link->dest->name, current->prev->name) == 0)
+				break ;
+			link = link->next;
+		}
 		link->flow -= 1;
 		link->rev->flow += 1;
 		current = current->prev;
