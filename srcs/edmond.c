@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/08/02 14:35:48 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/02 16:48:29 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_path		*create_pathlink(t_room *room)
 ***		GET ONE PATH IN SOLUTION SYSTEM
 */
 
-t_path		*get_path(t_env *env, t_room *next)
+t_path		*get_path(t_env *env, t_room *next, t_solution *sol)
 {
 	t_path *path;
 	t_path *head;
@@ -68,6 +68,7 @@ t_path		*get_path(t_env *env, t_room *next)
 	path->next = create_pathlink(next);
 	path = path->next;
 	link = next->linked_rooms;
+	sol->pathlen += 1;
 	while (ft_strcmp(path->room->name, env->end->name) != 0)
 	{
 		while (link->flow != 1)
@@ -75,7 +76,24 @@ t_path		*get_path(t_env *env, t_room *next)
 		path->next = create_pathlink(link->dest);
 		path = path->next;
 		link = path->room->linked_rooms;
+		sol->pathlen += 1;
 	}
+	env->total_len += sol->pathlen;
+	return (head);
+}
+
+/*
+***		APPEND SOLUTION TO HEAD
+*/
+
+t_solution	*append_sol(t_solution *head, t_solution *sol)
+{
+	t_solution *last;
+
+	last = head;
+	while (last->next)
+		last = last->next;
+	last->next = sol;
 	return (head);
 }
 
@@ -91,14 +109,34 @@ t_solution	*create_sol(t_env *env, t_solution *current, t_room *next)
 	printf("NEW PATH IN SOLUTION SYSTEM\n");
 	head = current;
 	if (head)
+	{
+		printf("HEAD EXISTS\n");
 		new = (t_solution *)ft_memalloc(sizeof(t_solution));
+	}
 	else
 		new = head;
-	new->path = get_path(env, next);
+	new->ants = 0;
+	new->pathlen = 0;
+	new->next = NULL;
+	new->path = get_path(env, next, new);
 	while (head->next)
 		head = head->next;
 	head->next = new;
+	print_paths(head);
 	return (head);
+}
+
+int		sollen(t_solution *sol)
+{
+	int i;
+
+	i = 0;
+	while (sol)
+	{
+		i += 1;
+		sol = sol->next;
+	}
+	return (i);
 }
 
 /*
@@ -108,13 +146,15 @@ t_solution	*create_sol(t_env *env, t_solution *current, t_room *next)
 int		edmond(t_env *env)
 {
 	t_solution	*current_sol;
+	t_solution	*head;
 	t_link		*link;
+	int			first;
 
-	current_sol = (t_solution *)ft_memalloc(sizeof(t_solution));
-	current_sol->path = NULL;
-	current_sol->next = NULL;
+	first = 0;
 	while (bfs(env) == 1)
-	{
+	{	
+		env->path_nb = 0;
+		env->total_len = 0;
 		update_flows(env);
 		printf("NEW SOLUTION SYSTEM\n");
 		link = env->start->linked_rooms;
@@ -122,11 +162,25 @@ int		edmond(t_env *env)
 		{
 			if (link->flow == 1)
 			{
-				current_sol = create_sol(env, current_sol, link->dest);
-				print_paths(current_sol);
+				if (first == 0)
+				{
+					current_sol = (t_solution *)ft_memalloc(sizeof(t_solution));
+					current_sol->path = NULL;
+					current_sol->ants = 0;
+					current_sol->pathlen = 0;
+					current_sol->next = NULL;
+					head = current_sol;
+					first = 1;
+				}
+				else
+					current_sol = create_sol(env, head, link->dest);
+				env->path_nb += 1;
 			}
 			link = link->next;
 		}
+		printf("NUMBER OF PATHS : %d VS SOLLEN %d\n", env->path_nb, sollen(current_sol));
+		printf("TOTAL LENGTH : %d\n", env->total_len);
+		ants_to_send(env, current_sol);
 	}
 	printf("END EDMOND\n");
 	return (1);
