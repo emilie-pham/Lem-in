@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by anonymous         #+#    #+#             */
-/*   Updated: 2019/08/02 15:06:22 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/02 19:55:34 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ void	print_hash(t_room **table, size_t size)
 
 void	print_paths(t_solution *current_sol)
 {
+	t_solution *head;
+
+	head = current_sol;
 	while (current_sol)
 	{
 		while (current_sol->path)
@@ -95,6 +98,7 @@ void	print_paths(t_solution *current_sol)
 		printf("\n\n");
 		current_sol = current_sol->next;
 	}
+	current_sol = head;
 }
 
 void	print_queue(t_env *env)

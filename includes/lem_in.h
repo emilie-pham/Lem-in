@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/08/02 15:24:28 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/02 20:10:55 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct 		s_solution
 	struct	s_path	*path;
 	int				ants;
 	int				pathlen;
+	int				steps;
 	struct	s_solution	*next;
 }					t_solution;
 
@@ -82,12 +83,15 @@ typedef struct		s_env
 	int				flag_link;
 	int				path_nb;
 	int				total_len;
+	int				ants_sent;
+	int				steps;
 	t_link			*links;
 	t_room			*start;
 	t_room			*end;
 	t_queue			*queue;
 	t_queue			*end_queue;
 	t_solution		*optimal_sol;
+	t_solution		*shortest_path;
 }					t_env;
 
 void				parse(t_env *env);
@@ -130,12 +134,13 @@ int					is_link(char *line);
 int					command_type(char *line);
 
 /*
-***		bfs
+***		bfs et edmond
 */
 
 int  				bfs(t_env *env);
 int					edmond(t_env *env);
-int					ants_to_send(t_env *env, t_solution *head);
+int					check_steps(t_env *env, t_solution *head);
+void				update_solution(t_env *env, t_solution *head);
 
 /*
 ***		utils

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/08/02 14:29:51 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/02 22:19:05 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void        get_queue(t_env *env, t_room *current)
     current->visited = 1;
     current->inqueue = 1;
     current_link = current->linked_rooms;
-    // printf("GET QUEUE FROM ROOM %s\n", current->name);
     while (current_link)
     {
         if ((current_link->flow == -1 && current_link->dest->visited == 0
@@ -119,7 +118,7 @@ int         bfs(t_env *env)
         current = queue->room;
         if (!ft_strcmp(current->name, env->end->name))
         {
-            print_queue(env);
+            // print_queue(env);
             return (1);
         }
     }

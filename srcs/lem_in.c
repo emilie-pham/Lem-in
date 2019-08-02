@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/08/02 15:01:22 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/02 19:39:41 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static	t_env	*init_env(void)
 	env->optimal_sol = NULL;
 	env->path_nb = 0;
 	env->total_len = 0;
+	env->ants_sent = 0;
+	env->steps = 2147483647;
 	return (env);
 }
 
