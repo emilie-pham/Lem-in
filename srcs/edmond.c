@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edmond.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/08/02 22:22:47 by anradixt         ###   ########.fr       */
+/*   Updated: 2019/08/03 15:53:55 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,9 @@ int		edmond(t_env *env)
 	t_link		*link;
 	int			first;
 
+	first = 0;
 	while (bfs(env) == 1)
 	{	
-		first = 0;
 		env->path_nb = 0;
 		env->total_len = 0;
 		env->ants_sent = 0;
@@ -154,11 +154,15 @@ int		edmond(t_env *env)
 		if (head->steps < env->steps)
 		{
 			printf("BETTER SOLUTION : from %d to %d steps\n", env->steps, head->steps);
+			printf("BEFORE UPDATE, CURRENT OPTIMAL SOL\n");
+			print_paths(env->optimal_sol);
 			update_solution(env, head);
 			env->steps = head->steps;
 			print_paths(env->optimal_sol);
 		}
 	}
+	if (first == 0)
+		return (0);
 	printf("END EDMOND\n");
 	return (1);
 }
