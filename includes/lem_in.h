@@ -6,7 +6,7 @@
 /*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/08/02 20:10:55 by anradixt         ###   ########.fr       */
+/*   Updated: 2019/08/04 20:03:04 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct 		s_solution
 {
 	struct	s_path	*path;
 	int				ants;
+	int				ants_sent;
+	int				ants_arrived;
 	int				pathlen;
 	int				steps;
 	struct	s_solution	*next;
@@ -65,6 +67,7 @@ typedef struct		s_path
 {
 	t_room			*room;
 	int				ant_index;
+	struct	s_path	*prev;
 	struct	s_path	*next;
 }					t_path;
 
@@ -141,6 +144,8 @@ int  				bfs(t_env *env);
 int					edmond(t_env *env);
 int					check_steps(t_env *env, t_solution *head);
 void				update_solution(t_env *env, t_solution *head);
+void    print_sol(t_env *env);
+
 
 /*
 ***		utils

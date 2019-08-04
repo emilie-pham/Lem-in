@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by anonymous         #+#    #+#             */
-/*   Updated: 2019/08/02 13:25:07 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/04 16:36:54 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parse_ants(t_env *env)
 	env->ant_nb = ft_atoi(env->line);
 	if (env->ant_nb <= 0)
 		ft_error(3);
-	printf("ants	%d\n", env->ant_nb);
+	// printf("ants	%d\n", env->ant_nb);
 	ft_strdel(&env->line);
 }
 
@@ -65,5 +65,5 @@ void	parse(t_env *env)
 		ft_error(4);
 	if (!env->flag_link)
 		ft_error(1);
-	print_hash(table, TABLE_SIZE);
+	// print_hash(table, TABLE_SIZE);
 }

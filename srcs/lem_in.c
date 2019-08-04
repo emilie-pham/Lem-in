@@ -6,7 +6,7 @@
 /*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/08/02 19:39:41 by anradixt         ###   ########.fr       */
+/*   Updated: 2019/08/04 20:28:13 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int		main(int ac, char **av)
 	if (!(env = init_env()))
 		return (0);
 	parse(env);
-	edmond(env);
+	if (edmond(env) != 0)
+		print_sol(env);
 	free(env);
 	return (0);
 }

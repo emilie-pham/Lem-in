@@ -6,7 +6,7 @@
 /*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by anonymous         #+#    #+#             */
-/*   Updated: 2019/08/02 19:55:34 by anradixt         ###   ########.fr       */
+/*   Updated: 2019/08/04 19:36:42 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_links(t_room *room)
 	t_link *head;
 
 	head = room->linked_rooms;
-	printf("room %s is connected to : ", room->name);
+	// printf("room %s is connected to : ", room->name);
 	while (head)
 	{
 		if (head->next)
@@ -85,17 +85,21 @@ void	print_hash(t_room **table, size_t size)
 
 void	print_paths(t_solution *current_sol)
 {
-	t_solution *head;
+	t_solution	*head;
+	t_path		*start;
 
 	head = current_sol;
 	while (current_sol)
 	{
+		printf("ANTS TO SEND IN THIS PATH : %d\n", current_sol->ants);
+		start = current_sol->path;
 		while (current_sol->path)
 		{
 			printf("%s | ", current_sol->path->room->name);
 			current_sol->path = current_sol->path->next;
 		}
-		printf("\n\n");
+		current_sol->path = start;
+		printf("\n");
 		current_sol = current_sol->next;
 	}
 	current_sol = head;

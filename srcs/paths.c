@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 14:36:38 by epham             #+#    #+#             */
-/*   Updated: 2019/08/03 15:55:37 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/04 16:38:25 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		check_steps(t_env *env, t_solution *head)
 	t_solution *sol;
 	int			min;
 	int			steps;
+	int			paths = 0;
 
 	sol = head;
 	min = 2147483647;
@@ -40,8 +41,10 @@ int		check_steps(t_env *env, t_solution *head)
 		if (sol->steps > steps)
 			steps = sol->steps;
 		sol = sol->next;
+		paths++;
 	}
-	// printf("STEPS FOR THIS SOLUTION SYSTEM : %d\n", steps);
+	sol = head;
+	// printf("STEPS FOR THIS SOLUTION SYSTEM : %d | NUMBER OF PATHS %d\n", steps, paths);
 	return (steps);
 }
 
@@ -51,7 +54,6 @@ void	free_path(t_path *path)
 
 	while (path)
 	{
-		printf("FREEING ROOM %s FROM PATH\n", path->room->name);
 		tmp = path;
 		path->room = NULL;
 		path = path->next;
@@ -63,22 +65,17 @@ void	free_path(t_path *path)
 void	update_solution(t_env *env, t_solution *head)
 {
 	t_solution *sol;
-	
+
+	// print_paths(head);
 	if (env->optimal_sol)
 	{
-		printf("REMOVING PREVIOUS PATH\n");
 		while (env->optimal_sol)
 		{
-			printf("REPLACE BY THIS SOL");
-			print_paths(head);
 			free_path(env->optimal_sol->path);
-			printf("AFTER FREE PATH\n");
 			sol = env->optimal_sol;
 			env->optimal_sol = env->optimal_sol->next;
 			sol->next = NULL;
-			printf("BEFORE FREE SOL\n");
 			free(sol);
-			printf("AFTER FREE SOL\n");
 		}
 	}
 	env->optimal_sol = head;	

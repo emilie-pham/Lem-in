@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edmond.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/08/03 15:53:55 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/04 21:16:24 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_path		*create_pathlink(t_room *room)
 	pathlink->room = room;
 	pathlink->ant_index = 0;
 	pathlink->next = NULL;
+	pathlink->prev = NULL;
 	return (pathlink);
 }
 
@@ -73,6 +74,7 @@ t_path		*get_path(t_env *env, t_room *next, t_solution *sol)
 		while (link->flow != 1)
 			link = link->next;
 		path->next = create_pathlink(link->dest);
+		path->next->prev = path;
 		path = path->next;
 		link = path->room->linked_rooms;
 		sol->pathlen += 1;
@@ -106,6 +108,8 @@ t_solution	*create_solution(t_env *env, t_room *next)
 
 	new = (t_solution*)ft_memalloc(sizeof(t_solution));
 	new->ants = 0;
+	new->ants_sent = 0;
+	new->ants_arrived = 0;
 	new->pathlen = 0;
 	new->steps = 0;
 	new->next = NULL;
@@ -132,6 +136,7 @@ int		edmond(t_env *env)
 		env->ants_sent = 0;
 		update_flows(env);
 		link = env->start->linked_rooms;
+		first = 0;
 		while (link)
 		{
 			if (link->flow == 1)
@@ -153,16 +158,13 @@ int		edmond(t_env *env)
 		head->steps = check_steps(env, head);
 		if (head->steps < env->steps)
 		{
-			printf("BETTER SOLUTION : from %d to %d steps\n", env->steps, head->steps);
-			printf("BEFORE UPDATE, CURRENT OPTIMAL SOL\n");
-			print_paths(env->optimal_sol);
 			update_solution(env, head);
 			env->steps = head->steps;
-			print_paths(env->optimal_sol);
 		}
 	}
 	if (first == 0)
 		return (0);
-	printf("END EDMOND\n");
+	// printf("FINAL SOL with %d steps\n", env->optimal_sol->steps);
+	// print_paths(env->optimal_sol);
 	return (1);
 }

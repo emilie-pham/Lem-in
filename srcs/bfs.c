@@ -6,7 +6,7 @@
 /*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/08/02 22:19:05 by anradixt         ###   ########.fr       */
+/*   Updated: 2019/08/04 20:29:52 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ int         bfs(t_env *env)
     current->visited = 1;
     queue = env->queue;
     current = queue->room;
+    if (!ft_strcmp(current->name, env->end->name))
+        return (1);
     while (ft_strcmp(current->name, env->end->name) != 0)
     {
         get_queue(env, current);
