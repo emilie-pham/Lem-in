@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by anonymous         #+#    #+#             */
-/*   Updated: 2019/08/05 17:45:25 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/05 18:22:56 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 void	parse_ants(t_env *env)
 {
 	if (get_next_line(0, &env->line) < 1)
-	{
-		add_line(env, create_line(env->line));
 		ft_error(1);
-	}
+	else
+		add_line(env, create_line(env->line));
 	while (is_comment(env->line))
 		get_line(env);
-	if (!ft_isdigit(*env->line))
+	if (!ft_strdigit(env->line))
 		ft_error(3);
 	env->ant_nb = ft_atoi(env->line);
 	if (env->ant_nb <= 0)
