@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 18:25:56 by anonymous         #+#    #+#             */
-/*   Updated: 2019/08/01 14:19:09 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/08/05 17:27:27 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ void	parse_startend(t_env *env, t_room **table)
 	room = NULL;
 	if (command_type(env->line) == 1)
 	{
-		get_next_line(0, &env->line);
+		get_line(env);
+		while (is_comment(env->line) || (is_command(env->line) &&
+		!command_type(env->line)))
+			get_line(env);
 		if (!is_room(env->line))
 			ft_error(4);
 		room = create_room(env->line);
@@ -48,7 +51,10 @@ void	parse_startend(t_env *env, t_room **table)
 	}
 	if (command_type(env->line) == 2)
 	{
-		get_next_line(0, &env->line);
+		get_line(env);
+		while (is_comment(env->line) || (is_command(env->line) &&
+		!command_type(env->line)))
+			get_line(env);
 		if (!is_room(env->line))
 			ft_error(4);
 		room = create_room(env->line);
