@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edmond.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/08/04 21:16:24 by anradixt         ###   ########.fr       */
+/*   Updated: 2019/08/05 14:02:04 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_path		*get_path(t_env *env, t_room *next, t_solution *sol)
 ***		APPEND SOLUTION TO HEAD
 */
 
-void	*append_sol(t_solution *head, t_solution *sol)
+void	append_sol(t_solution *head, t_solution *sol)
 {
 	t_solution *first;
 
@@ -130,7 +130,7 @@ int		edmond(t_env *env)
 
 	first = 0;
 	while (bfs(env) == 1)
-	{	
+	{
 		env->path_nb = 0;
 		env->total_len = 0;
 		env->ants_sent = 0;
