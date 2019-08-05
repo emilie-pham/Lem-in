@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/08/05 15:09:03 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/08/05 16:33:37 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void				parse(t_env *env);
 t_line	*create_line(char *content);
 void	add_line(t_env *env, t_line	*line);
 void	print_map(t_env *env);
+void	get_line(t_env *env);
 
 /*
 ***		hash

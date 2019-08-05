@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 14:28:40 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/08/05 15:08:39 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/08/05 16:33:19 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ void	add_line(t_env *env, t_line	*line)
 		tail->next = line;
 		tail = line;
 	}
+}
+
+void	get_line(t_env *env)
+{
+	get_next_line(0, &env->line);
+	add_line(env, create_line(env->line));
 }
 
 void	print_map(t_env *env)
