@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by anonymous         #+#    #+#             */
-/*   Updated: 2019/08/04 19:36:42 by anradixt         ###   ########.fr       */
+/*   Updated: 2019/08/05 14:12:07 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_links(t_room *room)
 	t_link *head;
 
 	head = room->linked_rooms;
-	// printf("room %s is connected to : ", room->name);
+	printf("room %s is connected to : ", room->name);
 	while (head)
 	{
 		if (head->next)
@@ -109,6 +109,7 @@ void	print_queue(t_env *env)
 {
 	t_queue *queue;
 
+	// printf("START ROOM : %s, END ROOM : %s\n", env->start->name, env->end->name);
 	if (env->queue)
 	{
 		queue = env->queue;

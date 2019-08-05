@@ -16,7 +16,7 @@ LIBS = libft
 LIB = ft
 # FLAGS = -Wall -Werror -Wextra
 SRCS = lem_in.c bfs.c checkers.c edmond.c hash.c init.c parse_links.c \
-parse_rooms.c parser.c utils.c
+parse_rooms.c parser.c utils.c paths.c print_sol.c
 SRCSREP = srcs
 OBJS = $(SRCS:.c=.o)
 
