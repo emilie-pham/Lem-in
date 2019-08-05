@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/08/05 17:00:23 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/05 17:06:43 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ int		check_links(t_room *start, t_room *end)
 	return (1);
 }
 
-void	*create_links(t_room **start, t_room **end)
+void	*create_links(t_room *start, t_room *end)
 {
 	t_link	*firstlink;
 	t_link	*secondlink;
 	t_link	*tail;
 
-	if (!check_links(*start, *end))
-		return (*start);
+	if (!check_links(start, end))
+		return (start);
 	if (!(firstlink = ft_memalloc(sizeof(t_link))))
 		return (NULL);
 	if (!(secondlink = ft_memalloc(sizeof(t_link))))

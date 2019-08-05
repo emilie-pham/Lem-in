@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_sol.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/04 16:42:11 by anradixt          #+#    #+#             */
-/*   Updated: 2019/08/04 21:11:40 by anradixt         ###   ########.fr       */
+/*   Created: 2019/08/04 16:42:11 by epham             #+#    #+#             */
+/*   Updated: 2019/08/05 17:27:41 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void    print_sol(t_env *env)
     int         next_ant;
     t_solution  *sol;
     t_path      *head;
+    int         steps;
 
     next_ant = 1;
     sol = env->optimal_sol;
