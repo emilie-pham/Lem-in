@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/19 14:19:54 by anonymous         #+#    #+#             */
-/*   Updated: 2019/07/30 16:39:04 by anonymous        ###   ########.fr       */
+/*   Created: 2019/08/05 14:11:33 by yoribeir          #+#    #+#             */
+/*   Updated: 2019/08/05 14:14:23 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-unsigned long long hash_value(char *key)
+unsigned long long	hash_value(char *key)
 {
-	unsigned long long hashedvalue;
+	unsigned long long	hashedvalue;
 
 	hashedvalue = 0;
 	while (*key)
@@ -25,7 +25,7 @@ unsigned long long hash_value(char *key)
 	return (hashedvalue % TABLE_SIZE);
 }
 
-void	insert_hash_table(t_room **table, t_room *room)
+void				insert_hash_table(t_room **table, t_room *room)
 {
 	t_room	*newnode;
 	t_room	*tmp;
@@ -45,10 +45,11 @@ void	insert_hash_table(t_room **table, t_room *room)
 	}
 }
 
-void	init_table(t_room **table)
+void				init_table(t_room **table)
 {
-	int i = 0;
+	int i;
 
+	i = 0;
 	while (i < TABLE_SIZE)
 	{
 		table[i] = malloc(sizeof(t_room));

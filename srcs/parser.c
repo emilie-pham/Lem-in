@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/11 20:26:13 by anonymous         #+#    #+#             */
-/*   Updated: 2019/08/05 16:44:01 by epham            ###   ########.fr       */
+/*   Created: 2019/07/11 20:26:13 by yoribeir          #+#    #+#             */
+/*   Updated: 2019/08/05 17:00:44 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ void	parse_ants(t_env *env)
 
 void	reader(t_env *env, t_room **table)
 {
-	t_room *room;
+	t_room	*room;
+	t_line	*line;
 
 	while (get_next_line(0, &env->line) == 1)
 	{
+		add_line(env, line = create_line(env->line));
 		if (is_room(env->line))
 		{
 			room = create_room(env->line);

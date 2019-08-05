@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/08/05 16:47:24 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/05 17:00:23 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ void	*create_links(t_room **start, t_room **end)
 		return (NULL);
 	if (!(secondlink = ft_memalloc(sizeof(t_link))))
 		return (NULL);
-	firstlink->dest = *end;
-	secondlink->dest = *start;
+	firstlink->dest = end;
+	secondlink->dest = start;
 	firstlink->flow = 0;
 	secondlink->flow = 0;
 	firstlink->rev = secondlink;
 	secondlink->rev = firstlink;
 	firstlink->next = NULL;
 	secondlink->next = NULL;
-	add_link(*start, firstlink);
-	add_link(*end, secondlink);
+	add_link(start, firstlink);
+	add_link(end, secondlink);
 	return (firstlink);
 }
 
@@ -109,7 +109,7 @@ void	*get_link(t_env *env, t_room **table, char *line)
 		if (end_room)
 			free(end);
 		if (start_room && end_room)
-			return (create_links(&start_room, &end_room));
+			return (create_links(start_room, end_room));
 		else
 			ft_error(2);
 	}
