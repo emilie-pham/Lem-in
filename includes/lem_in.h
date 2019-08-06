@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/08/05 16:33:37 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:24:50 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct		s_env
 	t_queue			*end_queue;
 	t_solution		*optimal_sol;
 	t_solution		*shortest_path;
+	t_solution		*second_shortest;
 }					t_env;
 
 void				parse(t_env *env);
@@ -157,7 +158,8 @@ int  				bfs(t_env *env);
 int					edmond(t_env *env);
 int					check_steps(t_env *env, t_solution *head);
 void				update_solution(t_env *env, t_solution *head);
-void    print_sol(t_env *env);
+void				print_sol(t_solution *solution, t_room *start, t_room *end, int *steps);
+
 
 
 /*

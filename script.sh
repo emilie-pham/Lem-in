@@ -17,8 +17,11 @@ do
 	diff=$(( result - gen ))
 	if [ $diff -gt $limit ]
 		then
-			worst=$diff
 			cp file maps/"worst"$diff
+	fi
+	if [ $diff -gt $worst ]
+		then
+			worst=$diff
 	fi
 	if [ $best -gt $diff ]
 		then
