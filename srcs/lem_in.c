@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/08/05 15:02:51 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/08/07 17:28:31 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_env	*init_env(void)
 	env->total_len = 0;
 	env->ants_sent = 0;
 	env->steps = 2147483647;
+	env->shortest_path = NULL;
+	env->second_shortest = NULL;
 	return (env);
 }
 
@@ -44,7 +46,8 @@ int		main(int ac, char **av)
 	parse(env);
 	print_map(env);
 	if (edmond(env) != 0)
-		print_sol(env);
+		print_sol(env->optimal_sol, env->start, env->end, &env->steps);
+	// print_paths(env->optimal_sol);
 	free(env);
 	return (0);
 }

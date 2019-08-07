@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/08/05 16:59:48 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/07 17:27:59 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ int		edmond(t_env *env)
 	first = 0;
 	while (bfs(env) == 1)
 	{
+		// printf("BFS\n");
 		env->path_nb = 0;
 		env->total_len = 0;
 		env->ants_sent = 0;
@@ -162,10 +163,9 @@ int		edmond(t_env *env)
 			// print_paths(env->optimal_sol);
 			env->steps = head->steps;
 		}
+		// print_paths(head);
 	}
 	if (first == 0)
 		return (0);
-	// printf("FINAL SOL with %d steps\n", env->optimal_sol->steps);
-	// print_paths(env->optimal_sol);
 	return (1);
 }

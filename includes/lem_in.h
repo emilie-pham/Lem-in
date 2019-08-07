@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/08/06 20:24:50 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/07 17:07:31 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,8 @@ int					edmond(t_env *env);
 int					check_steps(t_env *env, t_solution *head);
 void				update_solution(t_env *env, t_solution *head);
 void				print_sol(t_solution *solution, t_room *start, t_room *end, int *steps);
+// int					check_compatibility(t_env *env, t_solution *head, t_solution *optimal);
+
 
 
 

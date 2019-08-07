@@ -6,11 +6,53 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 14:36:38 by epham             #+#    #+#             */
-/*   Updated: 2019/08/06 13:23:31 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/07 17:08:02 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+// /*
+// ***		CHECK COMPATIBILITY WITH OPTIMAL SOL
+// */
+
+// int		check_compatibility(t_env *env, t_solution *head, t_solution *optimal)
+// {
+// 	t_solution	*current;
+// 	t_solution	*opti;
+// 	t_path		*head_current;
+// 	t_path		*head_opti;
+
+// 	current = head;
+// 	opti = optimal;
+// 	head_current = current->path;
+// 	head_opti = opti->path;
+// 	while (current)
+// 	{
+// 		while (opti)
+// 		{
+// 			while (head_current)
+// 			{
+// 				while (head_opti)
+// 				{
+// 					if (!ft_strcmp(head_current->room->name, head_opti->room->name)
+// 					&& ft_strcmp(head_current->room->name, env->end->name)
+// 					&& ft_strcmp(head_current->room->name, env->start->name))
+// 						return (-1);
+// 					head_opti = head_opti->next;
+// 				}
+// 				head_opti = opti->path;
+// 				head_current = head_current->next;
+// 			}
+// 			head_current = current->path;
+// 			head_opti = opti->path;
+// 			opti = opti->next;
+// 		}
+// 		opti = optimal;
+// 		current = current->next;
+// 	}
+// 	return (1);
+// }
 
 /*
 ***		DISTRIBUTE LEFTOVER ANTS OVER 2 SHORTEST PATHS
@@ -24,11 +66,12 @@ void	dispatch_leftover(t_solution *shortest, t_solution *second, t_env *env)
 	int		leftshort;
 	int		leftsecond;
 
+	// printf("DISPATCH LEFTOVER\n");
+	leftover = env->ant_nb - env->ants_sent;	
 	if (second)
 	{
 		difflen = second->pathlen - shortest->pathlen;
 		sumlen = second->pathlen + shortest->pathlen;
-		leftover = env->ant_nb - env->ants_sent;
 	}
 	if (!second || difflen == 0 || leftover <= difflen)
 	{
@@ -55,6 +98,7 @@ void	dispatch_ants(t_env *env, t_solution *head)
 	int			min;
 	int			second;
 
+	// printf("DISPATCH ANTS\n");
 	min = 2147483647;
 	second = 2147483647;
 	sol = head;
