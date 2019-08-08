@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/08/07 17:07:51 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/08 17:20:58 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,20 @@ void	print_queue(t_env *env)
 		}
 		printf("room %s\n\n", queue->room->name);
 	}
+}
+
+void	print_bfs(t_env *env)
+{
+	t_room *cur;
+
+	cur = env->end;
+	while (cur && ft_strcmp(cur->name, env->start->name))
+	{
+		if (ft_strcmp("Znh6", cur->name) && ft_strcmp("T_k0", cur->name))
+			printf(" %s w=%d <-", cur->name, cur->weight);
+		cur = cur->prev;
+	}
+	printf("\n\n");
 }
 
 void	free_table(t_room **table)

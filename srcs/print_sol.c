@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 16:42:11 by epham             #+#    #+#             */
-/*   Updated: 2019/08/06 13:20:07 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/08 19:14:34 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	next_step(t_solution *sol, t_path *head, int *next_ant, t_room *end)
 		{
 			if (sol->ants_arrived < sol->ants_sent)
 			{
-				printf("L%d-%s ", sol->path->ant_index, sol->path->room->name);
+				printf("FIRSTL%d-%s ", sol->path->ant_index, sol->path->room->name);
 				sol->ants_arrived++;
 			}
 		}
 		else if (sol->path->ant_index != sol->path->next->ant_index)
-			printf("L%d-%s ", sol->path->ant_index, sol->path->room->name);
+			printf("SECONDL%d-%s ", sol->path->ant_index, sol->path->room->name);
 		sol->path = sol->path->prev;
 	}
 	if (!ft_strcmp(sol->path->room->name, head->next->room->name)
@@ -56,7 +56,7 @@ void	next_step(t_solution *sol, t_path *head, int *next_ant, t_room *end)
 		sol->path->ant_index = *next_ant;
 		sol->ants_sent++;
 		(*next_ant)++;
-		printf("L%d-%s ", sol->path->ant_index, sol->path->room->name);
+		printf("THIRDL%d-%s ", sol->path->ant_index, sol->path->room->name);
 	}
 }
 

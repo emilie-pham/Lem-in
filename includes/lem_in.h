@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/08/07 17:07:31 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/08 17:04:34 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ typedef	struct		s_room
 	int				coord_y;
 	int				visited;
 	int				inqueue;
+	int				prev_flow;
+	int				weight;
 	struct 	s_link	*linked_rooms;
+	struct	s_link	*from;
 	struct	s_room	*prev;
 	struct	s_room	*next;      // separate chaining
 }					t_room;
@@ -159,7 +162,6 @@ int					edmond(t_env *env);
 int					check_steps(t_env *env, t_solution *head);
 void				update_solution(t_env *env, t_solution *head);
 void				print_sol(t_solution *solution, t_room *start, t_room *end, int *steps);
-// int					check_compatibility(t_env *env, t_solution *head, t_solution *optimal);
 
 
 
@@ -176,6 +178,7 @@ void				print_links(t_room *room);
 void				print_link(t_link *link);
 void				free_table(t_room **table);
 
+void	print_bfs(t_env *env);
 
 
 #endif

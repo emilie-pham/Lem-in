@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/08/07 17:27:59 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/08 18:16:08 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	update_flows(t_env *env)
 	t_room	*current;
 
 	current = env->end;
-	while (current != env->start)
+	while (ft_strcmp(current->name, env->start->name))
 	{
 		link = current->linked_rooms;
 		while (link)
 		{
-			if (ft_strcmp(link->dest->name, current->prev->name) == 0)
+			if (!ft_strcmp(link->dest->name, current->prev->name))
 				break ;
 			link = link->next;
 		}
@@ -69,7 +69,7 @@ t_path		*get_path(t_env *env, t_room *next, t_solution *sol)
 	path = path->next;
 	link = next->linked_rooms;
 	sol->pathlen += 1;
-	while (ft_strcmp(path->room->name, env->end->name) != 0)
+	while (ft_strcmp(path->room->name, env->end->name))
 	{
 		while (link->flow != 1)
 			link = link->next;
@@ -131,26 +131,30 @@ int		edmond(t_env *env)
 	first = 0;
 	while (bfs(env) == 1)
 	{
-		// printf("BFS\n");
 		env->path_nb = 0;
 		env->total_len = 0;
 		env->ants_sent = 0;
 		update_flows(env);
+		// printf("AFTER UPDATE FLOW\n");
 		link = env->start->linked_rooms;
 		first = 0;
 		while (link)
 		{
+			// printf("link to -> %s\n", link->dest->name);
 			if (link->flow == 1)
 			{
 				if (first == 0)
 				{
+					// printf("HEAD OF SOLUTION : %s\n", link->dest->name);
 					head = create_solution(env, link->dest);
 					first = 1;
 				}
 				else
 				{
+					// printf("HEAD OF SOLUTION : %s\n", link->dest->name);
 					current_sol = create_solution(env, link->dest);
 					append_sol(head, current_sol);
+					// printf("AFTER APPEND SOL\n");
 				}
 				env->path_nb += 1;
 			}
@@ -159,13 +163,19 @@ int		edmond(t_env *env)
 		head->steps = check_steps(env, head);
 		if (head->steps < env->steps)
 		{
+			// printf("BEFORE UPDATE SOL\n");
 			update_solution(env, head);
+			// printf("AFTER UPDATE SOL\n");
 			// print_paths(env->optimal_sol);
 			env->steps = head->steps;
 		}
 		// print_paths(head);
 	}
 	if (first == 0)
+	{
+		// printf("RETURN 0\n");
 		return (0);
+	}
+	// printf("RETURN 1\n");
 	return (1);
 }

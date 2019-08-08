@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 18:25:56 by anonymous         #+#    #+#             */
-/*   Updated: 2019/08/05 17:42:03 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/08 16:07:05 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ t_room	*create_room(char *line)
 	room->linked_rooms = NULL;
 	room->visited = 0;
 	room->inqueue = 0;
+	room->prev_flow = 0;
+	room->weight = 0;
+	room->from = NULL;
 	room->next = NULL;
 	room->prev = NULL;
 	return (room);
