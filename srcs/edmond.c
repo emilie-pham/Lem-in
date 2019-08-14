@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/08/08 18:16:08 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/14 14:18:04 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ int		edmond(t_env *env)
 	t_link		*link;
 	int			first;
 
-	first = 0;
 	while (bfs(env) == 1)
 	{
 		env->path_nb = 0;
