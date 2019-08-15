@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 16:42:11 by epham             #+#    #+#             */
-/*   Updated: 2019/08/14 14:43:20 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/14 15:34:47 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	print_end(t_solution *sol)
 }
 
 /*
-***		ARRIVING ANTS
+***		MOVE ANTS
 */
 
 void	print_ants(t_env *env, t_solution *sol, int *i)
@@ -38,19 +38,17 @@ void	print_ants(t_env *env, t_solution *sol, int *i)
 	{
 		if (sol->ants_arrived < sol->ants_sent)
 		{
-			if ((*i)++ == 0 && sol == env->optimal_sol)
-				printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
-			else
-				printf(" L%d-%s", sol->path->ant_index, sol->path->room->name);
+			if ((*i)++ != 0)
+				printf(" ");
+			printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
 			sol->ants_arrived++;
 		}
 	}
 	else if (sol->path->ant_index != sol->path->next->ant_index)
 	{
-		if ((*i)++ == 0 && sol == env->optimal_sol)
-			printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
-		else
-			printf(" L%d-%s", sol->path->ant_index, sol->path->room->name);
+		if ((*i)++ != 0)
+			printf(" ");
+		printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
 	}
 	sol->path = sol->path->prev;
 }
@@ -59,28 +57,25 @@ void	print_ants(t_env *env, t_solution *sol, int *i)
 ***		UPDATING ANT INDEX FOR EACH NODE
 */
 
-void	next_step(t_env *env, t_solution *sol, t_path *head, int *next_ant)
+void	move_ants(t_env *env, t_solution *sol, t_path *head, int *i)
 {
-	int	i;
-
-	i = 0;
 	while (ft_strcmp(sol->path->room->name, head->next->room->name))
 	{
 		if (sol->path->prev)
 			sol->path->ant_index = sol->path->prev->ant_index;
-		print_ants(env, sol, &i);
+		print_ants(env, sol, i);
 	}
 	if (!ft_strcmp(sol->path->room->name, head->next->room->name)
 	&& sol->ants_sent < sol->ants)
 	{
-		sol->path->ant_index = *next_ant;
+		sol->path->ant_index = env->next_ant;
 		sol->ants_sent++;
-		if (i++ == 0 && sol == env->optimal_sol)
-			printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
-		else
-			printf(" L%d-%s", sol->path->ant_index, sol->path->room->name);
-		(*next_ant)++;
+		if ((*i)++ != 0)
+			printf(" ");
+		printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
+		(env->next_ant)++;
 	}
+	sol->path = head;
 }
 
 /*
@@ -89,15 +84,16 @@ void	next_step(t_env *env, t_solution *sol, t_path *head, int *next_ant)
 
 void	print_sol(t_env *env, t_solution *solution)
 {
-	int			next_ant;
+	int			i;
 	t_solution	*sol;
 	t_path		*head;
 
-	next_ant = 1;
+	env->next_ant = 1;
 	sol = solution;
 	while (env->steps)
 	{
 		solution = sol;
+		i = 0;
 		while (solution)
 		{
 			head = solution->path;
@@ -107,8 +103,7 @@ void	print_sol(t_env *env, t_solution *solution)
 				solution->path = solution->path->next;
 			if (!ft_strcmp(head->next->room->name, env->end->name))
 				return (print_end(solution));
-			next_step(env, solution, head, &next_ant);
-			solution->path = head;
+			move_ants(env, solution, head, &i);
 			solution = solution->next;
 		}
 		(env->steps)--;

@@ -6,13 +6,13 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/08/08 18:16:31 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/15 19:32:18 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-t_env	*init_env(void)
+static t_env	*init_env(void)
 {
 	t_env	*env;
 
@@ -46,7 +46,7 @@ int		main(int ac, char **av)
 	parse(env);
 	print_map(env);
 	if (edmond(env) != 0)
-		print_sol(env->optimal_sol, env->start, env->end, &env->steps);
+		print_sol(env, env->optimal_sol);
 	// print_paths(env->optimal_sol);
 	free(env);
 	return (0);

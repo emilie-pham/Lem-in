@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/08/14 14:28:32 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/15 19:33:07 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef	struct		s_room
 	int				coord_x;
 	int				coord_y;
 	int				visited;
+	int				inpath;
 	int				inqueue;
 	int				prev_flow;
 	int				weight;
@@ -91,11 +92,11 @@ typedef struct		s_env
 {
 	char			*line;
 	int				ant_nb;
+	int				next_ant;
 	int				flag_link;
 	int				path_nb;
 	int				total_len;
 	int				ants_sent;
-	int				ants_arrived;
 	int				steps;
 	t_line			*read;
 	t_link			*links;
@@ -103,6 +104,7 @@ typedef struct		s_env
 	t_room			*end;
 	t_queue			*queue;
 	t_queue			*end_queue;
+	t_solution		*current_sol;
 	t_solution		*optimal_sol;
 	t_solution		*shortest_path;
 	t_solution		*second_shortest;
@@ -160,12 +162,26 @@ int					command_type(char *line);
 
 int  				bfs(t_env *env);
 int					edmond(t_env *env);
-int					check_steps(t_env *env, t_solution *head);
-void				update_solution(t_env *env, t_solution *head);
 void				print_sol(t_env *env, t_solution *solution);
 
+/*
+***		PATHS
+*/
 
+t_path				*create_pathlink(t_env *env, t_room *room);
+t_path				*get_path(t_env *env, t_room *next, t_solution *sol);
+int					remove_path(t_solution *head, t_solution *sol);
+int					check_steps(t_env *env);
+void				free_path(t_path *path);
 
+/*
+***		SOLUTIONS
+*/
+t_solution			*create_solution(t_env *env, t_room *next);
+void				append_sol(t_env *env, t_solution *new);
+t_solution			*dispatch_ants(t_env *env, t_solution *head);
+void				dispatch_leftover(t_solution *shortest, t_solution *second, t_env *env);
+void				free_sol(t_solution *sol);
 
 /*
 ***		utils
@@ -173,6 +189,7 @@ void				print_sol(t_env *env, t_solution *solution);
 
 void				ft_error(int error);
 void				print_paths(t_solution *current_sol);
+void				print_path(t_path *head);
 void				print_queue(t_env *env);
 void				printqueue(t_queue *queue);
 void				print_links(t_room *room);

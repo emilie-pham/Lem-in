@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/08/08 17:20:58 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/15 19:27:54 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,19 @@ void	print_hash(t_room **table, size_t size)
 	printf("room number %d\n", count);
 }
 
+void	print_path(t_path *head)
+{
+	t_path *current;
+
+	current = head;
+	while (current)
+	{
+		printf("%s | ", current->room->name);
+		current = current->next;
+	}
+	printf("\n");
+}
+
 void	print_paths(t_solution *current_sol)
 {
 	t_solution	*head;
@@ -91,6 +104,7 @@ void	print_paths(t_solution *current_sol)
 	head = current_sol;
 	while (current_sol)
 	{
+		printf("PATHLEN : %d\n", current_sol->pathlen);
 		printf("ANTS TO SEND IN THIS PATH : %d\n", current_sol->ants);
 		start = current_sol->path;
 		while (current_sol->path)
@@ -99,7 +113,7 @@ void	print_paths(t_solution *current_sol)
 			current_sol->path = current_sol->path->next;
 		}
 		current_sol->path = start;
-		printf("\n");
+		printf("\n\n");
 		current_sol = current_sol->next;
 	}
 	current_sol = head;
@@ -146,6 +160,45 @@ void	free_table(t_room **table)
 	{
 		free(table[i]);
 		i++;
+	}
+}
+
+/*
+***		FREE PATH
+*/
+
+void	free_path(t_path *path)
+{
+	t_path *tmp;
+
+	while (path)
+	{
+		tmp = path;
+		path->room = NULL;
+		path = path->next;
+		tmp->next = NULL;
+		free(tmp);
+	}
+}
+
+/*
+***		FREE SOL
+*/
+
+void	free_sol(t_solution *sol)
+{
+	t_solution *tmp;
+
+	if (sol)
+	{
+		while (sol)
+		{
+			free_path(sol->path);
+			tmp = sol;
+			sol = sol->next;
+			tmp->next = NULL;
+			free(tmp);
+		}
 	}
 }
 

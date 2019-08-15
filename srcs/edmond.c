@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/08/14 14:18:04 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/15 19:32:04 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ***		UPDATE FLOWS
 */
 
-void	update_flows(t_env *env)
+static void		update_flows(t_env *env)
 {
 	t_link	*link;
 	t_room	*current;
@@ -38,95 +38,84 @@ void	update_flows(t_env *env)
 }
 
 /*
-***		NEW PATHLINK
+***		REPLACE OPTIMAL SOLUTION
 */
 
-t_path		*create_pathlink(t_room *room)
+static void		update_solution(t_env *env)
 {
-	t_path *pathlink;
+	t_solution *sol;
 
-	pathlink = (t_path*)ft_memalloc(sizeof(t_path));
-	pathlink->room = room;
-	pathlink->ant_index = 0;
-	pathlink->next = NULL;
-	pathlink->prev = NULL;
-	return (pathlink);
+	free_sol(env->optimal_sol);
+	env->optimal_sol = env->current_sol;
+	env->steps = env->current_sol->steps;
 }
 
+
 /*
-***		GET ONE PATH IN SOLUTION SYSTEM
+***		RESET INPATH
 */
 
-t_path		*get_path(t_env *env, t_room *next, t_solution *sol)
+static void		reset_inpath(t_solution *solution)
 {
-	t_path *path;
-	t_path *head;
-	t_link *link;
+	t_solution	*head_sol;
+	t_path		*head_path;
 
-	path = create_pathlink(env->start);
-	head = path;
-	path->next = create_pathlink(next);
-	path = path->next;
-	link = next->linked_rooms;
-	sol->pathlen += 1;
-	while (ft_strcmp(path->room->name, env->end->name))
+	if (solution)
 	{
-		while (link->flow != 1)
-			link = link->next;
-		path->next = create_pathlink(link->dest);
-		path->next->prev = path;
-		path = path->next;
-		link = path->room->linked_rooms;
-		sol->pathlen += 1;
+		head_sol = solution;
+		while (solution)
+		{
+			head_path = solution->path;
+			while (solution->path)
+			{
+				solution->path->room->inpath = 0;
+				solution->path = solution->path->next;
+			}
+			solution->path = head_path;
+			solution = solution->next;
+		}
+		solution = head_sol;
 	}
-	env->total_len += sol->pathlen;
-	return (head);
+	
 }
 
 /*
-***		APPEND SOLUTION TO HEAD
+***		CHECK ALL LINKS FROM START
 */
 
-void	append_sol(t_solution *head, t_solution *sol)
+static int		check_start_links(t_env *env, int first)
 {
-	t_solution *first;
+	t_solution	*current_sol;
+	t_link		*link;
 
-	first = head;
-	while (head->next)
-		head = head->next;
-	head->next = sol;
-	head = first;
-}
-
-/*
-***		NEW PATH IN SAME SOLUTION SYSTEM
-*/
-
-t_solution	*create_solution(t_env *env, t_room *next)
-{
-	t_solution *new;
-
-	new = (t_solution*)ft_memalloc(sizeof(t_solution));
-	new->ants = 0;
-	new->ants_sent = 0;
-	new->ants_arrived = 0;
-	new->pathlen = 0;
-	new->steps = 0;
-	new->next = NULL;
-	new->path = get_path(env, next, new);
-	return (new);
+	link = env->start->linked_rooms;
+	while (link)
+	{
+		if (link->flow == 1/* && link->dest->inpath == 0*/)
+		{
+			if (first == 0 && (env->current_sol = create_solution(env, link->dest)))
+			{
+				first = 1;
+				env->path_nb += 1;
+			}
+			else if (first == 1 && (current_sol = create_solution(env, link->dest)))
+				append_sol(env, current_sol);
+		}
+		link = link->next;
+	}
+	return (first);
 }
 
 /*
 ***		EDMONDS KARP
 */
 
-int		edmond(t_env *env)
+int				edmond(t_env *env)
 {
-	t_solution	*current_sol;
-	t_solution	*head;
-	t_link		*link;
 	int			first;
+	int			steps;
+
+	t_solution *sol;
 
 	while (bfs(env) == 1)
 	{
@@ -134,47 +123,21 @@ int		edmond(t_env *env)
 		env->total_len = 0;
 		env->ants_sent = 0;
 		update_flows(env);
-		// printf("AFTER UPDATE FLOW\n");
-		link = env->start->linked_rooms;
 		first = 0;
-		while (link)
+		first = check_start_links(env, first);
+		if (first == 0 && !env->current_sol && !env->optimal_sol)
+			return (0);
+		else if (env->current_sol && first)
 		{
-			// printf("link to -> %s\n", link->dest->name);
-			if (link->flow == 1)
-			{
-				if (first == 0)
-				{
-					// printf("HEAD OF SOLUTION : %s\n", link->dest->name);
-					head = create_solution(env, link->dest);
-					first = 1;
-				}
-				else
-				{
-					// printf("HEAD OF SOLUTION : %s\n", link->dest->name);
-					current_sol = create_solution(env, link->dest);
-					append_sol(head, current_sol);
-					// printf("AFTER APPEND SOL\n");
-				}
-				env->path_nb += 1;
-			}
-			link = link->next;
+			reset_inpath(env->current_sol);
+			if ((steps = check_steps(env)) < 0)
+				continue ;
+			env->current_sol->steps = steps;
+			if (env->current_sol->steps < env->steps)
+				update_solution(env);
+			else
+				free_sol(env->current_sol);
 		}
-		head->steps = check_steps(env, head);
-		if (head->steps < env->steps)
-		{
-			// printf("BEFORE UPDATE SOL\n");
-			update_solution(env, head);
-			// printf("AFTER UPDATE SOL\n");
-			// print_paths(env->optimal_sol);
-			env->steps = head->steps;
-		}
-		// print_paths(head);
 	}
-	if (first == 0)
-	{
-		// printf("RETURN 0\n");
-		return (0);
-	}
-	// printf("RETURN 1\n");
 	return (1);
 }

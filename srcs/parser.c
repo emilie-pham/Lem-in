@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by anonymous         #+#    #+#             */
-/*   Updated: 2019/08/05 18:22:56 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/14 15:58:32 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ void	reader(t_env *env, t_room **table)
 			parse_startend(env, table);
 		if (!is_room(env->line) && !is_link(env->line) && !is_comment(env->line)
 				&& !is_command(env->line))
-		{
-			printf("BREAK\n");
 			break ;
-		}
 		ft_strdel(&env->line);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/08/08 18:07:04 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/15 18:00:04 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,11 +178,11 @@ void        get_queue(t_env *env, t_room *current)
             append_queue(env, current_link, current);
             // printf("2 appending %s from %s, with %s having weight = %d\n", current_link->dest->name, current->name, current_link->dest->name, current_link->dest->weight);
         }
-        else if (current_link->dest->inqueue && current_link->dest->weight > weight)
-        {
+        // else if (current_link->dest->inqueue && current_link->dest->weight > weight)
+        // {
             // printf("%s might have a better prev : %s instead of %s\n", current_link->dest->name, current->name, current_link->dest->prev->name);
             // change_source(env, current_link->dest, current_link, current);
-        }
+        // }
         current_link = current_link->next;
     }
 }
@@ -196,6 +196,7 @@ int         bfs(t_env *env)
     t_room      *current;
     t_queue     *queue;
 
+	// printf("\n\nNEW BFS\n");
     current = env->start;
     if (initialize_bfs(env))
     {
@@ -223,6 +224,7 @@ int         bfs(t_env *env)
             if (!ft_strcmp(current->name, env->end->name))
             {
                 // printf("BFS RETURN 1\n");
+                // printf("\n");
                 // print_bfs(env);
                 return (1);
             }
