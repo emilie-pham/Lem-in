@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/08/16 12:31:54 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/16 16:31:54 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,6 @@ void	print_paths(t_solution *current_sol)
 		printf("PATHLEN : %d\n", current_sol->pathlen);
 		printf("ANTS TO SEND IN THIS PATH : %d\n", current_sol->ants);
 		start = current_sol->path;
-		printf("path address %p\n", current_sol->path);
-		print_path(current_sol->path);
 		while (current_sol->path)
 		{
 			printf("%s | ", current_sol->path->room->name);

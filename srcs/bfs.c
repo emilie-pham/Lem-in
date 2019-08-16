@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/08/16 15:59:50 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/16 16:39:45 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,27 @@ void     append_queue(t_env *env, t_link *link, t_room *previous)
 }
 
 /*
+***     DEPTH FIRST ON NEGATIVE FLOWS
+*/
+
+static void        depthfirst_queue(t_env *env, t_room *room)
+{
+    t_link  *link;
+
+    link = room->linked_rooms;
+    while (link)
+    {
+        if (link->flow == -1 && link->dest->inqueue != 1)
+        {
+            append_queue(env, link, room);
+            link = link->dest->linked_rooms;
+        }
+        else
+            link = link->next;
+    }
+}
+
+/*
 ***     CHANGE SOURCE
 */
 
@@ -122,26 +143,24 @@ void        change_source(t_env *env, t_room *room, t_link *link, t_room *newpre
     roomweight = link->flow == -1 ? newprev->weight - 1 : newprev->weight + 1;
     prevweight = room->from->rev->flow == -1 ? room->weight - 1 : room->weight + 1;
 
-    // printf("%s->prev becomes %s instead of %s\n", room->name, newprev->name, room->prev->name);
-    // printf("%s->weight becomes %d instead of %d\n", room->name, roomweight, room->weight);
-
-    // printf("%s->prev becomes %s instead of %s\n", prev->name, room->name, prev->prev->name);
-    // printf("%s->weight becomes %d instead of %d\n", prev->name, prevweight, prev->weight);
     room->prev = newprev;
     room->weight = roomweight;
-    prev->prev = room;
-    prev->weight = prevweight;
-    prev->from = room->from->rev;
-    room->from = link;
-    while (queue->next && ft_strcmp(queue->room->name, room->name))
+    if (prevweight < prev->weight)
     {
-        curweight = queue->room->from->flow == -1 ? queue->room->prev->weight - 1 : queue->room->prev->weight + 1;
-        if (queue->room->weight != curweight)
-            queue->room->weight = curweight;
-        queue = queue->next;
+        prev->prev = room;
+        prev->weight = prevweight;
+        prev->from = room->from->rev;
     }
-    if (queue->room->weight != curweight)
-        queue->room->weight = curweight;
+    room->from = link;
+    // while (queue->next && ft_strcmp(queue->room->name, room->name))
+    // {
+    //     curweight = queue->room->from->flow == -1 ? queue->room->prev->weight - 1 : queue->room->prev->weight + 1;
+    //     if (queue->room->weight != curweight)
+    //         queue->room->weight = curweight;
+    //     queue = queue->next;
+    // }
+    // if (queue->room->weight != curweight)
+        // queue->room->weight = curweight;
 }
 
 /*
@@ -164,7 +183,7 @@ void        get_queue(t_env *env, t_room *current)
             && env->end_queue->prev_flow == 0))
         {
             append_queue(env, current_link, current);
-            get_queue(env, current_link->dest);
+            depthfirst_queue(env, current_link->dest);
             // printf("1 appending %s from %s, with %s having weight = %d\n", current_link->dest->name, current->name, current_link->dest->name, current_link->dest->weight);
             return ;
         }
