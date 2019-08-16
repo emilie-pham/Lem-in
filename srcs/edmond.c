@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edmond.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/08/15 19:32:04 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/16 16:44:35 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void		update_solution(t_env *env)
 	free_sol(env->optimal_sol);
 	env->optimal_sol = env->current_sol;
 	env->steps = env->current_sol->steps;
+	env->count = env->steps;
 }
 
 
@@ -76,7 +77,6 @@ static void		reset_inpath(t_solution *solution)
 		}
 		solution = head_sol;
 	}
-	
 }
 
 /*
@@ -114,7 +114,6 @@ int				edmond(t_env *env)
 {
 	int			first;
 	int			steps;
-
 	t_solution *sol;
 
 	while (bfs(env) == 1)
