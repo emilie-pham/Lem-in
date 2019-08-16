@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/08/15 19:27:54 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/16 12:31:54 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,16 @@ void	print_path(t_path *head)
 {
 	t_path *current;
 
-	current = head;
-	while (current)
+	if (head)
 	{
-		printf("%s | ", current->room->name);
-		current = current->next;
+		current = head;
+		while (current)
+		{
+			printf("%s | ", current->room->name);
+			current = current->next;
+		}
+		printf("\n");
 	}
-	printf("\n");
 }
 
 void	print_paths(t_solution *current_sol)
@@ -107,6 +110,8 @@ void	print_paths(t_solution *current_sol)
 		printf("PATHLEN : %d\n", current_sol->pathlen);
 		printf("ANTS TO SEND IN THIS PATH : %d\n", current_sol->ants);
 		start = current_sol->path;
+		printf("path address %p\n", current_sol->path);
+		print_path(current_sol->path);
 		while (current_sol->path)
 		{
 			printf("%s | ", current_sol->path->room->name);
@@ -144,8 +149,7 @@ void	print_bfs(t_env *env)
 	cur = env->end;
 	while (cur && ft_strcmp(cur->name, env->start->name))
 	{
-		if (ft_strcmp("Znh6", cur->name) && ft_strcmp("T_k0", cur->name))
-			printf(" %s w=%d <-", cur->name, cur->weight);
+		printf(" %s w=%d <-", cur->name, cur->weight);
 		cur = cur->prev;
 	}
 	printf("\n\n");

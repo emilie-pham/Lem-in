@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/08/15 19:33:07 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/16 12:26:18 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void				print_sol(t_env *env, t_solution *solution);
 
 t_path				*create_pathlink(t_env *env, t_room *room);
 t_path				*get_path(t_env *env, t_room *next, t_solution *sol);
-int					remove_path(t_solution *head, t_solution *sol);
+int					remove_path(t_env *env, t_solution *sol);
 int					check_steps(t_env *env);
 void				free_path(t_path *path);
 

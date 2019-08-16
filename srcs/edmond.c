@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/08/15 19:32:04 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/16 12:40:27 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static void		update_solution(t_env *env)
 	env->steps = env->current_sol->steps;
 }
 
-
 /*
 ***		RESET INPATH
 */
@@ -76,34 +75,35 @@ static void		reset_inpath(t_solution *solution)
 		}
 		solution = head_sol;
 	}
-	
 }
 
 /*
 ***		CHECK ALL LINKS FROM START
 */
 
-static int		check_start_links(t_env *env, int first)
+static int		check_start_links(t_env *env)
 {
 	t_solution	*current_sol;
 	t_link		*link;
+	int			i;
 
+	i = 0;
 	link = env->start->linked_rooms;
 	while (link)
 	{
-		if (link->flow == 1/* && link->dest->inpath == 0*/)
+		if (link->flow == 1)
 		{
-			if (first == 0 && (env->current_sol = create_solution(env, link->dest)))
+			if (i == 0 && (env->current_sol = create_solution(env, link->dest)))
 			{
-				first = 1;
+				i = 1;
 				env->path_nb += 1;
 			}
-			else if (first == 1 && (current_sol = create_solution(env, link->dest)))
+			else if (i == 1 && (current_sol = create_solution(env, link->dest)))
 				append_sol(env, current_sol);
 		}
 		link = link->next;
 	}
-	return (first);
+	return (i);
 }
 
 /*
@@ -115,16 +115,13 @@ int				edmond(t_env *env)
 	int			first;
 	int			steps;
 
-	t_solution *sol;
-
 	while (bfs(env) == 1)
 	{
 		env->path_nb = 0;
 		env->total_len = 0;
 		env->ants_sent = 0;
 		update_flows(env);
-		first = 0;
-		first = check_start_links(env, first);
+		first = check_start_links(env);
 		if (first == 0 && !env->current_sol && !env->optimal_sol)
 			return (0);
 		else if (env->current_sol && first)

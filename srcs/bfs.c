@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/08/15 18:00:04 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/16 15:59:50 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ void        change_source(t_env *env, t_room *room, t_link *link, t_room *newpre
     prev = room->prev;
     queue = env->queue;
 
-    roomweight = link->flow == -1 ? newprev->weight -1 : newprev->weight + 1;
-    prevweight = room->from->rev->flow == -1 ? room->weight -1 : room->weight + 1;
+    roomweight = link->flow == -1 ? newprev->weight - 1 : newprev->weight + 1;
+    prevweight = room->from->rev->flow == -1 ? room->weight - 1 : room->weight + 1;
 
     // printf("%s->prev becomes %s instead of %s\n", room->name, newprev->name, room->prev->name);
     // printf("%s->weight becomes %d instead of %d\n", room->name, roomweight, room->weight);
@@ -128,9 +128,9 @@ void        change_source(t_env *env, t_room *room, t_link *link, t_room *newpre
     // printf("%s->prev becomes %s instead of %s\n", prev->name, room->name, prev->prev->name);
     // printf("%s->weight becomes %d instead of %d\n", prev->name, prevweight, prev->weight);
     room->prev = newprev;
-    room->weight = link->flow == -1 ? newprev->weight - 1 : newprev->weight + 1;
+    room->weight = roomweight;
     prev->prev = room;
-    prev->weight = room->from->rev->flow == -1 ? room->weight -1 : room->weight + 1;
+    prev->weight = prevweight;
     prev->from = room->from->rev;
     room->from = link;
     while (queue->next && ft_strcmp(queue->room->name, room->name))
@@ -164,6 +164,7 @@ void        get_queue(t_env *env, t_room *current)
             && env->end_queue->prev_flow == 0))
         {
             append_queue(env, current_link, current);
+            get_queue(env, current_link->dest);
             // printf("1 appending %s from %s, with %s having weight = %d\n", current_link->dest->name, current->name, current_link->dest->name, current_link->dest->weight);
             return ;
         }
@@ -178,11 +179,11 @@ void        get_queue(t_env *env, t_room *current)
             append_queue(env, current_link, current);
             // printf("2 appending %s from %s, with %s having weight = %d\n", current_link->dest->name, current->name, current_link->dest->name, current_link->dest->weight);
         }
-        // else if (current_link->dest->inqueue && current_link->dest->weight > weight)
-        // {
+        else if (current_link->dest->inqueue && current_link->dest->weight > weight)
+        {
             // printf("%s might have a better prev : %s instead of %s\n", current_link->dest->name, current->name, current_link->dest->prev->name);
-            // change_source(env, current_link->dest, current_link, current);
-        // }
+            change_source(env, current_link->dest, current_link, current);
+        }
         current_link = current_link->next;
     }
 }
@@ -196,7 +197,6 @@ int         bfs(t_env *env)
     t_room      *current;
     t_queue     *queue;
 
-	// printf("\n\nNEW BFS\n");
     current = env->start;
     if (initialize_bfs(env))
     {
