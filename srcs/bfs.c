@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/08/16 16:39:45 by epham            ###   ########.fr       */
+/*   Updated: 2019/08/18 04:31:09 by anradixt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,27 +140,20 @@ void        change_source(t_env *env, t_room *room, t_link *link, t_room *newpre
     prev = room->prev;
     queue = env->queue;
 
-    roomweight = link->flow == -1 ? newprev->weight - 1 : newprev->weight + 1;
-    prevweight = room->from->rev->flow == -1 ? room->weight - 1 : room->weight + 1;
-
-    room->prev = newprev;
-    room->weight = roomweight;
-    if (prevweight < prev->weight)
+    if (prev)
     {
-        prev->prev = room;
-        prev->weight = prevweight;
-        prev->from = room->from->rev;
+        roomweight = link->flow == -1 ? newprev->weight - 1 : newprev->weight + 1;
+        prevweight = room->from->rev->flow == -1 ? room->weight - 1 : room->weight + 1;
+        room->prev = newprev;
+        room->weight = roomweight;
+        if (prevweight < prev->weight)
+        {
+            prev->prev = room;
+            prev->weight = prevweight;
+            prev->from = room->from->rev;
+        }
+        room->from = link;
     }
-    room->from = link;
-    // while (queue->next && ft_strcmp(queue->room->name, room->name))
-    // {
-    //     curweight = queue->room->from->flow == -1 ? queue->room->prev->weight - 1 : queue->room->prev->weight + 1;
-    //     if (queue->room->weight != curweight)
-    //         queue->room->weight = curweight;
-    //     queue = queue->next;
-    // }
-    // if (queue->room->weight != curweight)
-        // queue->room->weight = curweight;
 }
 
 /*
