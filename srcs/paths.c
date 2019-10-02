@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 14:36:38 by epham             #+#    #+#             */
-/*   Updated: 2019/08/16 12:45:41 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/02 16:14:45 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_path		*get_path(t_env *env, t_room *next, t_solution *sol)
 		sol->pathlen += 1;
 		while (ft_strcmp(path->room->name, env->end->name))
 		{
-			while (link->flow != 1)
+			while (link && link->flow != 1)
 				link = link->next;
 			if (!(path->next = create_pathlink(env, link->dest)))
 			{

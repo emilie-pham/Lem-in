@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anradixt <anradix@student.42.fr>           +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/08/18 04:31:09 by anradixt         ###   ########.fr       */
+/*   Updated: 2019/10/02 11:16:01 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,12 +235,13 @@ int         bfs(t_env *env)
             current = queue->room;
             if (!ft_strcmp(current->name, env->end->name))
             {
-                // printf("BFS RETURN 1\n");
+                // printf("bfs end 1\n");
                 // printf("\n");
                 // print_bfs(env);
                 return (1);
             }
         }
     }
+    // printf("bfs 0\n");
     return (0);
 }

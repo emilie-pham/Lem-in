@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/08/16 12:40:27 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/02 11:13:26 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,23 +115,35 @@ int				edmond(t_env *env)
 	int			first;
 	int			steps;
 
+	// printf("edmond\n");
 	while (bfs(env) == 1)
 	{
+		// printf("bfs\n");
+		// print_bfs(env);
+		// getchar();
 		env->path_nb = 0;
 		env->total_len = 0;
 		env->ants_sent = 0;
+		// printf("before update flows\n");
 		update_flows(env);
+		// printf("after update flows\n");
 		first = check_start_links(env);
+		// printf("after check start links\n");
 		if (first == 0 && !env->current_sol && !env->optimal_sol)
 			return (0);
 		else if (env->current_sol && first)
 		{
+			// printf("before reset inpath\n");
 			reset_inpath(env->current_sol);
+			// printf("before checksteps\n");
 			if ((steps = check_steps(env)) < 0)
 				continue ;
 			env->current_sol->steps = steps;
 			if (env->current_sol->steps < env->steps)
+			{
+				// printf("before update sol\n");
 				update_solution(env);
+			}
 			else
 				free_sol(env->current_sol);
 		}
