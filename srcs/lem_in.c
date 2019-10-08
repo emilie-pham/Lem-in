@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/08/16 16:49:50 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/08 16:31:36 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int		main(int ac, char **av)
 	t_env 	*env;
 	int		print;
 
+	(void)ac;
+	(void)av;
 	if (!(env = init_env()))
 		return (0);
 	parse(env);

@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 14:36:38 by epham             #+#    #+#             */
-/*   Updated: 2019/08/15 19:27:56 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/07 18:31:00 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,15 @@ t_path		*create_pathlink(t_env *env, t_room *room)
 {
 	t_path *pathlink;
 
-	if (room->inpath != 0 && (ft_strcmp(room->name, env->start->name) && ft_strcmp(room->name, env->end->name)))
-	{
-		// printf("start : %s || room : %s || room->inpath = %d\n", env->start->name, room->name, room->inpath);
-		// printf("CREATE PATHLINK NULL\n");
+	if (room->inpath != 0 && (ft_strcmp(room->name, env->start->name)
+	&& ft_strcmp(room->name, env->end->name)))
 		return (NULL);
-	}
 	room->inpath = 1;
 	pathlink = (t_path*)ft_memalloc(sizeof(t_path));
 	pathlink->room = room;
 	pathlink->ant_index = 0;
 	pathlink->next = NULL;
 	pathlink->prev = NULL;
-	// printf("%s (%d) -> ", room->name, room->inpath);
 	return (pathlink);
 }
 
@@ -57,9 +53,9 @@ t_path		*get_path(t_env *env, t_room *next, t_solution *sol)
 		sol->pathlen += 1;
 		while (ft_strcmp(path->room->name, env->end->name))
 		{
-			while (link->flow != 1)
+			while (link && link->flow != 1)
 				link = link->next;
-			if (!(path->next = create_pathlink(env, link->dest)))
+			if (!(link && (path->next = create_pathlink(env, link->dest))))
 			{
 				free_path(head);
 				return (NULL);
@@ -79,22 +75,24 @@ t_path		*get_path(t_env *env, t_room *next, t_solution *sol)
 ***		REMOVE PATH THAT IS TOO LONG
 */
 
-int		remove_path(t_solution *head, t_solution *sol)
+int			remove_path(t_env *env, t_solution *remove)
 {
-	t_solution 	*current;
-	t_solution 	*prev;
-	int 		pathlen;
+	t_solution	*current;
+	t_solution	*prev;
+	int			pathlen;
 
-	current = head;
-	prev = head;
-	while (current != sol)
+	current = env->current_sol;
+	prev = env->current_sol;
+	while (current != remove && current->next)
 	{
 		prev = current;
 		current = current->next;
 	}
 	pathlen = current->pathlen;
 	free_path(current->path);
-	if (current->next)
+	if (current == env->current_sol && current->next)
+		env->current_sol = current->next;
+	else if (current->next)
 		prev->next = current->next;
 	else
 		prev->next = NULL;
@@ -106,7 +104,7 @@ int		remove_path(t_solution *head, t_solution *sol)
 ***		GET NUMBER OF STEPS FOR THIS SOLUTION SYSTEM
 */
 
-int		check_steps(t_env *env)
+int			check_steps(t_env *env)
 {
 	t_solution	*sol;
 	t_solution	*negants;
@@ -122,11 +120,11 @@ int		check_steps(t_env *env)
 	{
 		if (negants->next)
 			newhead = negants->next;
-		env->total_len -= remove_path(env->current_sol, negants);
+		env->total_len -= remove_path(env, negants);
 		env->path_nb -= 1;
-		if (!env->path_nb)
+		if (!env->path_nb || (!newhead && !env->current_sol))
 			return (-2);
-		if (!env->current_sol)
+		else if (!env->current_sol && newhead)
 			env->current_sol = newhead;
 		env->current_sol->steps = check_steps(env);
 		return (-1);
@@ -143,4 +141,3 @@ int		check_steps(t_env *env)
 	sol = env->current_sol;
 	return (steps);
 }
-

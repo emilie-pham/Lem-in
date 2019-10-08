@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/08/05 17:41:47 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/07 10:30:26 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	*create_links(t_room *start, t_room *end)
 {
 	t_link	*firstlink;
 	t_link	*secondlink;
-	t_link	*tail;
 
 	if (!check_links(start, end))
 		return (start);
@@ -57,7 +56,9 @@ void	*create_links(t_room *start, t_room *end)
 		return (NULL);
 	if (!(secondlink = ft_memalloc(sizeof(t_link))))
 		return (NULL);
+	firstlink->from = start;
 	firstlink->dest = end;
+	secondlink->from = end;
 	secondlink->dest = start;
 	firstlink->flow = 0;
 	secondlink->flow = 0;
@@ -70,7 +71,7 @@ void	*create_links(t_room *start, t_room *end)
 	return (firstlink);
 }
 
-t_room	*find_room(t_env *env, t_room **table, char *room_name)
+t_room	*find_room(t_room **table, char *room_name)
 {
 	t_room	*current;
 	int		index;
@@ -101,8 +102,8 @@ void	*get_link(t_env *env, t_room **table, char *line)
 		env->flag_link = 1;
 		start = ft_strdup(split[0]);
 		end = ft_strdup(split[1]);
-		start_room = find_room(env, table, start);
-		end_room = find_room(env, table, end);
+		start_room = find_room(table, start);
+		end_room = find_room(table, end);
 		ft_tabdel(split);
 		if (start_room)
 			free(start);

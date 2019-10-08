@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 19:22:01 by epham             #+#    #+#             */
-/*   Updated: 2019/08/15 19:37:11 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/03 15:17:08 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void			append_sol(t_env *env, t_solution *new)
 t_solution		*dispatch_ants(t_env *env, t_solution *head)
 {
 	t_solution	*sol;
-	t_solution	*newhead;
 	int			min;
 	int			second;
 

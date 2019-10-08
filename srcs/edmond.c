@@ -6,7 +6,11 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/08/16 16:44:35 by yoribeir         ###   ########.fr       */
+=======
+/*   Updated: 2019/10/07 19:30:23 by epham            ###   ########.fr       */
+>>>>>>> 0893d688e8c7747105725d8895c36167e16e2f78
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +35,12 @@ static void		update_flows(t_env *env)
 				break ;
 			link = link->next;
 		}
-		link->flow -= 1;
-		link->rev->flow += 1;
-		current = current->prev;
+		if (link)
+		{
+			link->flow -= 1;
+			link->rev->flow += 1;
+			current = current->prev;
+		}
 	}
 }
 
@@ -43,14 +50,11 @@ static void		update_flows(t_env *env)
 
 static void		update_solution(t_env *env)
 {
-	t_solution *sol;
-
 	free_sol(env->optimal_sol);
 	env->optimal_sol = env->current_sol;
 	env->steps = env->current_sol->steps;
 	env->count = env->steps;
 }
-
 
 /*
 ***		RESET INPATH
@@ -83,27 +87,29 @@ static void		reset_inpath(t_solution *solution)
 ***		CHECK ALL LINKS FROM START
 */
 
-static int		check_start_links(t_env *env, int first)
+static int		check_start_links(t_env *env)
 {
 	t_solution	*current_sol;
 	t_link		*link;
+	int			i;
 
+	i = 0;
 	link = env->start->linked_rooms;
 	while (link)
 	{
-		if (link->flow == 1/* && link->dest->inpath == 0*/)
+		if (link->flow == 1)
 		{
-			if (first == 0 && (env->current_sol = create_solution(env, link->dest)))
+			if (i == 0 && (env->current_sol = create_solution(env, link->dest)))
 			{
-				first = 1;
+				i = 1;
 				env->path_nb += 1;
 			}
-			else if (first == 1 && (current_sol = create_solution(env, link->dest)))
+			else if (i == 1 && (current_sol = create_solution(env, link->dest)))
 				append_sol(env, current_sol);
 		}
 		link = link->next;
 	}
-	return (first);
+	return (i);
 }
 
 /*
@@ -114,7 +120,10 @@ int				edmond(t_env *env)
 {
 	int			first;
 	int			steps;
+<<<<<<< HEAD
 	t_solution *sol;
+=======
+>>>>>>> 0893d688e8c7747105725d8895c36167e16e2f78
 
 	while (bfs(env) == 1)
 	{
@@ -122,8 +131,7 @@ int				edmond(t_env *env)
 		env->total_len = 0;
 		env->ants_sent = 0;
 		update_flows(env);
-		first = 0;
-		first = check_start_links(env, first);
+		first = check_start_links(env);
 		if (first == 0 && !env->current_sol && !env->optimal_sol)
 			return (0);
 		else if (env->current_sol && first)

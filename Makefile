@@ -23,17 +23,26 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 %.o: $(SRCSREP)/%.c
-	gcc $(FLAGS) -I$(INCLUDES) -c $^
+	@gcc $(FLAGS) -I$(INCLUDES) -c $^
+
+debug: 
+	@gcc $(DFLAGS) srcs/*.c libft/*.c -o $(NAME) 
 
 $(NAME): $(OBJS)
+	@echo "\n$(RED)CREATING LEM IN ...$(BLANK)"
 	@make -C libft
-	gcc $(FLAGS) -I$(INCLUDES) $^ -L$(LIBS) -l$(LIB) -o $@
+	@gcc $(FLAGS) -I$(INCLUDES) $^ -L$(LIBS) -l$(LIB) -o $@
+	@echo "$(GREEN)[lem-in created]$(BLANK)"
 
 clean:
-	rm -f $(OBJS)
-	make clean -C libft
+	@echo "\n$(RED)CLEANING OBJECTS FILES ...$(BLANK)"
+	@rm -f $(OBJS)
+	@make clean -C libft
+	@echo "$(YELLOW)[object files removed]$(BLANK)"
 fclean: clean
-	make fclean -C libft
-	rm -f $(NAME)
+	@echo "\n$(RED)REMOVING LEM IN ...$(BLANK)"
+	@make fclean -C libft
+	@rm -f $(NAME)
+	@echo "$(YELLOW)[lem-in removed]$(BLANK)"
 
 re: fclean all

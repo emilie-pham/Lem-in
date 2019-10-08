@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/08/15 19:27:54 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/07 16:05:56 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,16 @@ void	print_path(t_path *head)
 {
 	t_path *current;
 
-	current = head;
-	while (current)
+	if (head)
 	{
-		printf("%s | ", current->room->name);
-		current = current->next;
+		current = head;
+		while (current)
+		{
+			printf("%s | ", current->room->name);
+			current = current->next;
+		}
+		printf("\n");
 	}
-	printf("\n");
 }
 
 void	print_paths(t_solution *current_sol)
@@ -144,8 +147,7 @@ void	print_bfs(t_env *env)
 	cur = env->end;
 	while (cur && ft_strcmp(cur->name, env->start->name))
 	{
-		if (ft_strcmp("Znh6", cur->name) && ft_strcmp("T_k0", cur->name))
-			printf(" %s w=%d <-", cur->name, cur->weight);
+		printf(" %s w=%d <-", cur->name, cur->weight);
 		cur = cur->prev;
 	}
 	printf("\n\n");
@@ -212,5 +214,7 @@ void	ft_error(int error)
 		ft_putstr_fd("INVALID ANTS\n", 2);
 	if (error == 4)
 		ft_putstr_fd("ROOM START OR END MISSING\n", 2);
+	if (error == 5)
+		ft_putstr_fd("NO PATH FROM START TO END\n", 2);
 	exit(1);
 }

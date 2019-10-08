@@ -6,7 +6,11 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by anonymous         #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/08/16 15:58:44 by yoribeir         ###   ########.fr       */
+=======
+/*   Updated: 2019/10/07 16:07:14 by epham            ###   ########.fr       */
+>>>>>>> 0893d688e8c7747105725d8895c36167e16e2f78
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +67,6 @@ void	parse(t_env *env)
 		ft_error(4);
 	if (!env->flag_link)
 		ft_error(1);
+	if (!bfs(env))
+		ft_error(5);
 }
