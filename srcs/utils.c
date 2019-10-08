@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/07 16:05:56 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/08 17:27:42 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,5 +216,7 @@ void	ft_error(int error)
 		ft_putstr_fd("ROOM START OR END MISSING\n", 2);
 	if (error == 5)
 		ft_putstr_fd("NO PATH FROM START TO END\n", 2);
+	if (error == 6)
+		ft_putstr_fd("ROOM END OR START ALREADY EXISTS\n", 2);
 	exit(1);
 }

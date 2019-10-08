@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 18:25:56 by anonymous         #+#    #+#             */
-/*   Updated: 2019/09/25 17:44:39 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/08 17:51:35 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	parse_startend(t_env *env, t_room **table)
 	room = NULL;
 	if (command_type(env->line) == 1)
 	{
+		if (env->start != NULL)
+			ft_error(6);
 		get_line(env);
 		while (is_comment(env->line) || (is_command(env->line) &&
 		!command_type(env->line)))
@@ -55,6 +57,8 @@ void	parse_startend(t_env *env, t_room **table)
 	}
 	if (command_type(env->line) == 2)
 	{
+		if (env->end != NULL)
+			ft_error(6);
 		get_line(env);
 		while (is_comment(env->line) || (is_command(env->line) &&
 		!command_type(env->line)))
