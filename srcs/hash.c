@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 14:11:33 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/08/05 14:14:23 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/08 17:53:57 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void				insert_hash_table(t_room **table, t_room *room)
 	t_room	*tmp;
 	size_t	hashedvalue;
 
+	if (find_room(table, room->name))
+		ft_error(6);
 	hashedvalue = hash_value(room->name);
 	if (table[hashedvalue]->name == NULL)
 		table[hashedvalue] = room;
