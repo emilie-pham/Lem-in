@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_links.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 19:21:29 by epham             #+#    #+#             */
-/*   Updated: 2019/10/07 19:28:28 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/08 18:33:06 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int		is_link(char *line)
 
 	count = 0;
 	ret = 0;
+	if (is_comment(line))
+		return (0);
 	if (!(split = ft_strsplit(line, '-')))
 		return (0);
 	while (split[count])
