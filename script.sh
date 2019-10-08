@@ -11,13 +11,13 @@ set -e
 set -o pipefail
 while [[ $loop != "0" ]]
 do
-	./generator --big-superposition > file
-	result="$( ./lem-in < file | grep L | wc -l )"
+	./generator --big > file
+	result="$( ./lem-in-alban < file | grep L | wc -l )"
 	gen=$( tail -2 file | grep '#' | cut -d":" -f2 )
 	diff=$(( result - gen ))
 	if [ $diff -gt $limit ]
 		then
-			cp file maps/"worst"$diff
+			cp file maps/"perfalban"$diff
 	fi
 	if [ $diff -gt $worst ]
 		then

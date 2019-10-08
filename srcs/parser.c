@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by anonymous         #+#    #+#             */
-/*   Updated: 2019/09/24 18:21:51 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/07 16:07:14 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,6 @@ void	parse(t_env *env)
 		ft_error(4);
 	if (!env->flag_link)
 		ft_error(1);
+	if (!bfs(env))
+		ft_error(5);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+         #
+#    By: epham <epham@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/08 09:05:15 by anradix           #+#    #+#              #
-#    Updated: 2019/07/12 16:10:49 by yoribeir         ###   ########.fr        #
+#    Updated: 2019/10/08 12:40:27 by epham            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,24 +104,27 @@ SRC = 	ft_atoi.c\
 
 OBJ = $(SRC:.c=.o)
 
+BLANK		=\x1b[0m
+LIGHTORANGE	=\x1b[38;5;209m
+GREY		=\x1b[38;5;248m
+ORANGE		=\x1b[38;5;208m
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $?
 	@ranlib $(NAME)
-	@echo "libft.a has been successfully created"
+	@echo "$(LIGHTORANGE)[libft created]$(BLANK)"
 
 %.o: %.c
 	@gcc $(FLAGS) -o $@ -c $<
 
 clean:
 	@rm -f $(OBJ)
-	@echo "libft clean OK"
+	@echo "$(GREY)[libft object files removed]$(BLANK)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "libft fclean OK"
-
+	@echo "$(ORANGE)[libft removed]$(BLANK)"
 
 re: fclean all
-	@echo "libft re OK"

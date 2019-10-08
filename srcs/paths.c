@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 14:36:38 by epham             #+#    #+#             */
-/*   Updated: 2019/10/02 16:14:45 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/07 18:31:00 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ t_path		*create_pathlink(t_env *env, t_room *room)
 
 	if (room->inpath != 0 && (ft_strcmp(room->name, env->start->name)
 	&& ft_strcmp(room->name, env->end->name)))
-	{
-		// printf("start : %s || room : %s || room->inpath = %d\n", env->start->name, room->name, room->inpath);
 		return (NULL);
-	}
 	room->inpath = 1;
 	pathlink = (t_path*)ft_memalloc(sizeof(t_path));
 	pathlink->room = room;
@@ -58,7 +55,7 @@ t_path		*get_path(t_env *env, t_room *next, t_solution *sol)
 		{
 			while (link && link->flow != 1)
 				link = link->next;
-			if (!(path->next = create_pathlink(env, link->dest)))
+			if (!(link && (path->next = create_pathlink(env, link->dest))))
 			{
 				free_path(head);
 				return (NULL);

@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/08/16 12:26:18 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/07 19:24:54 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdlib.h>
 
 # include <stdio.h>
-
 
 #define TABLE_SIZE 10007
 
@@ -157,12 +156,22 @@ int					is_link(char *line);
 int					command_type(char *line);
 
 /*
-***		bfs et edmond
+***		BFS
 */
 
 int  				bfs(t_env *env);
+void				append_queue(t_env *env, t_link *link, t_room *prev);
 int					edmond(t_env *env);
 void				print_sol(t_env *env, t_solution *solution);
+
+/*
+***		OPTI BFS
+*/
+
+int					check_change_source(t_env *env, t_room *room, t_room *new);
+void				change_source(t_env *e, t_room *r, t_link *l, t_room *new);
+int					remontada(t_env *env, t_room *curr, t_link *curr_link);
+void				depthfirst_queue(t_env *env, t_room *room);
 
 /*
 ***		PATHS
@@ -177,6 +186,7 @@ void				free_path(t_path *path);
 /*
 ***		SOLUTIONS
 */
+
 t_solution			*create_solution(t_env *env, t_room *next);
 void				append_sol(t_env *env, t_solution *new);
 t_solution			*dispatch_ants(t_env *env, t_solution *head);
@@ -196,7 +206,7 @@ void				print_links(t_room *room);
 void				print_link(t_link *link);
 void				free_table(t_room **table);
 
-void	print_bfs(t_env *env);
+void				print_bfs(t_env *env);
 
 
 #endif

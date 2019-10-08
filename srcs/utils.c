@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/08/16 16:31:54 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/07 16:05:56 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,5 +214,7 @@ void	ft_error(int error)
 		ft_putstr_fd("INVALID ANTS\n", 2);
 	if (error == 4)
 		ft_putstr_fd("ROOM START OR END MISSING\n", 2);
+	if (error == 5)
+		ft_putstr_fd("NO PATH FROM START TO END\n", 2);
 	exit(1);
 }

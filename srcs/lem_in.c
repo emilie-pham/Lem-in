@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/09/25 16:43:28 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/08 15:27:10 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,19 @@ static t_env	*init_env(void)
 	return (env);
 }
 
-int		main(int ac, char **av)
+int				main(int ac, char **av)
 {
-	t_env 	*env;
+	t_env	*env;
 
+	(void)ac;
+	(void)av;
 	if (!(env = init_env()))
 		return (0);
 	parse(env);
 	print_map(env);
 	if (edmond(env) != 0)
 		print_sol(env, env->optimal_sol);
-	// print_paths(env->optimal_sol);
+	print_paths(env->optimal_sol);
 	free(env);
 	return (0);
 }

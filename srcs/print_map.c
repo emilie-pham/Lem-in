@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 14:28:40 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/08/05 16:33:19 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/08 12:45:08 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-t_line	*create_line(char *content)
+t_line		*create_line(char *content)
 {
-	t_line *line;
+	t_line		*line;
 
 	if (!(line = (t_line *)ft_memalloc(sizeof(t_line))))
 		return (NULL);
@@ -23,7 +23,7 @@ t_line	*create_line(char *content)
 	return (line);
 }
 
-void	add_line(t_env *env, t_line	*line)
+void		add_line(t_env *env, t_line *line)
 {
 	t_line			*current;
 	static t_line	*tail;
@@ -41,13 +41,13 @@ void	add_line(t_env *env, t_line	*line)
 	}
 }
 
-void	get_line(t_env *env)
+void		get_line(t_env *env)
 {
 	get_next_line(0, &env->line);
 	add_line(env, create_line(env->line));
 }
 
-void	print_map(t_env *env)
+void		print_map(t_env *env)
 {
 	t_line	*current;
 
