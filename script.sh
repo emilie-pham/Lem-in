@@ -12,7 +12,7 @@ set -o pipefail
 while [[ $loop != "0" ]]
 do
 	./generator --big > file
-	result="$( ./lem-in-alban < file | grep L | wc -l )"
+	result="$( ./lem-in < file | grep L | wc -l )"
 	gen=$( tail -2 file | grep '#' | cut -d":" -f2 )
 	diff=$(( result - gen ))
 	if [ $diff -gt $limit ]
