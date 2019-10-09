@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/10/08 18:31:32 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/09 18:26:16 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int				main(int ac, char **av)
 	print_map(env);
 	if (edmond(env) != 0)
 		print_sol(env, env->optimal_sol);
-	// print_paths(env->optimal_sol);
+	print_paths(env->optimal_sol);
 	free(env);
 	return (0);
 }

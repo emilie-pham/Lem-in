@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 19:10:07 by epham             #+#    #+#             */
-/*   Updated: 2019/10/08 15:44:38 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/09 14:03:36 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ void		change_source(t_env *env, t_room *room, t_link *link, t_room *new)
 }
 
 /*
-***		INSERT TO QUEUE IN MIDDLE
+***		INSERT TO QUEUE IN MIDDLE BUT AFTER PREV
 */
 
-void		insert_queue(t_env *env, t_link *link, t_room *prev)
+void		insert_after_queue(t_env *env, t_link *link, t_room *prev)
 {
 	t_queue		*insert;
 	t_queue		*find;
@@ -95,6 +95,41 @@ void		insert_queue(t_env *env, t_link *link, t_room *prev)
 	while (find->next && ft_strcmp(find->room->name, prev->name))
 		find = find->next;
 	tmp = find->next;
+	find->next = insert;
+	insert->next = tmp;
+}
+
+/*
+***		INSERT TO QUEUE IN MIDDLE BUT BEFORE PREV
+*/
+
+void		insert_before_queue(t_env *env, t_link *link, t_room *prev)
+{
+	t_queue		*insert;
+	t_queue		*find;
+	t_queue		*tmp;
+
+	find = env->queue;
+	if (!(insert = (t_queue*)malloc(sizeof(t_queue))))
+		return ;
+	insert->room = link->dest;
+	link->dest->inqueue = 1;
+	link->dest->from = link;
+	insert->room->prev = prev;
+	insert->prev_flow = link->flow;
+	link->dest->weight = link->flow == -1 ? prev->weight - 1 : prev->weight + 1;
+	insert->next = NULL;
+	if (!env->queue)
+	{
+		env->queue = insert;
+		env->end_queue = env->queue;
+		return ;
+	}
+	while (find->next && ft_strcmp(find->next->room->name, prev->name))
+		find = find->next;
+	tmp = find->next;
+	find->next = insert;
+	insert->next = tmp;
 }
 
 /*
@@ -111,7 +146,7 @@ int			remontada(t_env *env, t_room *current, t_link *current_link)
 		if (current_link->flow == -1 && current_link->dest->inqueue == 0
 		&& current->prev_flow == 0)
 		{
-			append_queue(env, current_link, current);
+			insert_after_queue(env, current_link, current);
 			depthfirst_queue(env, current_link->dest);
 			current_link = head;
 			return (1);
@@ -137,7 +172,7 @@ void		depthfirst_queue(t_env *env, t_room *room)
 		&& ft_strcmp(link->dest->name, env->start->name)
 		&& ft_strcmp(link->dest->name, env->end->name))
 		{
-			append_queue(env, link, link->rev->dest);
+			insert_before_queue(env, link, link->rev->dest);
 			link = link->dest->linked_rooms;
 		}
 		else
