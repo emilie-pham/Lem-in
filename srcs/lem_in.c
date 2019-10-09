@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/10/08 17:54:06 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/09 19:09:37 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static t_env	*init_env(void)
 	env->steps = 2147483647;
 	env->shortest_path = NULL;
 	env->second_shortest = NULL;
+	env->table = NULL;
 	return (env);
 }
 
@@ -46,10 +47,14 @@ int				main(int ac, char **av)
 	if (!(env = init_env()))
 		return (0);
 	parse(env);
-	print_map(env);
-	if (edmond(env) != 0)
-		print_sol(env, env->optimal_sol);
-	print_paths(env->optimal_sol);
+	// print_hash(env->table, TABLE_SIZE);
+	// print_map(env);
+	// if (edmond(env) != 0)
+	// 	print_sol(env, env->optimal_sol);
+	// print_paths(env->optimal_sol);
+	free_table(env->table);
+	free_links(env->links);
+	free_lines(env->read);
 	free(env);
 	return (0);
 }

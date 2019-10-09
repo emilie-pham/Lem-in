@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/10/08 17:51:25 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/09 19:13:59 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct		s_env
 	int				steps;
 	t_line			*read;
 	t_link			*links;
+	t_room			**table;
 	t_room			*start;
 	t_room			*end;
 	t_queue			*queue;
@@ -147,11 +148,11 @@ void				add_room(t_env *env, t_room *room);
 void				parse_startend(t_env *env, t_room **table);
 t_room 				*find_room(t_room **table, char *room_name);
 
-	/*
+/*
 ***		links
 */
 
-	void add_link(t_room *room, t_link *link);
+void 				add_link(t_room *room, t_link *link);
 void				*get_link(t_env *env, t_room **table, char *line);
 void				parse_links(t_env *env);
 
@@ -215,8 +216,11 @@ void				printqueue(t_queue *queue);
 void				print_links(t_room *room);
 void				print_link(t_link *link);
 void				free_table(t_room **table);
+void 				free_links(t_link *links);
+void 				free_rooms(t_room *rooms);
+void 				free_lines(t_line *line);
+void 				free_2darray(char **arr);
 
-void				print_bfs(t_env *env);
-
+	void print_bfs(t_env *env);
 
 #endif

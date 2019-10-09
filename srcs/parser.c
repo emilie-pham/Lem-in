@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by anonymous         #+#    #+#             */
-/*   Updated: 2019/10/08 18:46:43 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/09 18:59:04 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ void	reader(t_env *env, t_room **table)
 
 void	parse(t_env *env)
 {
-	t_room	*table[TABLE_SIZE];
+	t_room	**table;
 
+	if (!(table = (t_room**)malloc(sizeof(t_room*) * 10007)))
+		return ;
+	env->table = table;
 	init_table(table);
 	parse_ants(env);
 	reader(env, table);
