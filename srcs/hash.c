@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 14:11:33 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/09 19:02:00 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/10 18:35:01 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,7 @@ void				free_table(t_room **table)
 		{
 			if (table[i]->linked_rooms)
 				free_links(table[i]->linked_rooms);
-			if (table[i]->next)
-				free_rooms(table[i]);
-			else
-				free(table[i]);
+			free_rooms(table[i]);
 		}
 		i++;
 	}

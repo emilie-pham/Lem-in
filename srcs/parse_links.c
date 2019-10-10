@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/09 18:28:49 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/10 15:44:39 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ t_room	*find_room(t_room **table, char *room_name)
 	current = table[index];
 	if (!current)
 		return (NULL);
-	// if (!current->name)
-		// return (NULL);
 	while (current)
 	{
 		if (!ft_strcmp(current->name, room_name))

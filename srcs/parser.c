@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by anonymous         #+#    #+#             */
-/*   Updated: 2019/10/09 18:59:04 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/10 18:12:00 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	reader(t_env *env, t_room **table)
 			break ;
 		ft_strdel(&env->line);
 	}
+	ft_strdel(&env->line);
 }
 
 void	parse(t_env *env)

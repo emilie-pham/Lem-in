@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/09 19:24:17 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/10 18:36:38 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,66 @@ void	print_link(t_link *link)
 	printf("from : %s\n\n", link->rev->dest->name);
 }
 
-void	print_links(t_room *room)
+void 	print_linked(t_room *room)
 {
-	t_link *head;
+	t_room *current;
 
-	head = room->linked_rooms;
-	printf("room %s is connected to : ", room->name);
-	while (head)
+	current = room;
+	if (current)
+		printf("linked rooms ");
+	while (current)
 	{
-		if (head->next)
-			printf("room %s, ", head->dest->name);
-		else
-			printf("room %s", head->dest->name);
-		head = head->next;
+		printf("[%s]", current->name);
+		if (current->next)
+			printf("->");
+		current = current->next;
 	}
+	printf("\n");
 }
+
+void 	print_hash(t_room **table, size_t size)
+{
+	t_room 	*collisions;
+	size_t 	i;
+	int 	count = 0;
+
+	i = 0;
+	while (i < size)
+	{
+		if (table[i])
+		{
+			printf("hash %s", table[i]->name);
+			collisions = table[i];
+			while (collisions->next)
+			{
+				count++;
+				collisions = collisions->next;
+				printf(" -> %s", collisions->name);
+			}
+			count++;
+		}
+		if (table[i])
+			printf("\n");
+		i++;
+	}
+	printf("room number %d\n", count);
+}
+
+// void	print_links(t_room *room)
+// {
+// 	t_link *head;
+
+// 	head = room->linked_rooms;
+// 	printf("room %s is connected to : ", room->name);
+// 	while (head)
+// 	{
+// 		if (head->next)
+// 			printf("room %s, ", head->dest->name);
+// 		else
+// 			printf("room %s", head->dest->name);
+// 		head = head->next;
+// 	}
+// }
 
 void	print_split(char **tab)
 {
@@ -54,34 +99,34 @@ void	print_split(char **tab)
 	i = 0;
 }
 
-void	print_hash(t_room **table, size_t size)
-{
-	t_room	*collisions;
-	size_t i;
-	int	count = 0;
+// void	print_hash(t_room **table, size_t size)
+// {
+// 	t_room	*collisions;
+// 	size_t i;
+// 	int	count = 0;
 
-	i = 0;
-	while (i < size)
-	{
-		if (table[i])
-		{
-			printf("hash [%s] ", table[i]->name);
-			print_links(table[i]);
-			collisions = table[i];
-			while (collisions->next)
-			{
-				count++;
-				collisions = collisions->next;
-				printf(" -> %s", collisions->name);
-			}
-			count++;
-		}
-		if (table[i])
-			printf("\n");
-		i++;
-	}
-	printf("room number %d\n", count);
-}
+// 	i = 0;
+// 	while (i < size)
+// 	{
+// 		if (table[i])
+// 		{
+// 			// printf("hash [%s] ", table[i]->name);
+// 			print_links(table[i]);
+// 			collisions = table[i];
+// 			while (collisions->next)
+// 			{
+// 				count++;
+// 				collisions = collisions->next;
+// 				printf(" -> %s", collisions->name);
+// 			}
+// 			count++;
+// 		}
+// 		if (table[i])
+// 			printf("\n");
+// 		i++;
+// 	}
+// 	printf("room number %d\n", count);
+// }
 
 void	print_path(t_path *head)
 {
@@ -202,6 +247,7 @@ void 	free_rooms(t_room *rooms)
 	{
 		tmp1 = tmp;
 		tmp = tmp->next;
+		free(tmp1->name);
 		free(tmp1);
 	}
 }
@@ -210,7 +256,6 @@ void	free_links(t_link *links)
 {
 	t_link	*tmp;
 	t_link	*tmp1;
-	t_link	*rev;
 
 	tmp = links;
 	while (tmp)
@@ -231,22 +276,11 @@ void 	free_lines(t_line *line)
 	{
 		tmp1 = tmp;
 		tmp = tmp->next;
+		free(tmp1->line);
 		free(tmp1);
+		tmp1 = NULL;
 	}
 }
-
-// void free_2darray(char **arr, int size)
-// {
-// 	int y;
-
-// 	y = 0;
-// 	while (y < size)
-// 	{
-// 		ft_strdel(&arr[y]);
-// 		y++;
-// 	}
-// 	free(arr);
-// }
 
 void 	free_2darray(char **arr)
 {

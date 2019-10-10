@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/10/09 19:09:37 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/10 18:25:00 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ int				main(int ac, char **av)
 	// print_hash(env->table, TABLE_SIZE);
 	// print_map(env);
 	// if (edmond(env) != 0)
-	// 	print_sol(env, env->optimal_sol);
+		// print_sol(env, env->optimal_sol);
 	// print_paths(env->optimal_sol);
-	free_table(env->table);
 	free_links(env->links);
+	free_table(env->table);
 	free_lines(env->read);
 	free(env);
 	return (0);
