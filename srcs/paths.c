@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 14:36:38 by epham             #+#    #+#             */
-/*   Updated: 2019/10/07 18:31:00 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/10 17:48:11 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,30 @@ int			remove_path(t_env *env, t_solution *remove)
 }
 
 /*
+***		KEEP PATH WITH SMALLEST STEP
+*/
+
+void		smallest_step(t_env *env)
+{
+	int			smallest;
+	t_solution	*sol;
+
+	sol = env->current_sol;
+	smallest = 2147483647;
+	while (sol)
+	{
+		sol->steps = sol->pathlen + sol->ants - 1;
+		if (sol->steps < smallest)
+		{
+			env->shortest_path = sol;
+			smallest = sol->steps;
+		}
+		sol = sol->next;
+	}
+	sol = env->current_sol;
+}
+
+/*
 ***		GET NUMBER OF STEPS FOR THIS SOLUTION SYSTEM
 */
 
@@ -130,7 +154,11 @@ int			check_steps(t_env *env)
 		return (-1);
 	}
 	while (env->ants_sent < env->ant_nb)
-		dispatch_leftover(env->shortest_path, env->second_shortest, env);
+	{
+		smallest_step(env);
+		env->shortest_path->ants += 1;
+		env->ants_sent += 1;
+	}
 	while (sol)
 	{
 		sol->steps = sol->pathlen + sol->ants - 1;

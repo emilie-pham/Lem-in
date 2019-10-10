@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 14:11:33 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/09 19:02:00 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/10 13:12:50 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ unsigned long long	hash_value(char *key)
 	return (hashedvalue % TABLE_SIZE);
 }
 
-void 	insert_hash_table(t_room **table, t_room *room)
+void				insert_hash_table(t_room **table, t_room *room)
 {
 	t_room *newnode;
 	t_room *tmp;
@@ -50,7 +50,7 @@ void 	insert_hash_table(t_room **table, t_room *room)
 	}
 }
 
-void 	init_table(t_room **table)
+void				init_table(t_room **table)
 {
 	int i;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edmond.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/10/08 17:09:40 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/10 17:46:00 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int				edmond(t_env *env)
 			if ((steps = check_steps(env)) < 0)
 				continue ;
 			env->current_sol->steps = steps;
-			if (env->current_sol->steps < env->steps)
+			if (env->current_sol->steps <= env->steps)
 				update_solution(env);
 			else
 				free_sol(env->current_sol);

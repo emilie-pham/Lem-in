@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/10/08 18:35:33 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/10 14:00:17 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,18 @@ int			check_start_end(t_env *env)
 	end = env->end->linked_rooms;
 	fullend = 1;
 	fullstart = 1;
-	while (start)
+	while (start && end)
 	{
 		fullstart = start->rev->flow != 1 ? 0 : 1;
-		if (!fullstart)
-			break ;
-		start = start->next;
-	}
-	while (end)
-	{
 		fullend = end->rev->flow != 1 ? 0 : 1;
-		if (!fullend)
-			break ;
-		end = end->next;
+		if (fullstart)
+			start = start->next;
+		if (fullend)
+			end = end->next;
+		if (!fullstart && !fullend)
+			return (1);
 	}
-	if (fullend || fullstart)
-		return (0);
-	return (1);
+	return (0);
 }
 
 /*
@@ -66,8 +61,8 @@ int			initialize_bfs(t_env *env)
 			head->room->weight = 0;
 			tmp = head;
 			head = head->next;
+			free(tmp);
 		}
-		free(env->queue);
 	}
 	env->queue = NULL;
 	env->end_queue = NULL;
@@ -75,34 +70,7 @@ int			initialize_bfs(t_env *env)
 }
 
 /*
-***     CREATE QUEUE MAILLON AND APPEND IT
-*/
-
-void		append_queue(t_env *env, t_link *link, t_room *prev)
-{
-	t_queue		*last;
-
-	if (!(last = (t_queue*)malloc(sizeof(t_queue))))
-		return ;
-	last->room = link->dest;
-	link->dest->inqueue = 1;
-	link->dest->from = link;
-	last->room->prev = prev;
-	last->prev_flow = link->flow;
-	link->dest->weight = link->flow == -1 ? prev->weight - 1 : prev->weight + 1;
-	last->next = NULL;
-	if (!env->queue)
-	{
-		env->queue = last;
-		env->end_queue = env->queue;
-		return ;
-	}
-	env->end_queue->next = last;
-	env->end_queue = last;
-}
-
-/*
-***     GET LINKS TO ADD TO QUEUE
+***     GET QUEUE FROM ROOM
 */
 
 void		get_queue(t_env *env, t_room *room)

@@ -18,7 +18,7 @@ FLAGS		= -Wall -Werror -Wextra -g
 DFLAGS		= -g3 -fsanitize=address,undefined
 SRCS		= lem_in.c opti.c check_rooms.c check_links.c check_commands.c \
 edmond.c hash.c init.c parse_links.c parse_rooms.c parser.c paths.c solutions.c \
-print_sol.c print_map.c utils.c bfs.c
+print_sol.c print_map.c utils.c bfs.c queue.c
 SRCSREP		= srcs
 OBJS		= $(SRCS:.c=.o)
 

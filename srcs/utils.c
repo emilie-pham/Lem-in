@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/09 19:24:17 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/10 15:51:51 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	print_paths(t_solution *current_sol)
 	t_path		*start;
 
 	head = current_sol;
+	printf("SOLUTION SET :\n");
 	while (current_sol)
 	{
 		printf("PATHLEN : %d\n", current_sol->pathlen);
@@ -210,7 +211,6 @@ void	free_links(t_link *links)
 {
 	t_link	*tmp;
 	t_link	*tmp1;
-	t_link	*rev;
 
 	tmp = links;
 	while (tmp)
