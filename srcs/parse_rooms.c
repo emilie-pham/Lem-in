@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 18:25:56 by anonymous         #+#    #+#             */
-/*   Updated: 2019/09/25 17:44:39 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/09 19:14:09 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_room	*create_room(char *line)
 	room->name = ft_strdup(split[0]);
 	room->coord_x = ft_atoi(split[1]);
 	room->coord_y = ft_atoi(split[2]);
+	free_2darray(split);
 	room->linked_rooms = NULL;
 	room->visited = 0;
 	room->inqueue = 0;
@@ -43,6 +44,8 @@ void	parse_startend(t_env *env, t_room **table)
 	room = NULL;
 	if (command_type(env->line) == 1)
 	{
+		if (env->start != NULL)
+			ft_error(6);
 		get_line(env);
 		while (is_comment(env->line) || (is_command(env->line) &&
 		!command_type(env->line)))
@@ -55,6 +58,8 @@ void	parse_startend(t_env *env, t_room **table)
 	}
 	if (command_type(env->line) == 2)
 	{
+		if (env->end != NULL)
+			ft_error(6);
 		get_line(env);
 		while (is_comment(env->line) || (is_command(env->line) &&
 		!command_type(env->line)))

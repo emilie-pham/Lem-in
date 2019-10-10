@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/11 20:26:13 by anonymous         #+#    #+#             */
-/*   Updated: 2019/10/09 14:11:56 by epham            ###   ########.fr       */
+/*   Created: 2019/07/11 20:26:13 by yoribeir          #+#    #+#             */
+/*   Updated: 2019/10/10 12:37:05 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ void	reader(t_env *env, t_room **table)
 
 void	parse(t_env *env)
 {
-	t_room	*table[TABLE_SIZE];
+	t_room	**table;
 
+	if (!(table = (t_room**)malloc(sizeof(t_room*) * 10007)))
+		return ;
+	env->table = table;
 	init_table(table);
 	parse_ants(env);
 	reader(env, table);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/10/07 19:24:54 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/09 19:13:59 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@
 # include <stdio.h>
 
 #define TABLE_SIZE 10007
+
+#define RED 	"\x1B[31m"
+#define GRN 	"\x1B[32m"
+#define YEL 	"\x1B[33m"
+#define BLU 	"\x1B[34m"
+#define MAG 	"\x1B[35m"
+#define CYN 	"\x1B[36m"
+#define WHT 	"\x1B[37m"
+#define RESET 	"\x1B[0m"
 
 /*
 ***		NEXT POUR HASH, PREV POUR BFS
@@ -99,6 +108,7 @@ typedef struct		s_env
 	int				steps;
 	t_line			*read;
 	t_link			*links;
+	t_room			**table;
 	t_room			*start;
 	t_room			*end;
 	t_queue			*queue;
@@ -136,12 +146,13 @@ void				print_hash(t_room **table, size_t size);
 t_room				*create_room(char *line);
 void				add_room(t_env *env, t_room *room);
 void				parse_startend(t_env *env, t_room **table);
+t_room 				*find_room(t_room **table, char *room_name);
 
 /*
 ***		links
 */
 
-void				add_link(t_room *room, t_link *link);
+void 				add_link(t_room *room, t_link *link);
 void				*get_link(t_env *env, t_room **table, char *line);
 void				parse_links(t_env *env);
 
@@ -205,8 +216,11 @@ void				printqueue(t_queue *queue);
 void				print_links(t_room *room);
 void				print_link(t_link *link);
 void				free_table(t_room **table);
+void 				free_links(t_link *links);
+void 				free_rooms(t_room *rooms);
+void 				free_lines(t_line *line);
+void 				free_2darray(char **arr);
 
-void				print_bfs(t_env *env);
-
+	void print_bfs(t_env *env);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/07 16:05:56 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/09 19:24:17 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	print_hash(t_room **table, size_t size)
 	i = 0;
 	while (i < size)
 	{
-		if (table[i]->name)
+		if (table[i])
 		{
-			// printf("hash %s", table[i]->name);
+			printf("hash [%s] ", table[i]->name);
 			print_links(table[i]);
 			collisions = table[i];
 			while (collisions->next)
@@ -76,7 +76,7 @@ void	print_hash(t_room **table, size_t size)
 			}
 			count++;
 		}
-		if (table[i]->name)
+		if (table[i])
 			printf("\n");
 		i++;
 	}
@@ -153,18 +153,6 @@ void	print_bfs(t_env *env)
 	printf("\n\n");
 }
 
-void	free_table(t_room **table)
-{
-	int i;
-
-	i = 0;
-	while (i < TABLE_SIZE)
-	{
-		free(table[i]);
-		i++;
-	}
-}
-
 /*
 ***		FREE PATH
 */
@@ -204,6 +192,75 @@ void	free_sol(t_solution *sol)
 	}
 }
 
+void 	free_rooms(t_room *rooms)
+{
+	t_room *tmp;
+	t_room *tmp1;
+
+	tmp = rooms;
+	while (tmp)
+	{
+		tmp1 = tmp;
+		tmp = tmp->next;
+		free(tmp1);
+	}
+}
+
+void	free_links(t_link *links)
+{
+	t_link	*tmp;
+	t_link	*tmp1;
+	t_link	*rev;
+
+	tmp = links;
+	while (tmp)
+	{
+		tmp1 = tmp;
+		tmp = tmp->next;
+		free(tmp1);
+	}
+}
+
+void 	free_lines(t_line *line)
+{
+	t_line *tmp;
+	t_line *tmp1;
+
+	tmp = line;
+	while (tmp)
+	{
+		tmp1 = tmp;
+		tmp = tmp->next;
+		free(tmp1);
+	}
+}
+
+// void free_2darray(char **arr, int size)
+// {
+// 	int y;
+
+// 	y = 0;
+// 	while (y < size)
+// 	{
+// 		ft_strdel(&arr[y]);
+// 		y++;
+// 	}
+// 	free(arr);
+// }
+
+void 	free_2darray(char **arr)
+{
+	int y;
+
+	y = 0;
+	while (arr[y])
+	{
+		ft_strdel(&arr[y]);
+		y++;
+	}
+	free(arr);
+}
+
 void	ft_error(int error)
 {
 	if (error == 1)
@@ -216,5 +273,9 @@ void	ft_error(int error)
 		ft_putstr_fd("ROOM START OR END MISSING\n", 2);
 	if (error == 5)
 		ft_putstr_fd("NO PATH FROM START TO END\n", 2);
+	if (error == 6)
+		ft_putstr_fd("ROOM END OR START ALREADY EXISTS\n", 2);
+	if (error == 7)
+		ft_putstr_fd("MALLOC FAILED\n", 2);
 	exit(1);
 }
