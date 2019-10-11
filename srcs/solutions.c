@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 19:22:01 by epham             #+#    #+#             */
-/*   Updated: 2019/10/03 15:17:08 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/11 15:59:11 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,7 @@ void			append_sol(t_env *env, t_solution *new)
 t_solution		*dispatch_ants(t_env *env, t_solution *head)
 {
 	t_solution	*sol;
-	int			min;
-	int			second;
 
-	min = 2147483647;
-	second = 2147483647;
 	sol = head;
 	while (sol)
 	{
@@ -71,47 +67,19 @@ t_solution		*dispatch_ants(t_env *env, t_solution *head)
 		if (sol->ants < 0)
 			return (sol);
 		env->ants_sent += sol->ants;
-		if (sol->pathlen < min)
-		{
-			env->shortest_path = sol;
-			min = sol->pathlen;
-		}
-		else if (sol->pathlen >= min && sol->pathlen < second)
-		{
-			env->second_shortest = sol;
-			second = sol->pathlen;
-		}
 		sol = sol->next;
 	}
 	sol = head;
 	return (NULL);
 }
 
-void			dispatch_leftover(t_solution *one, t_solution *two, t_env *env)
-{
-	int		difflen;
-	int		sumlen;
-	int		leftover;
-	int		leftshort;
-	int		leftsecond;
+/*
+***		REPLACE OPTIMAL SOLUTION
+*/
 
-	leftover = env->ant_nb - env->ants_sent;
-	if (two)
-	{
-		difflen = two->pathlen - one->pathlen;
-		sumlen = two->pathlen + one->pathlen;
-	}
-	if (!two || difflen == 0 || leftover <= difflen)
-	{
-		one->ants += leftover;
-		env->ants_sent += leftover;
-	}
-	else if (leftover > difflen && two)
-	{
-		leftshort = (leftover + sumlen) / 2 - one->pathlen;
-		leftsecond = (leftover + sumlen) / 2 - two->pathlen;
-		one->ants += leftshort;
-		two->ants += leftsecond;
-		env->ants_sent += leftshort + leftsecond;
-	}
+void			update_solution(t_env *env)
+{
+	free_sol(env->optimal_sol);
+	env->optimal_sol = env->current_sol;
+	env->steps = env->current_sol->steps;
 }

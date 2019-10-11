@@ -1,16 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_commands.c                                   :+:      :+:    :+:   */
+/*   is_commands.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 19:29:05 by epham             #+#    #+#             */
-/*   Updated: 2019/10/08 17:46:58 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/11 16:42:51 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+/*
+***		CHECK IF LINE IS A COMMAND START/END
+*/
 
 int		is_command(char *line)
 {
@@ -20,6 +24,10 @@ int		is_command(char *line)
 	return (0);
 }
 
+/*
+***		CHECK WHETHER COMMAND IS START OR END
+*/
+
 int		command_type(char *line)
 {
 	if (!ft_strcmp("##start", line))
@@ -28,6 +36,10 @@ int		command_type(char *line)
 		return (2);
 	return (0);
 }
+
+/*
+***		CHECK IF LINE IS A COMMENT
+*/
 
 int		is_comment(char *line)
 {

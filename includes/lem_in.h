@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/10/09 19:13:59 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/11 16:35:02 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,16 +119,24 @@ typedef struct		s_env
 	t_solution		*second_shortest;
 }					t_env;
 
+/*
+***		INIT.C
+*/
+
+t_env				*init_env(void);
+void				init_table(t_room **table);
+
+
 void				parse(t_env *env);
 
 /*
 ***		print
 */
 
-t_line	*create_line(char *content);
-void	add_line(t_env *env, t_line	*line);
-void	print_map(t_env *env);
-void	get_line(t_env *env);
+t_line				*create_line(char *content);
+void				add_line(t_env *env, t_line	*line);
+void				print_map(t_env *env);
+void				get_line(t_env *env);
 
 /*
 ***		hash
@@ -171,9 +179,17 @@ int					command_type(char *line);
 */
 
 int  				bfs(t_env *env);
-void				append_queue(t_env *env, t_link *link, t_room *prev);
 int					edmond(t_env *env);
 void				print_sol(t_env *env, t_solution *solution);
+
+/*
+***		QUEUE
+*/
+
+void				append_queue(t_env *env, t_link *link, t_room *prev);
+void				insert_after_queue(t_env *env, t_link *link, t_room *prev);
+void				insert_before_queue(t_env *env, t_link *link, t_room *prev);
+void				get_queue(t_env *env, t_room *room);
 
 /*
 ***		OPTI BFS
@@ -195,13 +211,13 @@ int					check_steps(t_env *env);
 void				free_path(t_path *path);
 
 /*
-***		SOLUTIONS
+***		SOLUTIONS.C
 */
 
 t_solution			*create_solution(t_env *env, t_room *next);
 void				append_sol(t_env *env, t_solution *new);
 t_solution			*dispatch_ants(t_env *env, t_solution *head);
-void				dispatch_leftover(t_solution *shortest, t_solution *second, t_env *env);
+void				update_solution(t_env *env);
 void				free_sol(t_solution *sol);
 
 /*
@@ -220,7 +236,6 @@ void 				free_links(t_link *links);
 void 				free_rooms(t_room *rooms);
 void 				free_lines(t_line *line);
 void 				free_2darray(char **arr);
-
-	void print_bfs(t_env *env);
+void 				print_bfs(t_env *env);
 
 #endif

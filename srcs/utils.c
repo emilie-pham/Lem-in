@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/10 18:36:38 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/11 17:18:58 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ void	print_paths(t_solution *current_sol)
 	t_path		*start;
 
 	head = current_sol;
+	printf("SOLUTION SET :\n");
 	while (current_sol)
 	{
 		printf("PATHLEN : %d\n", current_sol->pathlen);
@@ -311,5 +312,9 @@ void	ft_error(int error)
 		ft_putstr_fd("ROOM END OR START ALREADY EXISTS\n", 2);
 	if (error == 7)
 		ft_putstr_fd("MALLOC FAILED\n", 2);
+	if (error == 8)
+		ft_putstr_fd("DOUBLE ROOM\n", 2);
+	if (error == 9)
+		ft_putstr_fd("ROOM LINKED TO ITSELF\n", 2);
 	exit(1);
 }
