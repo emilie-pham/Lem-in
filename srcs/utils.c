@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/10 15:51:51 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/11 16:07:46 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,5 +277,9 @@ void	ft_error(int error)
 		ft_putstr_fd("ROOM END OR START ALREADY EXISTS\n", 2);
 	if (error == 7)
 		ft_putstr_fd("MALLOC FAILED\n", 2);
+	if (error == 8)
+		ft_putstr_fd("DOUBLE ROOM\n", 2);
+	if (error == 9)
+		ft_putstr_fd("ROOM LINKED TO ITSELF\n", 2);
 	exit(1);
 }

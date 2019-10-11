@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:17:16 by epham             #+#    #+#             */
-/*   Updated: 2019/10/10 13:18:41 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/11 15:28:50 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,34 @@ void		insert_before_queue(t_env *env, t_link *link, t_room *prev)
 	tmp = find->next;
 	find->next = insert;
 	insert->next = tmp;
+}
+
+/*
+***     GET QUEUE FROM ROOM
+*/
+
+void		get_queue(t_env *env, t_room *room)
+{
+	t_link		*currlink;
+	int			weight;
+
+	weight = 0;
+	room->visited = 1;
+	currlink = room->linked_rooms;
+	if (remontada(env, room, currlink) == 1)
+		return ;
+	while (currlink)
+	{
+		weight = currlink->flow == -1 ? room->weight - 1 : room->weight + 1;
+		if (currlink->dest->inqueue == 0 && currlink->flow != 1)
+			append_queue(env, currlink, room);
+		else if (ft_strcmp(currlink->dest->name, env->start->name)
+		&& ft_strcmp(currlink->dest->name, env->end->name)
+		&& currlink->dest->inqueue && currlink->dest->weight > weight)
+		{
+			if (check_change_source(env, currlink->dest, room) == 1)
+				change_source(env, currlink->dest, currlink, room);
+		}
+		currlink = currlink->next;
+	}
 }

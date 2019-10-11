@@ -6,37 +6,11 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/10/10 17:09:01 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/11 15:37:25 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-static t_env	*init_env(void)
-{
-	t_env	*env;
-
-	if (!(env = malloc(sizeof(t_env))))
-		return (NULL);
-	env->line = NULL;
-	env->ant_nb = 0;
-	env->flag_link = 0;
-	env->links = NULL;
-	env->start = NULL;
-	env->end = NULL;
-	env->queue = NULL;
-	env->read = NULL;
-	env->end_queue = env->queue;
-	env->optimal_sol = NULL;
-	env->path_nb = 0;
-	env->total_len = 0;
-	env->ants_sent = 0;
-	env->steps = 2147483647;
-	env->shortest_path = NULL;
-	env->second_shortest = NULL;
-	env->table = NULL;
-	return (env);
-}
 
 int				main(int ac, char **av)
 {
@@ -47,11 +21,9 @@ int				main(int ac, char **av)
 	if (!(env = init_env()))
 		return (0);
 	parse(env);
-	// print_hash(env->table, TABLE_SIZE);
 	print_map(env);
 	if (edmond(env) != 0)
 		print_sol(env, env->optimal_sol);
-	// print_paths(env->optimal_sol);
 	free_table(env->table);
 	free_links(env->links);
 	free_lines(env->read);

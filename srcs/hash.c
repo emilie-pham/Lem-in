@@ -6,11 +6,15 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 14:11:33 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/10 13:12:50 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/11 15:54:12 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+/*
+***		COMPUTE HASH VALUE (INDEX) OF ROOM
+*/
 
 unsigned long long	hash_value(char *key)
 {
@@ -25,6 +29,10 @@ unsigned long long	hash_value(char *key)
 	return (hashedvalue % TABLE_SIZE);
 }
 
+/*
+***		INSERT ROOM IN HASH TABLE
+*/
+
 void				insert_hash_table(t_room **table, t_room *room)
 {
 	t_room *newnode;
@@ -32,7 +40,7 @@ void				insert_hash_table(t_room **table, t_room *room)
 	size_t hashedvalue;
 
 	if (find_room(table, room->name))
-		ft_error(6);
+		ft_error(8);
 	hashedvalue = hash_value(room->name);
 	if (table[hashedvalue] == NULL)
 	{
@@ -50,17 +58,9 @@ void				insert_hash_table(t_room **table, t_room *room)
 	}
 }
 
-void				init_table(t_room **table)
-{
-	int i;
-
-	i = 0;
-	while (i < TABLE_SIZE)
-	{
-		table[i] = NULL;
-		i++;
-	}
-}
+/*
+***		FREE HASH TABLE
+*/
 
 void				free_table(t_room **table)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 16:38:10 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/07/24 18:39:29 by anonymous        ###   ########.fr       */
+/*   Updated: 2019/10/11 16:23:34 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,31 +82,3 @@ int		get_next_line(const int fd, char **line)
 	free(tmp);
 	return (readsz > 0 ? 1 : 0);
 }
-
-// int		get_next_line(const int fd, char **line)
-// {
-// 	int				sz;
-// 	char			buffer[BUFF_SIZE + 1];
-// 	static	t_list	*str;
-// 	t_list			*head;
-
-// 	if (fd < 0 || !line || read(fd, buffer, 0) < 0)
-// 		return (-1);
-// 	head = str;
-// 	str = get_fd(&head, fd);
-// 	while ((sz = read(fd, buffer, BUFF_SIZE)))
-// 	{
-// 		str->content = read_line(str, buffer, sz);
-// 		if (ft_strchr(str->content, '\n'))
-// 			break ;
-// 	}
-// 	sz = 0;
-// 	while (((char *)str->content)[sz] != '\n' && ((char *)str->content)[sz])
-// 		sz++;
-// 	*line = ft_strndup(str->content, sz);
-// 	if (((char *)str->content)[sz] == '\n')
-// 		sz++;
-// 	str->content = save_rest(str, sz);
-// 	str = head;
-// 	return (sz > 0 ? 1 : 0);
-// }

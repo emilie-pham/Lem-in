@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 19:22:01 by epham             #+#    #+#             */
-/*   Updated: 2019/10/10 17:47:47 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/11 15:59:11 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,15 @@ t_solution		*dispatch_ants(t_env *env, t_solution *head)
 	}
 	sol = head;
 	return (NULL);
+}
+
+/*
+***		REPLACE OPTIMAL SOLUTION
+*/
+
+void			update_solution(t_env *env)
+{
+	free_sol(env->optimal_sol);
+	env->optimal_sol = env->current_sol;
+	env->steps = env->current_sol->steps;
 }

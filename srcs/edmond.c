@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/10/10 17:46:00 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/11 16:36:57 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,7 @@ static void		update_flows(t_env *env)
 }
 
 /*
-***		REPLACE OPTIMAL SOLUTION
-*/
-
-static void		update_solution(t_env *env)
-{
-	free_sol(env->optimal_sol);
-	env->optimal_sol = env->current_sol;
-	env->steps = env->current_sol->steps;
-}
-
-/*
-***		RESET INPATH
+***		RESET INPATH VARIABLE
 */
 
 static void		reset_inpath(t_solution *solution)
@@ -79,10 +68,10 @@ static void		reset_inpath(t_solution *solution)
 }
 
 /*
-***		CHECK ALL LINKS FROM START
+***		FIND ALL SOLUTION PATHS
 */
 
-static int		check_start_links(t_env *env)
+static int		find_sol_paths(t_env *env)
 {
 	t_solution	*current_sol;
 	t_link		*link;
@@ -122,7 +111,7 @@ int				edmond(t_env *env)
 		env->total_len = 0;
 		env->ants_sent = 0;
 		update_flows(env);
-		first = check_start_links(env);
+		first = find_sol_paths(env);
 		if (first == 0 && !env->current_sol && !env->optimal_sol)
 			return (0);
 		else if (env->current_sol && first)

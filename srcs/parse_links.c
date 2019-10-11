@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/10 15:40:22 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/11 16:57:15 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,10 @@ void	*get_link(t_env *env, t_room **table, char *line)
 			free(start);
 		if (end_room)
 			free(end);
-		if (start_room && end_room)
+		if (start_room && end_room && (start_room != end_room))
 			return (create_links(start_room, end_room));
+		if (start_room == end_room)
+			ft_error(9);
 		else
 			ft_error(2);
 	}

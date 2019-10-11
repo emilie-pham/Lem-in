@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 18:25:56 by anonymous         #+#    #+#             */
-/*   Updated: 2019/10/09 19:14:09 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/11 13:38:57 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,37 +37,46 @@ t_room	*create_room(char *line)
 	return (room);
 }
 
-void	parse_startend(t_env *env, t_room **table)
+void	parse_start(t_env *env, t_room **table)
 {
 	t_room	*room;
 
 	room = NULL;
+	if (env->start != NULL)
+		ft_error(6);
+	get_line(env);
+	while (is_comment(env->line) || (is_command(env->line) &&
+	!command_type(env->line)))
+		get_line(env);
+	if (!is_room(env->line))
+		ft_error(4);
+	room = create_room(env->line);
+	insert_hash_table(table, room);
+	env->start = room;
+}
+
+void	parse_end(t_env *env, t_room **table)
+{
+	t_room	*room;
+
+	room = NULL;
+	if (env->end != NULL)
+		ft_error(6);
+	get_line(env);
+	while (is_comment(env->line) || (is_command(env->line) &&
+	!command_type(env->line)))
+		get_line(env);
+	if (!is_room(env->line))
+		ft_error(4);
+	room = create_room(env->line);
+	insert_hash_table(table, room);
+	env->end = room;
+}
+
+void	parse_startend(t_env *env, t_room **table)
+{
 	if (command_type(env->line) == 1)
-	{
-		if (env->start != NULL)
-			ft_error(6);
-		get_line(env);
-		while (is_comment(env->line) || (is_command(env->line) &&
-		!command_type(env->line)))
-			get_line(env);
-		if (!is_room(env->line))
-			ft_error(4);
-		room = create_room(env->line);
-		insert_hash_table(table, room);
-		env->start = room;
-	}
+		parse_start(env, table);
 	if (command_type(env->line) == 2)
-	{
-		if (env->end != NULL)
-			ft_error(6);
-		get_line(env);
-		while (is_comment(env->line) || (is_command(env->line) &&
-		!command_type(env->line)))
-			get_line(env);
-		if (!is_room(env->line))
-			ft_error(4);
-		room = create_room(env->line);
-		insert_hash_table(table, room);
-		env->end = room;
-	}
+		parse_end(env, table);
 }

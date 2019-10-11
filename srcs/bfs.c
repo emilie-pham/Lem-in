@@ -6,11 +6,15 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/10/10 14:00:17 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/11 16:41:29 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+/*
+***			CHECK IF START AND END STILL HAVE AVAILABLE LINKS
+*/
 
 int			check_start_end(t_env *env)
 {
@@ -41,7 +45,7 @@ int			check_start_end(t_env *env)
 ***     INITIALIZE BFS : PREV TO NULL AND VISITED TO 0
 */
 
-int			initialize_bfs(t_env *env)
+int			init_bfs(t_env *env)
 {
 	t_queue		*head;
 	t_queue		*tmp;
@@ -70,36 +74,6 @@ int			initialize_bfs(t_env *env)
 }
 
 /*
-***     GET QUEUE FROM ROOM
-*/
-
-void		get_queue(t_env *env, t_room *room)
-{
-	t_link		*currlink;
-	int			weight;
-
-	weight = 0;
-	room->visited = 1;
-	currlink = room->linked_rooms;
-	if (remontada(env, room, currlink) == 1)
-		return ;
-	while (currlink)
-	{
-		weight = currlink->flow == -1 ? room->weight - 1 : room->weight + 1;
-		if (currlink->dest->inqueue == 0 && currlink->flow != 1)
-			append_queue(env, currlink, room);
-		else if (ft_strcmp(currlink->dest->name, env->start->name)
-		&& ft_strcmp(currlink->dest->name, env->end->name)
-		&& currlink->dest->inqueue && currlink->dest->weight > weight)
-		{
-			if (check_change_source(env, currlink->dest, room) == 1)
-				change_source(env, currlink->dest, currlink, room);
-		}
-		currlink = currlink->next;
-	}
-}
-
-/*
 ***     BFS
 */
 
@@ -109,7 +83,7 @@ int			bfs(t_env *env)
 	t_queue		*queue;
 
 	current = env->start;
-	if (initialize_bfs(env))
+	if (init_bfs(env))
 	{
 		current->visited = 1;
 		get_queue(env, env->start);
