@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opti.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 19:10:07 by epham             #+#    #+#             */
-/*   Updated: 2019/10/10 13:58:25 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/11 17:27:59 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,11 @@ int			check_change_source(t_env *env, t_room *room, t_room *newprev)
 
 void		change_source(t_env *env, t_room *room, t_link *link, t_room *new)
 {
-	t_queue		*queue;
 	t_room		*prev;
 	int			roomweight;
 	int			prevweight;
 
 	prev = room->prev;
-	queue = env->queue;
 	if (prev)
 	{
 		roomweight = link->flow == -1 ? new->weight - 1 : new->weight + 1;

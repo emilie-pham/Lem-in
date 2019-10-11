@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:12:56 by epham             #+#    #+#             */
-/*   Updated: 2019/10/11 16:52:53 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/11 18:21:22 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_env		*init_env(void)
 	env->line = NULL;
 	env->ant_nb = 0;
 	env->flag_link = 0;
-	env->links = NULL;
 	env->start = NULL;
 	env->end = NULL;
 	env->queue = NULL;

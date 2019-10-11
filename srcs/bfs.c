@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/10/11 17:15:47 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/11 17:27:25 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ int			init_bfs(t_env *env)
 {
 	t_queue		*head;
 	t_queue		*tmp;
-	t_link		*endlinks;
 
-	endlinks = env->end->linked_rooms;
 	if (!check_start_end(env))
 		return (0);
 	if (env->queue)

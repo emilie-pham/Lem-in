@@ -35,7 +35,7 @@ SRCS		= 	bfs.c			\
 				queue.c			\
 				solutions.c		\
 				utils.c
-				
+
 SRCSREP		=	srcs
 OBJS		=	$(SRCS:.c=.o)
 
@@ -49,8 +49,8 @@ all: $(NAME)
 %.o: $(SRCSREP)/%.c
 	@gcc $(FLAGS) -I$(INCLUDES) -c $^
 
-debug: 
-	@gcc $(DFLAGS) srcs/*.c libft/*.c -o $(NAME) 
+debug:
+	@gcc $(DFLAGS) srcs/*.c libft/*.c -o $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "\n$(RED)CREATING LEM IN ...$(BLANK)"
