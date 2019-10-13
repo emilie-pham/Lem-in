@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/11 16:07:46 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/13 13:21:33 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,19 +234,6 @@ void 	free_lines(t_line *line)
 		free(tmp1);
 	}
 }
-
-// void free_2darray(char **arr, int size)
-// {
-// 	int y;
-
-// 	y = 0;
-// 	while (y < size)
-// 	{
-// 		ft_strdel(&arr[y]);
-// 		y++;
-// 	}
-// 	free(arr);
-// }
 
 void 	free_2darray(char **arr)
 {

@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/10/11 16:41:29 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/11 18:20:49 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,7 @@ int			init_bfs(t_env *env)
 {
 	t_queue		*head;
 	t_queue		*tmp;
-	t_link		*endlinks;
 
-	endlinks = env->end->linked_rooms;
-	if (!check_start_end(env))
-		return (0);
 	if (env->queue)
 	{
 		head = env->queue;
@@ -70,6 +66,8 @@ int			init_bfs(t_env *env)
 	}
 	env->queue = NULL;
 	env->end_queue = NULL;
+	if (!check_start_end(env))
+		return (0);
 	return (1);
 }
 

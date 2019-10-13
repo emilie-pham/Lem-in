@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/10/11 16:36:57 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/11 19:26:41 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,10 @@ int				edmond(t_env *env)
 		{
 			reset_inpath(env->current_sol);
 			if ((steps = check_steps(env)) < 0)
+			{
+				free_sol(env->current_sol);
 				continue ;
+			}
 			env->current_sol->steps = steps;
 			if (env->current_sol->steps <= env->steps)
 				update_solution(env);

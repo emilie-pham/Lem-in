@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 14:36:38 by epham             #+#    #+#             */
-/*   Updated: 2019/10/11 14:14:46 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/13 13:59:34 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,12 @@ int			remove_path(t_env *env, t_solution *remove)
 
 	current = env->current_sol;
 	prev = env->current_sol;
+	pathlen = remove->pathlen;
 	while (current != remove && current->next)
 	{
 		prev = current;
 		current = current->next;
 	}
-	pathlen = current->pathlen;
 	free_path(current->path);
 	if (current == env->current_sol && current->next)
 		env->current_sol = current->next;

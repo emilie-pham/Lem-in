@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 19:22:01 by epham             #+#    #+#             */
-/*   Updated: 2019/10/11 15:59:11 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/11 18:47:32 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_solution		*create_solution(t_env *env, t_room *next)
 {
 	t_solution *new;
 
-	new = (t_solution*)ft_memalloc(sizeof(t_solution));
+	if (!(new = (t_solution*)malloc(sizeof(t_solution))))
+		return (NULL);
 	new->ants = 0;
 	new->ants_sent = 0;
 	new->ants_arrived = 0;
