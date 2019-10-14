@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 17:40:58 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/14 18:23:05 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ void	free_path(t_path *path)
 		path = path->next;
 		tmp->next = NULL;
 		free(tmp);
+		tmp = NULL;
 	}
 }
 
@@ -170,6 +171,7 @@ void	free_sol(t_sol *sol)
 			sol = sol->next;
 			tmp->next = NULL;
 			free(tmp);
+			tmp = NULL;
 		}
 	}
 }
@@ -185,6 +187,7 @@ void	free_links(t_link *links)
 		tmp1 = tmp;
 		tmp = tmp->next;
 		free(tmp1);
+		tmp1 = NULL;
 	}
 }
 
@@ -257,9 +260,7 @@ void	free_env(t_env *env)
 	if (env->queue)
 		free_queue(env);
 	// if (env->current_sol)
-		// free_sol(env->current_sol);
-		// ft_printf("ENV CURRSOL\n");
-	// if (env->optimal_sol)
-		// free_sol(env->current_sol);
-		// ft_printf("ENV OPTIMALSOL\n");
+	// 	free_sol(env->current_sol);
+	if (env->optimal_sol)
+		free_sol(env->optimal_sol);
 }
