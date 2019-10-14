@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 14:11:33 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 18:06:56 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/14 18:56:13 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,21 @@ void				free_rooms(t_room *rooms)
 		if (tmp1->linked_rooms)
 			free_links(tmp1->linked_rooms);
 		ft_strdel(&tmp1->name);
+		free(tmp1);
+		tmp1 = NULL;
+	}
+}
+
+void	free_links(t_link *links)
+{
+	t_link	*tmp;
+	t_link	*tmp1;
+
+	tmp = links;
+	while (tmp)
+	{
+		tmp1 = tmp;
+		tmp = tmp->next;
 		free(tmp1);
 		tmp1 = NULL;
 	}

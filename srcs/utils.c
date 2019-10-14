@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 18:23:05 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/14 19:02:42 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,75 +135,6 @@ void	print_bfs(t_env *env)
 	ft_printf("\n\n");
 }
 
-/*
-***		FREE PATH
-*/
-
-void	free_path(t_path *path)
-{
-	t_path *tmp;
-
-	while (path)
-	{
-		tmp = path;
-		path->room = NULL;
-		path = path->next;
-		tmp->next = NULL;
-		free(tmp);
-		tmp = NULL;
-	}
-}
-
-/*
-***		FREE SOL
-*/
-
-void	free_sol(t_sol *sol)
-{
-	t_sol *tmp;
-
-	if (sol)
-	{
-		while (sol)
-		{
-			free_path(sol->path);
-			tmp = sol;
-			sol = sol->next;
-			tmp->next = NULL;
-			free(tmp);
-			tmp = NULL;
-		}
-	}
-}
-
-void	free_links(t_link *links)
-{
-	t_link	*tmp;
-	t_link	*tmp1;
-
-	tmp = links;
-	while (tmp)
-	{
-		tmp1 = tmp;
-		tmp = tmp->next;
-		free(tmp1);
-		tmp1 = NULL;
-	}
-}
-
-void 	free_2darray(char **arr)
-{
-	int y;
-
-	y = 0;
-	while (arr[y])
-	{
-		ft_strdel(&arr[y]);
-		y++;
-	}
-	free(arr);
-}
-
 void	ft_error(int error)
 {
 	if (error == 1)
@@ -225,42 +156,4 @@ void	ft_error(int error)
 	if (error == 9)
 		ft_putstr_fd("ROOM LINKED TO ITSELF\n", 2);
 	exit(1);
-}
-
-void	free_queue(t_env *env)
-{
-	t_queue	*head;
-	t_queue	*tmp;
-
-	if (env->queue)
-	{
-		head = env->queue;
-		while (head)
-		{
-			head->room->prev = NULL;
-			head->room->visited = 0;
-			head->room->inqueue = 0;
-			head->room->weight = 0;
-			tmp = head;
-			head = head->next;
-			free(tmp);
-		}
-	}
-	env->queue = NULL;
-	env->end_queue = NULL;
-}
-
-void	free_env(t_env *env)
-{
-	ft_strdel(&env->line);
-	// if (env->read)
-		// free_lines(env->read);
-	// if (env->table)
-		// free_table(env->table);
-	if (env->queue)
-		free_queue(env);
-	// if (env->current_sol)
-	// 	free_sol(env->current_sol);
-	if (env->optimal_sol)
-		free_sol(env->optimal_sol);
 }
