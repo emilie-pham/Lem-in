@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 14:11:33 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 16:36:03 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 18:56:13 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void				insert_hash_table(t_room **table, t_room *room)
 ***		FREE HASH TABLE
 */
 
-void 	free_table(t_room **table)
+void				free_table(t_room **table)
 {
 	int i;
 
@@ -66,15 +66,13 @@ void 	free_table(t_room **table)
 	while (i < TABLE_SIZE)
 	{
 		if (table[i])
-		{
 			free_rooms(table[i]);
-		}
 		i++;
 	}
 	free(table);
 }
 
-void 	free_rooms(t_room *rooms)
+void				free_rooms(t_room *rooms)
 {
 	t_room *tmp;
 	t_room *tmp1;
@@ -87,6 +85,21 @@ void 	free_rooms(t_room *rooms)
 		if (tmp1->linked_rooms)
 			free_links(tmp1->linked_rooms);
 		ft_strdel(&tmp1->name);
+		free(tmp1);
+		tmp1 = NULL;
+	}
+}
+
+void	free_links(t_link *links)
+{
+	t_link	*tmp;
+	t_link	*tmp1;
+
+	tmp = links;
+	while (tmp)
+	{
+		tmp1 = tmp;
+		tmp = tmp->next;
 		free(tmp1);
 		tmp1 = NULL;
 	}

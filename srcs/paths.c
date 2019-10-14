@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 14:36:38 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 11:37:10 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 17:24:07 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int			remove_path(t_env *env, t_sol *remove)
 {
 	t_sol	*current;
 	t_sol	*prev;
-	int			pathlen;
+	int		pathlen;
 
 	current = env->current_sol;
 	prev = env->current_sol;

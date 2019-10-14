@@ -6,14 +6,14 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 17:14:25 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 19:08:57 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-# include "../libft/libft.h"
+# include "../libft/includes/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 
@@ -124,7 +124,6 @@ typedef struct		s_env
 */
 
 t_env				*init_env(void);
-void				init_table(t_room **table);
 
 
 void				parse(t_env *env);
@@ -143,8 +142,8 @@ void				get_line(t_env *env);
 */
 
 unsigned long long	hash_value(char *key);
-void				init_table(t_room **table);
-void				insert_hash_table(t_room **table, t_room *room);
+void 				init_hashtable(t_room **table);
+void 				insert_hash_table(t_room **table, t_room *room);
 void				print_hash(t_room **table, size_t size);
 
 /*

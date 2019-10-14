@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 18:25:56 by anonymous         #+#    #+#             */
-/*   Updated: 2019/10/14 16:17:28 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 18:06:09 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_room	*create_room(char *line)
 	room->name = ft_strdup(split[0]);
 	room->coord_x = ft_atoi(split[1]);
 	room->coord_y = ft_atoi(split[2]);
-	free_2darray(split);
+	ft_tabdel(split);
 	room->linked_rooms = NULL;
 	room->visited = 0;
 	room->inqueue = 0;
@@ -52,7 +52,7 @@ void	parse_start(t_env *env, t_room **table)
 	while (is_comment(env->line) || (is_command(env->line) &&
 	!command_type(env->line)))
 	{
-		// free(env->line);
+		free(env->line);
 		get_line(env);
 	}
 	if (!is_room(env->line))

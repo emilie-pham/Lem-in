@@ -19,6 +19,7 @@ DFLAGS		=	-g3 -fsanitize=address,undefined
 SRCS		= 	bfs.c			\
 				check_steps.c	\
 				edmond.c		\
+				free.c			\
 				hash.c			\
 				init.c			\
 				is_commands.c	\
@@ -35,6 +36,7 @@ SRCS		= 	bfs.c			\
 				queue.c			\
 				solutions.c		\
 				utils.c
+				
 				
 SRCSREP		=	srcs
 OBJS		=	$(SRCS:.c=.o)

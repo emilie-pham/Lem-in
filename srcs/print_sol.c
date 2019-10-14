@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_sol.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 16:42:11 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 11:37:20 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 17:06:58 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_end(t_sol *sol)
 	i = 1;
 	while (i <= sol->ants)
 	{
-		printf("L%d-%s\n", i, sol->path->room->name);
+		ft_printf("L%d-%s\n", i, sol->path->room->name);
 		i++;
 	}
 }
@@ -39,16 +39,16 @@ void	print_ants(t_env *env, t_sol *sol, int *i)
 		if (sol->ants_arrived < sol->ants_sent)
 		{
 			if ((*i)++ != 0)
-				printf(" ");
-			printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
+				ft_printf(" ");
+			ft_printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
 			sol->ants_arrived++;
 		}
 	}
 	else if (sol->path->ant_index != sol->path->next->ant_index)
 	{
 		if ((*i)++ != 0)
-			printf(" ");
-		printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
+			ft_printf(" ");
+		ft_printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
 	}
 	sol->path = sol->path->prev;
 }
@@ -71,8 +71,8 @@ void	move_ants(t_env *env, t_sol *sol, t_path *head, int *i)
 		sol->path->ant_index = env->next_ant;
 		sol->ants_sent++;
 		if ((*i)++ != 0)
-			printf(" ");
-		printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
+			ft_printf(" ");
+		ft_printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
 		(env->next_ant)++;
 	}
 	sol->path = head;
@@ -107,6 +107,6 @@ void	print_sol(t_env *env, t_sol *solution)
 			solution = solution->next;
 		}
 		(env->steps)--;
-		printf("\n");
+		ft_printf("\n");
 	}
 }

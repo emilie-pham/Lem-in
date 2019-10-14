@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:12:56 by epham             #+#    #+#             */
-/*   Updated: 2019/10/11 16:52:53 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 17:12:35 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_env		*init_env(void)
 ***		INITIALIZE HASH TABLE
 */
 
-void		init_table(t_room **table)
+void		init_hashtable(t_room **table)
 {
 	int i;
 
