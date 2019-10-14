@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 14:11:33 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 17:14:00 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/14 17:26:15 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void				insert_hash_table(t_room **table, t_room *room)
 ***		FREE HASH TABLE
 */
 
-void 	free_table(t_room **table)
+void				free_table(t_room **table)
 {
 	int i;
 
@@ -66,15 +66,13 @@ void 	free_table(t_room **table)
 	while (i < TABLE_SIZE)
 	{
 		if (table[i])
-		{
 			free_rooms(table[i]);
-		}
 		i++;
 	}
 	free(table);
 }
 
-void 	free_rooms(t_room *rooms)
+void				free_rooms(t_room *rooms)
 {
 	t_room *tmp;
 	t_room *tmp1;

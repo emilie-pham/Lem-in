@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_steps.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 13:58:29 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 11:36:28 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 17:25:42 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void		find_smallest_step_path(t_env *env)
 {
 	int			smallest;
-	t_sol	*sol;
+	t_sol		*sol;
 
 	sol = env->current_sol;
 	smallest = 2147483647;
