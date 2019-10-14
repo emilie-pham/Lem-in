@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 19:22:01 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 11:42:16 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 17:45:39 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_sol		*copy_solution(t_env *env)
 			append_sol(env, new, head);
 		curr_sol = curr_sol->next;
 	}
-	free_sol(env->current_sol);
+	free_sol(&env->current_sol);
 	return (head);
 }
 
@@ -115,7 +115,7 @@ t_sol		*copy_solution(t_env *env)
 
 void		update_solution(t_env *env)
 {
-	free_sol(env->optimal_sol);
+	free_sol(&env->optimal_sol);
 	env->optimal_sol = copy_solution(env);
 	env->steps = env->optimal_sol->steps;
 }

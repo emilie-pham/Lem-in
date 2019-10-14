@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 15:18:13 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 18:14:48 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,21 +176,27 @@ void	free_path(t_path *path)
 ***		FREE SOL
 */
 
-void	free_sol(t_sol *sol)
+void	free_sol(t_sol **sol)
 {
-	t_sol *tmp;
+	t_sol	*tmp;
+	t_sol	**head;
 
-	if (sol)
+	head = sol;
+	if (*sol)
 	{
-		while (sol)
+		while (*sol)
 		{
-			free_path(sol->path);
-			tmp = sol;
-			sol = sol->next;
+			free_path((*sol)->path);
+			tmp = *sol;
+			*sol = (*sol)->next;
+			// (*sol)->next = NULL;
 			tmp->next = NULL;
 			free(tmp);
+			// *sol =tmp;
 		}
 	}
+	*head = NULL;
+	head = NULL;
 }
 
 void	free_links(t_link *links)
@@ -285,16 +291,10 @@ void	free_queue(t_env *env)
 void	free_env(t_env *env)
 {
 	ft_strdel(&env->line);
-	// if (env->read)
-		// free_lines(env->read);
-	// if (env->table)
-		// free_table(env->table);
 	if (env->queue)
 		free_queue(env);
-	// if (env->current_sol)
-		// free_sol(env->current_sol);
-		// printf("ENV CURRSOL\n");
-	// if (env->optimal_sol)
-		// free_sol(env->current_sol);
-		// printf("ENV OPTIMALSOL\n");
+	if (env->current_sol)
+		free_sol(&env->current_sol);
+	if (env->optimal_sol)
+		free_sol(&env->optimal_sol);
 }

@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 15:03:17 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 17:14:25 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ t_sol				*create_solution(t_env *env, t_room *next, int copy, t_sol *path);
 void				append_sol(t_env *env, t_sol *new, t_sol *to);
 t_sol				*dispatch_ants(t_env *env, t_sol *head);
 void				update_solution(t_env *env);
-void				free_sol(t_sol *sol);
+void				free_sol(t_sol **sol);
 
 /*
 ***		utils
