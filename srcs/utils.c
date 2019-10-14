@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/13 13:21:33 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 11:35:24 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ void	print_path(t_path *head)
 	}
 }
 
-void	print_paths(t_solution *current_sol)
+void	print_paths(t_sol *current_sol)
 {
-	t_solution	*head;
+	t_sol	*head;
 	t_path		*start;
 
 	head = current_sol;
@@ -176,9 +176,9 @@ void	free_path(t_path *path)
 ***		FREE SOL
 */
 
-void	free_sol(t_solution *sol)
+void	free_sol(t_sol *sol)
 {
-	t_solution *tmp;
+	t_sol *tmp;
 
 	if (sol)
 	{

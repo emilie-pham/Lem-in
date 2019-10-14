@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 13:58:29 by epham             #+#    #+#             */
-/*   Updated: 2019/10/13 13:52:04 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 11:36:28 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void		find_smallest_step_path(t_env *env)
 {
 	int			smallest;
-	t_solution	*sol;
+	t_sol	*sol;
 
 	sol = env->current_sol;
 	smallest = 2147483647;
@@ -42,13 +42,14 @@ void		find_smallest_step_path(t_env *env)
 ***		NEGATIVE ANTS
 */
 
-int			negative_ants(t_env *env, t_solution **negants)
+int			negative_ants(t_env *env, t_sol **negants)
 {
-	t_solution	*newhead;
+	t_sol	*newhead;
 
 	if ((*negants)->next)
 		newhead = (*negants)->next;
-	env->total_len -= remove_path(env, *negants);
+	env->total_len -= (*negants)->pathlen;
+	remove_path(env, *negants);
 	env->path_nb -= 1;
 	if (!env->path_nb || (!newhead && !env->current_sol))
 		return (-2);
@@ -64,9 +65,9 @@ int			negative_ants(t_env *env, t_solution **negants)
 
 int			check_steps(t_env *env)
 {
-	t_solution	*sol;
-	t_solution	*negants;
-	int			steps;
+	t_sol	*sol;
+	t_sol	*negants;
+	int		steps;
 
 	sol = env->current_sol;
 	steps = 0;

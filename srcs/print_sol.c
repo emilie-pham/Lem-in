@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 16:42:11 by epham             #+#    #+#             */
-/*   Updated: 2019/10/11 16:41:34 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 11:37:20 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ***		CASE OF START END
 */
 
-void	print_end(t_solution *sol)
+void	print_end(t_sol *sol)
 {
 	int i;
 
@@ -32,7 +32,7 @@ void	print_end(t_solution *sol)
 ***		MOVE ANTS
 */
 
-void	print_ants(t_env *env, t_solution *sol, int *i)
+void	print_ants(t_env *env, t_sol *sol, int *i)
 {
 	if (!ft_strcmp(sol->path->room->name, env->end->name))
 	{
@@ -57,7 +57,7 @@ void	print_ants(t_env *env, t_solution *sol, int *i)
 ***		UPDATING ANT INDEX FOR EACH NODE
 */
 
-void	move_ants(t_env *env, t_solution *sol, t_path *head, int *i)
+void	move_ants(t_env *env, t_sol *sol, t_path *head, int *i)
 {
 	while (ft_strcmp(sol->path->room->name, head->next->room->name))
 	{
@@ -82,10 +82,10 @@ void	move_ants(t_env *env, t_solution *sol, t_path *head, int *i)
 ***		PRINT SOLUTION
 */
 
-void	print_sol(t_env *env, t_solution *solution)
+void	print_sol(t_env *env, t_sol *solution)
 {
 	int			i;
-	t_solution	*sol;
+	t_sol		*sol;
 	t_path		*head;
 
 	env->next_ant = 1;
