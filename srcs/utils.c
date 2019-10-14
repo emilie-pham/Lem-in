@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 15:09:44 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/14 15:12:07 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,9 @@ void 	free_lines(t_line *line)
 	{
 		tmp1 = tmp;
 		tmp = tmp->next;
+		free(tmp1->line);
 		free(tmp1);
+		tmp1 = NULL;
 	}
 }
 
