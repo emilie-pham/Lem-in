@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 15:10:03 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/14 15:50:57 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int				main(int ac, char **av)
 	if (!(env = init_env()))
 		return (0);
 	parse(env);
-	print_map(env);
+	// print_map(env);
 	if (edmond(env) != 0)
 		print_sol(env, env->optimal_sol);
 	free_table(env->table);

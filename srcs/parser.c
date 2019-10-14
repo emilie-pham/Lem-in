@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 15:22:39 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/14 16:02:44 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	parse_ants(t_env *env)
 void	reader(t_env *env, t_room **table)
 {
 	t_room	*room;
+	int	i = 0;
 
 	while (get_next_line(0, &env->line) == 1)
 	{
@@ -40,8 +41,11 @@ void	reader(t_env *env, t_room **table)
 			room = create_room(env->line);
 			insert_hash_table(table, room);
 		}
-		else if (is_comment(env->line))
-			continue ;
+		// else if (is_comment(env->line))
+		// {
+		// 	ft_strdel(&env->line);
+		// 	continue ;
+		// }
 		else if (is_command(env->line))
 			parse_startend(env, table);
 		else if (is_link(env->line))
@@ -52,6 +56,7 @@ void	reader(t_env *env, t_room **table)
 		&& !is_command(env->line))
 			break ;
 		ft_strdel(&env->line);
+		i++;
 	}
 	// ft_strdel(&env->line);
 }
