@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 11:36:59 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 15:11:56 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int				main(int ac, char **av)
 	free_table(env->table);
 	free_links(env->links);
 	free_lines(env->read);
+	free_env(env);
 	free(env);
 	return (0);
 }
