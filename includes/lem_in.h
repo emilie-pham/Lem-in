@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 11:33:39 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 15:03:17 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,6 +243,8 @@ void 				free_links(t_link *links);
 void 				free_rooms(t_room *rooms);
 void 				free_lines(t_line *line);
 void 				free_2darray(char **arr);
+void				free_queue(t_env *env);
 void 				print_bfs(t_env *env);
+void				free_env(t_env *env);
 
 #endif
