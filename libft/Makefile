@@ -3,128 +3,142 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: epham <epham@student.42.fr>                +#+  +:+       +#+         #
+#    By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/11/08 09:05:15 by anradix           #+#    #+#              #
-#    Updated: 2019/10/08 12:40:27 by epham            ###   ########.fr        #
+#    Created: 2019/04/11 19:12:59 by anonymous         #+#    #+#              #
+#    Updated: 2019/10/14 17:13:49 by yoribeir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+RED = \033[0;31m
+GREEN = \033[0;32m
+L_GREEN = \033[1;32m
+BLUE = \033[0;34m
+L_BLUE = \033[0;34m
+WHITE = \033[1;37m
+
 NAME = libft.a
 
-FLAGS = -Wall -Wextra -Werror
+MISC_SRCS = ft_atoi.c \
+	   ft_toupper.c \
+	   ft_tolower.c \
+	   ft_itoa.c \
+	   get_next_line.c \
+	   ft_nblen.c \
+	   ft_abs.c \
+	   ft_wstrlen.c \
+	   ft_tabdel.c \
 
-SRC = 	ft_atoi.c\
-		ft_atol.c\
-		ft_bzero.c\
-		ft_isalnum.c\
-		ft_isalpha.c\
-		ft_isascii.c\
-		ft_isdigit.c\
-		ft_strdigit.c\
-		ft_isprint.c\
-		ft_itoa.c\
-		ft_itoa_base.c\
-		ft_lstadd.c\
-		ft_lstdel.c\
-		ft_lstdelone.c\
-		ft_lstiter.c\
-		ft_lstmap.c\
-		ft_lstnew.c\
-		ft_memalloc.c\
-		ft_memccpy.c\
-		ft_memchr.c\
-		ft_memcmp.c\
-		ft_memcpy.c\
-		ft_memdel.c\
-		ft_memmove.c\
-		ft_memset.c\
-		ft_putchar_fd.c\
-		ft_putchar.c\
-		ft_putendl_fd.c\
-		ft_putnbr_fd.c\
-		ft_putnbr.c\
-		ft_putstr_fd.c\
-		ft_putstr.c\
-		ft_putendl.c\
-		ft_strcat.c\
-		ft_strchr.c\
-		ft_strclr.c\
-		ft_strcmp.c\
-		ft_strcpy.c\
-		ft_strdel.c\
-		ft_strdup.c\
-		ft_strequ.c\
-		ft_striter.c\
-		ft_striteri.c\
-		ft_strjoin.c\
-		ft_strlcat.c\
-		ft_strlen.c\
-		ft_strmap.c\
-		ft_strmapi.c\
-		ft_strncat.c\
-		ft_strncmp.c\
-		ft_strncpy.c\
-		ft_strnequ.c\
-		ft_strnew.c\
-		ft_strnstr.c\
-		ft_strrchr.c\
-		ft_strsplit.c\
-		ft_strstr.c\
-		ft_strsub.c\
-		ft_strtrim.c\
-		ft_tolower.c\
-		ft_strlower.c\
-		ft_toupper.c\
-		ft_add_list.c\
-		ft_count_words.c\
-		ft_create_list.c\
-		ft_isspace.c\
-		ft_len_list.c\
-		ft_putlst.c\
-		ft_strrev.c\
-		ft_swap.c\
-		ft_word_len.c\
-		ft_printtab.c\
-		ft_printtabdl.c\
-		ft_printinttab.c\
-		ft_printint.c\
-		get_next_line.c\
-		ft_init_tab.c\
-		ft_init_int.c\
-		ft_tablen.c\
-		ft_triple_tablen.c\
-		ft_tabdup.c\
-		ft_init_triple_tab.c\
-		ft_sqrt.c\
-		ft_tabdel.c\
-		ft_triple_tabdel.c\
-		ft_power.c\
-		ft_strndup.c
+LST_SRCS = ft_lstadd.c \
+		   ft_lstdelone.c \
+		   ft_lstmap.c \
+		   ft_lstdel.c \
+		   ft_lstiter.c \
+		   ft_lstnew.c
 
-OBJ = $(SRC:.c=.o)
+STR_SRCS = ft_strcat.c \
+			ft_strchr.c \
+			ft_strclr.c \
+			ft_strcmp.c \
+			ft_strcpy.c \
+			ft_strdel.c \
+			ft_strdup.c \
+			ft_strequ.c \
+			ft_striter.c \
+			ft_striteri.c \
+			ft_strjoin.c \
+			ft_strlcat.c \
+			ft_strlen.c \
+			ft_strmap.c \
+			ft_strmapi.c \
+			ft_strncat.c \
+			ft_strncmp.c \
+			ft_strncpy.c \
+			ft_strndup.c \
+			ft_strnequ.c \
+			ft_strnew.c \
+			ft_strnstr.c \
+			ft_strrchr.c \
+			ft_strsplit.c \
+			ft_strstr.c \
+			ft_strsub.c \
+			ft_strtrim.c \
+			ft_strtoupper.c \
+			ft_strdigit.c \
 
-BLANK		=\x1b[0m
-LIGHTORANGE	=\x1b[38;5;209m
-GREY		=\x1b[38;5;248m
-ORANGE		=\x1b[38;5;208m
+IS_SRCS = ft_isalpha.c \
+			ft_isdigit.c \
+			ft_isupper.c \
+			ft_islower.c \
+			ft_isalnum.c \
+			ft_isascii.c \
+			ft_isprint.c
 
-all: $(NAME)
+PUT_SRCS = ft_putchar.c \
+			ft_putstr.c \
+			ft_putendl.c \
+			ft_putnbr.c \
+			ft_putchar_fd.c \
+			ft_putstr_fd.c \
+			ft_putendl_fd.c \
+			ft_putnbr_fd.c
 
-$(NAME): $(OBJ)
-	@ar rc $(NAME) $?
-	@ranlib $(NAME)
-	@echo "$(LIGHTORANGE)[libft created]$(BLANK)"
+MEM_SRCS = ft_memset.c \
+			ft_bzero.c \
+			ft_memcpy.c \
+			ft_memccpy.c \
+			ft_memmove.c \
+			ft_memchr.c \
+			ft_memcmp.c \
+			ft_memalloc.c \
+			ft_memdel.c \
 
-%.o: %.c
-	@gcc $(FLAGS) -o $@ -c $<
+PRINTF_SRCS = ft_printf.c handlers.c parsers.c utils.c handle_int.c handle_unsigned.c \
+handle_char.c handle_pointer.c handle_escape.c handle_string.c handle_wchar.c \
+handle_float.c
+
+OBJECTS =  $(patsubst %.c,%.o,$(MISC_SRCS))
+OBJECTS += $(patsubst %.c,%.o,$(LST_SRCS))
+OBJECTS += $(patsubst %.c,%.o,$(STR_SRCS))
+OBJECTS += $(patsubst %.c,%.o,$(IS_SRCS))
+OBJECTS += $(patsubst %.c,%.o,$(PUT_SRCS))
+OBJECTS += $(patsubst %.c,%.o,$(MEM_SRCS))
+OBJECTS += $(patsubst %.c,%.o,$(PRINTF_SRCS))
+
+INCLUDES = includes/
+
+all:	$(NAME)
+
+$(NAME):
+	@mkdir build
+	@echo "$(L_BLUE)Making ft_printf...$(WHITE)"
+	@gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(addprefix printf/,$(PRINTF_SRCS))
+	@echo "$(L_BLUE)Making PUT_SRCS...$(WHITE)"
+	@gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(addprefix put/,$(PUT_SRCS))
+	@echo "$(L_BLUE)Making STR_SRCS...$(WHITE)"
+	@gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(addprefix str/,$(STR_SRCS))
+	@echo "$(L_BLUE)Making MEM_SRCS...$(WHITE)"
+	@gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(addprefix mem/,$(MEM_SRCS))
+	@echo "$(L_BLUE)Making LST_SRCS...$(WHITE)"
+	@gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(addprefix lst/,$(LST_SRCS))
+	@echo "$(L_BLUE)Making IS_SRCS...$(WHITE)"
+	@gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(addprefix is/,$(IS_SRCS))
+	@echo "$(L_BLUE)Making MISC_SRCS...$(WHITE)"
+	@gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(addprefix misc/,$(MISC_SRCS))
+	@mv $(OBJECTS) build/
+	@echo "$(L_GREEN)Objects made!$(WHITE)"
+	@echo "$(L_BLUE)Making library...$(WHITE)"
+	@ar -rcs $(NAME) $(addprefix build/,$(OBJECTS))
+	@echo "$(L_GREEN)Library made!$(WHITE)"
 
 clean:
-	@rm -f $(OBJ)
-	@echo "$(GREY)[libft object files removed]$(BLANK)"
+	@echo "$(L_BLUE)Deleting objects...$(WHITE)"
+	@rm -rf build
+	@echo "$(RED)Objects deleted!$(WHITE)"
 
 fclean: clean
-	@rm -f $(NAME)
-	@echo "$(ORANGE)[libft removed]$(BLANK)"
+	@echo "$(L_BLUE)Cleaning up...$(WHITE)"
+	@rm -rf $(NAME)
+	@echo "$(RED)Objects and library deleted$(WHITE)"
 
 re: fclean all

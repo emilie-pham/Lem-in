@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 16:09:48 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 17:12:45 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	parse(t_env *env)
 	if (!(table = (t_room**)malloc(sizeof(t_room*) * 10007)))
 		return ;
 	env->table = table;
-	init_table(table);
+	init_hashtable(table);
 	parse_ants(env);
 	reader(env, table);
 	if (!env->start || !env->end)
