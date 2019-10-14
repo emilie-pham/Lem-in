@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 15:24:07 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 15:26:05 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	reader(t_env *env, t_room **table)
 			break ;
 		ft_strdel(&env->line);
 	}
-	ft_strdel(&env->line);
 }
 
 void	parse(t_env *env)
