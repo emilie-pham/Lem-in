@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 18:25:56 by anonymous         #+#    #+#             */
-/*   Updated: 2019/10/11 13:38:57 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 13:15:27 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,19 @@ void	parse_start(t_env *env, t_room **table)
 
 	room = NULL;
 	if (env->start != NULL)
+	{
+		ft_strdel(&env->line);
 		ft_error(6);
+	}
 	get_line(env);
 	while (is_comment(env->line) || (is_command(env->line) &&
 	!command_type(env->line)))
 		get_line(env);
 	if (!is_room(env->line))
+	{
+		ft_strdel(&env->line);
 		ft_error(4);
+	}
 	room = create_room(env->line);
 	insert_hash_table(table, room);
 	env->start = room;
@@ -61,13 +67,19 @@ void	parse_end(t_env *env, t_room **table)
 
 	room = NULL;
 	if (env->end != NULL)
+	{
+		ft_strdel(&env->line);
 		ft_error(6);
+	}
 	get_line(env);
 	while (is_comment(env->line) || (is_command(env->line) &&
 	!command_type(env->line)))
 		get_line(env);
 	if (!is_room(env->line))
+	{
+		ft_strdel(&env->line);
 		ft_error(4);
+	}
 	room = create_room(env->line);
 	insert_hash_table(table, room);
 	env->end = room;

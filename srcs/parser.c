@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/11 16:54:28 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 13:12:25 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,25 @@
 void	parse_ants(t_env *env)
 {
 	if (get_next_line(0, &env->line) < 1)
+	{
+		ft_strdel(&env->line);
 		ft_error(1);
+	}
 	else
 		add_line(env, create_line(env->line));
 	while (is_comment(env->line))
 		get_line(env);
 	if (!ft_strdigit(env->line))
+	{
+		ft_strdel(&env->line);
 		ft_error(3);
+	}
 	env->ant_nb = ft_atoi(env->line);
 	if (env->ant_nb <= 0)
+	{
+		ft_strdel(&env->line);
 		ft_error(3);
+	}
 	ft_strdel(&env->line);
 }
 
@@ -53,6 +62,7 @@ void	reader(t_env *env, t_room **table)
 			break ;
 		ft_strdel(&env->line);
 	}
+	ft_strdel(&env->line);
 }
 
 void	parse(t_env *env)
