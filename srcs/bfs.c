@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/10/11 17:27:25 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/14 14:42:03 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ int			init_bfs(t_env *env)
 	t_queue		*head;
 	t_queue		*tmp;
 
-	if (!check_start_end(env))
-		return (0);
 	if (env->queue)
 	{
 		head = env->queue;
@@ -68,6 +66,8 @@ int			init_bfs(t_env *env)
 	}
 	env->queue = NULL;
 	env->end_queue = NULL;
+	if (!check_start_end(env))
+		return (0);
 	return (1);
 }
 

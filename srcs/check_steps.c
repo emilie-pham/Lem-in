@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 13:58:29 by epham             #+#    #+#             */
-/*   Updated: 2019/10/11 15:25:46 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 11:36:28 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void		find_smallest_step_path(t_env *env)
 {
 	int			smallest;
-	t_solution	*sol;
+	t_sol	*sol;
 
 	sol = env->current_sol;
 	smallest = 2147483647;
@@ -42,16 +42,19 @@ void		find_smallest_step_path(t_env *env)
 ***		NEGATIVE ANTS
 */
 
-int			negative_ants(t_env *env, t_solution **negants, t_solution **head)
+int			negative_ants(t_env *env, t_sol **negants)
 {
+	t_sol	*newhead;
+
 	if ((*negants)->next)
-		*head = (*negants)->next;
-	env->total_len -= remove_path(env, *negants);
+		newhead = (*negants)->next;
+	env->total_len -= (*negants)->pathlen;
+	remove_path(env, *negants);
 	env->path_nb -= 1;
-	if (!env->path_nb || (!(*head) && !env->current_sol))
+	if (!env->path_nb || (!newhead && !env->current_sol))
 		return (-2);
-	else if (!env->current_sol && *head)
-		env->current_sol = *head;
+	else if (!env->current_sol && newhead)
+		env->current_sol = newhead;
 	env->current_sol->steps = check_steps(env);
 	return (-1);
 }
@@ -62,10 +65,9 @@ int			negative_ants(t_env *env, t_solution **negants, t_solution **head)
 
 int			check_steps(t_env *env)
 {
-	t_solution	*sol;
-	t_solution	*negants;
-	t_solution	*newhead;
-	int			steps;
+	t_sol	*sol;
+	t_sol	*negants;
+	int		steps;
 
 	sol = env->current_sol;
 	steps = 0;
@@ -73,7 +75,7 @@ int			check_steps(t_env *env)
 	env->shortest_path = NULL;
 	env->second_shortest = NULL;
 	if ((negants = dispatch_ants(env, env->current_sol)) != NULL)
-		return (negative_ants(env, &negants, &newhead));
+		return (negative_ants(env, &negants));
 	while (env->ants_sent < env->ant_nb)
 		find_smallest_step_path(env);
 	while (sol)

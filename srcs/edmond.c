@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/10/11 16:36:57 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 11:36:48 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static void		update_flows(t_env *env)
 ***		RESET INPATH VARIABLE
 */
 
-static void		reset_inpath(t_solution *solution)
+void			reset_inpath(t_sol *solution)
 {
-	t_solution	*head_sol;
+	t_sol		*head_sol;
 	t_path		*head_path;
 
 	if (solution)
@@ -73,7 +73,7 @@ static void		reset_inpath(t_solution *solution)
 
 static int		find_sol_paths(t_env *env)
 {
-	t_solution	*current_sol;
+	t_sol		*current_sol;
 	t_link		*link;
 	int			i;
 
@@ -83,13 +83,13 @@ static int		find_sol_paths(t_env *env)
 	{
 		if (link->flow == 1)
 		{
-			if (i == 0 && (env->current_sol = create_solution(env, link->dest)))
+			if (i == 0 && (env->current_sol = create_solution(env, link->dest, 0, NULL)))
 			{
 				i = 1;
 				env->path_nb += 1;
 			}
-			else if (i == 1 && (current_sol = create_solution(env, link->dest)))
-				append_sol(env, current_sol);
+			else if (i == 1 && (current_sol = create_solution(env, link->dest, 0, NULL)))
+				append_sol(env, current_sol, env->current_sol);
 		}
 		link = link->next;
 	}
@@ -118,10 +118,15 @@ int				edmond(t_env *env)
 		{
 			reset_inpath(env->current_sol);
 			if ((steps = check_steps(env)) < 0)
+			{
+				free_sol(env->current_sol);
 				continue ;
+			}
 			env->current_sol->steps = steps;
 			if (env->current_sol->steps <= env->steps)
+			{
 				update_solution(env);
+			}
 			else
 				free_sol(env->current_sol);
 		}

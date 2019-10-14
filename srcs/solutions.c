@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 19:22:01 by epham             #+#    #+#             */
-/*   Updated: 2019/10/11 15:59:11 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 11:42:16 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,28 @@
 ***		NEW PATH IN SAME SOLUTION SYSTEM
 */
 
-t_solution		*create_solution(t_env *env, t_room *next)
+t_sol		*create_solution(t_env *env, t_room *next, int copy, t_sol *path)
 {
-	t_solution *new;
+	t_sol *new;
 
-	new = (t_solution*)ft_memalloc(sizeof(t_solution));
+	if (!(new = (t_sol*)malloc(sizeof(t_sol))))
+		return (NULL);
 	new->ants = 0;
 	new->ants_sent = 0;
 	new->ants_arrived = 0;
 	new->pathlen = 0;
 	new->steps = 0;
 	new->next = NULL;
-	if (!(new->path = get_path(env, next, new)))
+	if (copy == 0)
 	{
-		free(new);
-		return (NULL);
+		if (!(new->path = get_path(env, next, new)))
+		{
+			free(new);
+			return (NULL);
+		}
 	}
+	else
+		new->path = copy_path(env, path);
 	return (new);
 }
 
@@ -39,25 +45,26 @@ t_solution		*create_solution(t_env *env, t_room *next)
 ***		APPEND SOLUTION TO HEAD
 */
 
-void			append_sol(t_env *env, t_solution *new)
+void		append_sol(t_env *env, t_sol *new, t_sol *to)
 {
-	t_solution *first;
+	t_sol *first;
 
-	first = env->current_sol;
-	while (env->current_sol->next)
-		env->current_sol = env->current_sol->next;
-	env->current_sol->next = new;
-	env->current_sol = first;
-	env->path_nb += 1;
+	first = to;
+	while (first->next)
+		first = first->next;
+	first->next = new;
+	first = to;
+	if (to == env->current_sol)
+		env->path_nb += 1;
 }
 
 /*
 ***		DISTRIBUTES ANTS OVER ALL PATHS OF SOLUTION
 */
 
-t_solution		*dispatch_ants(t_env *env, t_solution *head)
+t_sol		*dispatch_ants(t_env *env, t_sol *head)
 {
-	t_solution	*sol;
+	t_sol	*sol;
 
 	sol = head;
 	while (sol)
@@ -74,12 +81,41 @@ t_solution		*dispatch_ants(t_env *env, t_solution *head)
 }
 
 /*
+***		COPY CURRENT SOLUTION
+*/
+
+t_sol		*copy_solution(t_env *env)
+{
+	t_sol	*curr_sol;
+	t_sol	*new;
+	t_sol	*head;
+
+	curr_sol = env->current_sol;
+	head = NULL;
+	new = NULL;
+	while (curr_sol)
+	{
+		new = create_solution(env, curr_sol->path->room, 1, curr_sol);
+		new->pathlen = curr_sol->pathlen;
+		new->steps = env->current_sol->steps;
+		new->ants = curr_sol->ants;
+		if (!head)
+			head = new;
+		else
+			append_sol(env, new, head);
+		curr_sol = curr_sol->next;
+	}
+	free_sol(env->current_sol);
+	return (head);
+}
+
+/*
 ***		REPLACE OPTIMAL SOLUTION
 */
 
-void			update_solution(t_env *env)
+void		update_solution(t_env *env)
 {
 	free_sol(env->optimal_sol);
-	env->optimal_sol = env->current_sol;
-	env->steps = env->current_sol->steps;
+	env->optimal_sol = copy_solution(env);
+	env->steps = env->optimal_sol->steps;
 }

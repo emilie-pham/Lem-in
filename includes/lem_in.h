@@ -6,7 +6,11 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/10/11 18:21:34 by yoribeir         ###   ########.fr       */
+=======
+/*   Updated: 2019/10/14 11:33:39 by epham            ###   ########.fr       */
+>>>>>>> 743f59e8d2df6999f1f215f5d79a70217417375d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +76,7 @@ typedef struct 		s_solution
 	int				pathlen;
 	int				steps;
 	struct	s_solution	*next;
-}					t_solution;
+}					t_sol;
 
 
 typedef struct		s_path
@@ -112,10 +116,10 @@ typedef struct		s_env
 	t_room			*end;
 	t_queue			*queue;
 	t_queue			*end_queue;
-	t_solution		*current_sol;
-	t_solution		*optimal_sol;
-	t_solution		*shortest_path;
-	t_solution		*second_shortest;
+	t_sol			*current_sol;
+	t_sol			*optimal_sol;
+	t_sol			*shortest_path;
+	t_sol			*second_shortest;
 }					t_env;
 
 /*
@@ -178,8 +182,14 @@ int					command_type(char *line);
 */
 
 int  				bfs(t_env *env);
+void				print_sol(t_env *env, t_sol *solution);
+
+/*
+***		EDMOND
+*/
+
+void				reset_inpath(t_sol *solution);
 int					edmond(t_env *env);
-void				print_sol(t_env *env, t_solution *solution);
 
 /*
 ***		QUEUE
@@ -204,8 +214,9 @@ void				depthfirst_queue(t_env *env, t_room *room);
 */
 
 t_path				*create_pathlink(t_env *env, t_room *room);
-t_path				*get_path(t_env *env, t_room *next, t_solution *sol);
-int					remove_path(t_env *env, t_solution *sol);
+t_path				*get_path(t_env *env, t_room *next, t_sol *sol);
+int					remove_path(t_env *env, t_sol *sol);
+t_path				*copy_path(t_env *env, t_sol *solution);
 int					check_steps(t_env *env);
 void				free_path(t_path *path);
 
@@ -213,18 +224,18 @@ void				free_path(t_path *path);
 ***		SOLUTIONS.C
 */
 
-t_solution			*create_solution(t_env *env, t_room *next);
-void				append_sol(t_env *env, t_solution *new);
-t_solution			*dispatch_ants(t_env *env, t_solution *head);
+t_sol				*create_solution(t_env *env, t_room *next, int copy, t_sol *path);
+void				append_sol(t_env *env, t_sol *new, t_sol *to);
+t_sol				*dispatch_ants(t_env *env, t_sol *head);
 void				update_solution(t_env *env);
-void				free_sol(t_solution *sol);
+void				free_sol(t_sol *sol);
 
 /*
 ***		utils
 */
 
 void				ft_error(int error);
-void				print_paths(t_solution *current_sol);
+void				print_paths(t_sol *current_sol);
 void				print_path(t_path *head);
 void				print_queue(t_env *env);
 void				printqueue(t_queue *queue);

@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 14:36:38 by epham             #+#    #+#             */
-/*   Updated: 2019/10/11 14:14:46 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 11:37:10 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_path		*create_pathlink(t_env *env, t_room *room)
 	&& ft_strcmp(room->name, env->end->name)))
 		return (NULL);
 	room->inpath = 1;
-	pathlink = (t_path*)ft_memalloc(sizeof(t_path));
+	if (!(pathlink = (t_path*)malloc(sizeof(t_path))))
+		return (NULL);
 	pathlink->room = room;
 	pathlink->ant_index = 0;
 	pathlink->next = NULL;
@@ -55,7 +56,7 @@ int			check_flows(t_env *env, t_path **path, t_link **link, t_path **head)
 ***		GET ONE PATH IN SOLUTION SYSTEM
 */
 
-t_path		*get_path(t_env *env, t_room *next, t_solution *sol)
+t_path		*get_path(t_env *env, t_room *next, t_sol *sol)
 {
 	t_path *path;
 	t_path *head;
@@ -86,27 +87,56 @@ t_path		*get_path(t_env *env, t_room *next, t_solution *sol)
 ***		REMOVE PATH THAT IS TOO LONG
 */
 
-int			remove_path(t_env *env, t_solution *remove)
+int			remove_path(t_env *env, t_sol *remove)
 {
-	t_solution	*current;
-	t_solution	*prev;
+	t_sol	*current;
+	t_sol	*prev;
 	int			pathlen;
 
 	current = env->current_sol;
 	prev = env->current_sol;
+	pathlen = remove->pathlen;
 	while (current != remove && current->next)
 	{
 		prev = current;
 		current = current->next;
 	}
-	pathlen = current->pathlen;
-	free_path(current->path);
+	free_path(remove->path);
 	if (current == env->current_sol && current->next)
 		env->current_sol = current->next;
 	else if (current->next)
 		prev->next = current->next;
 	else
 		prev->next = NULL;
-	free(current);
-	return (pathlen);
+	free(remove);
+	return (1);
+}
+
+/*
+***		COPY PATH FOR COPY SOLUTION
+*/
+
+t_path		*copy_path(t_env *env, t_sol *solution)
+{
+	t_path		*head;
+	t_path		*path;
+	t_path		*current;
+	t_path		*new;
+
+	path = solution->path;
+	head = NULL;
+	new = NULL;
+	current = NULL;
+	while (path)
+	{
+		reset_inpath(env->current_sol);
+		new = create_pathlink(env, path->room);
+		new->prev = current;
+		head = head ? head : new;
+		if (current)
+			current->next = new;
+		current = new ? new : head;
+		path = path->next;
+	}
+	return (head);
 }
