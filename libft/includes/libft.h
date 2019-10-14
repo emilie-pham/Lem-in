@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 16:29:08 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 17:10:55 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/14 17:37:58 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-
 /*
 ** -------- MEMORY --------
 */
@@ -39,7 +38,6 @@ void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
-
 
 /*
 ** -------- STRING --------
@@ -73,13 +71,13 @@ char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_strtoupper(char *str);
 char				*ft_strndup(char const *src, int n);
-int 				ft_strdigit(char *str);
+int					ft_strdigit(char *str);
 
-	/*
+/*
 ** -------- ASCII --------
 */
 
-	int ft_isalpha(int c);
+int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
@@ -128,6 +126,6 @@ unsigned int		ft_nblen(unsigned long long n, int base);
 unsigned int		ft_abs(int value);
 size_t				ft_wstrlen(const int *str);
 char				*ft_itoa(int n);
-void 				ft_tabdel(char **tab);
+void				ft_tabdel(char **tab);
 
 #endif

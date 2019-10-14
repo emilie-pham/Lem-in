@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 17:22:41 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/14 18:05:59 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ void	reader(t_env *env, t_room **table)
 			if (!(get_link(env, table, env->line)))
 				break ;
 		if ((!is_room(env->line)) && !(is_link(env->line))
-		&& !(is_comment(env->line))
-		&& !is_command(env->line))
+		&& !(is_comment(env->line)) && !is_command(env->line))
 			break ;
 		ft_strdel(&env->line);
 	}

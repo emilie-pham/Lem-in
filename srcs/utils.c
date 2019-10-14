@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 15:18:13 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 17:40:58 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	print_link(t_link *link)
 {
-	printf("\ndest : %s\n", link->dest->name);
-	printf("flow : %d\n", link->flow);
-	printf("from : %s\n\n", link->rev->dest->name);
+	ft_printf("\ndest : %s\n", link->dest->name);
+	ft_printf("flow : %d\n", link->flow);
+	ft_printf("from : %s\n\n", link->rev->dest->name);
 }
 
 void	print_links(t_room *room)
@@ -24,34 +24,15 @@ void	print_links(t_room *room)
 	t_link *head;
 
 	head = room->linked_rooms;
-	printf("room %s is connected to : ", room->name);
+	ft_printf("room %s is connected to : ", room->name);
 	while (head)
 	{
 		if (head->next)
-			printf("room %s, ", head->dest->name);
+			ft_printf("room %s, ", head->dest->name);
 		else
-			printf("room %s", head->dest->name);
+			ft_printf("room %s", head->dest->name);
 		head = head->next;
 	}
-}
-
-void	print_split(char **tab)
-{
-	int		i = 0;
-	int		y = 0;
-
-	while (tab[i])
-	{
-		while (tab[i][y])
-		{
-			printf("%c", tab[i][y]);
-			y++;
-		}
-		printf(" ");
-		y = 0;
-		i++;
-	}
-	i = 0;
 }
 
 void	print_hash(t_room **table, size_t size)
@@ -65,22 +46,22 @@ void	print_hash(t_room **table, size_t size)
 	{
 		if (table[i])
 		{
-			printf("hash [%s] ", table[i]->name);
+			ft_printf("hash [%s] ", table[i]->name);
 			print_links(table[i]);
 			collisions = table[i];
 			while (collisions->next)
 			{
 				count++;
 				collisions = collisions->next;
-				printf(" -> %s", collisions->name);
+				ft_printf(" -> %s", collisions->name);
 			}
 			count++;
 		}
 		if (table[i])
-			printf("\n");
+			ft_printf("\n");
 		i++;
 	}
-	printf("room number %d\n", count);
+	ft_printf("room number %d\n", count);
 }
 
 void	print_path(t_path *head)
@@ -92,10 +73,10 @@ void	print_path(t_path *head)
 		current = head;
 		while (current)
 		{
-			printf("%s | ", current->room->name);
+			ft_printf("%s | ", current->room->name);
 			current = current->next;
 		}
-		printf("\n");
+		ft_printf("\n");
 	}
 }
 
@@ -105,19 +86,19 @@ void	print_paths(t_sol *current_sol)
 	t_path		*start;
 
 	head = current_sol;
-	printf("SOLUTION SET :\n");
+	ft_printf("SOLUTION SET :\n");
 	while (current_sol)
 	{
-		printf("PATHLEN : %d\n", current_sol->pathlen);
-		printf("ANTS TO SEND IN THIS PATH : %d\n", current_sol->ants);
+		ft_printf("PATHLEN : %d\n", current_sol->pathlen);
+		ft_printf("ANTS TO SEND IN THIS PATH : %d\n", current_sol->ants);
 		start = current_sol->path;
 		while (current_sol->path)
 		{
-			printf("%s | ", current_sol->path->room->name);
+			ft_printf("%s | ", current_sol->path->room->name);
 			current_sol->path = current_sol->path->next;
 		}
 		current_sol->path = start;
-		printf("\n\n");
+		ft_printf("\n\n");
 		current_sol = current_sol->next;
 	}
 	current_sol = head;
@@ -127,17 +108,17 @@ void	print_queue(t_env *env)
 {
 	t_queue *queue;
 
-	// printf("START ROOM : %s, END ROOM : %s\n", env->start->name, env->end->name);
+	// ft_printf("START ROOM : %s, END ROOM : %s\n", env->start->name, env->end->name);
 	if (env->queue)
 	{
 		queue = env->queue;
-		printf("\nQUEUE : ");
+		ft_printf("\nQUEUE : ");
 		while (queue->next)
 		{
-			printf("room %s || ", queue->room->name);
+			ft_printf("room %s || ", queue->room->name);
 			queue = queue->next;
 		}
-		printf("room %s\n\n", queue->room->name);
+		ft_printf("room %s\n\n", queue->room->name);
 	}
 }
 
@@ -148,10 +129,10 @@ void	print_bfs(t_env *env)
 	cur = env->end;
 	while (cur && ft_strcmp(cur->name, env->start->name))
 	{
-		printf(" %s w=%d <-", cur->name, cur->weight);
+		ft_printf(" %s w=%d <-", cur->name, cur->weight);
 		cur = cur->prev;
 	}
-	printf("\n\n");
+	ft_printf("\n\n");
 }
 
 /*
@@ -204,22 +185,6 @@ void	free_links(t_link *links)
 		tmp1 = tmp;
 		tmp = tmp->next;
 		free(tmp1);
-	}
-}
-
-void 	free_lines(t_line *line)
-{
-	t_line *tmp;
-	t_line *tmp1;
-
-	tmp = line;
-	while (tmp)
-	{
-		tmp1 = tmp;
-		tmp = tmp->next;
-		free(tmp1->line);
-		free(tmp1);
-		tmp1 = NULL;
 	}
 }
 
@@ -293,8 +258,8 @@ void	free_env(t_env *env)
 		free_queue(env);
 	// if (env->current_sol)
 		// free_sol(env->current_sol);
-		// printf("ENV CURRSOL\n");
+		// ft_printf("ENV CURRSOL\n");
 	// if (env->optimal_sol)
 		// free_sol(env->current_sol);
-		// printf("ENV OPTIMALSOL\n");
+		// ft_printf("ENV OPTIMALSOL\n");
 }
