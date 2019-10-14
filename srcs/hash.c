@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 14:11:33 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 15:16:27 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/14 16:36:03 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,9 @@ void				insert_hash_table(t_room **table, t_room *room)
 		ft_error(8);
 	hashedvalue = hash_value(room->name);
 	if (table[hashedvalue] == NULL)
-	{
-		table[hashedvalue] = malloc(sizeof(t_room));
 		table[hashedvalue] = room;
-	}
 	else
 	{
-		newnode = ft_memalloc(sizeof(t_room));
 		newnode = room;
 		tmp = table[hashedvalue];
 		while (tmp->next)
@@ -90,7 +86,7 @@ void 	free_rooms(t_room *rooms)
 		tmp = tmp->next;
 		if (tmp1->linked_rooms)
 			free_links(tmp1->linked_rooms);
-		free(tmp1->name);
+		ft_strdel(&tmp1->name);
 		free(tmp1);
 		tmp1 = NULL;
 	}
