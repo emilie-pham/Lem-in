@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 11:36:59 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 15:10:03 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int				main(int ac, char **av)
 	if (edmond(env) != 0)
 		print_sol(env, env->optimal_sol);
 	free_table(env->table);
-	free_links(env->links);
 	free_lines(env->read);
 	free(env);
 	return (0);

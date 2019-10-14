@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 11:35:24 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/14 15:09:44 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,20 +190,6 @@ void	free_sol(t_sol *sol)
 			tmp->next = NULL;
 			free(tmp);
 		}
-	}
-}
-
-void 	free_rooms(t_room *rooms)
-{
-	t_room *tmp;
-	t_room *tmp1;
-
-	tmp = rooms;
-	while (tmp)
-	{
-		tmp1 = tmp;
-		tmp = tmp->next;
-		free(tmp1);
 	}
 }
 
