@@ -5,140 +5,118 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/04/11 19:12:59 by anonymous         #+#    #+#              #
-#    Updated: 2019/10/14 17:13:49 by yoribeir         ###   ########.fr        #
+#    Created: 2018/09/10 11:13:42 by yoribeir          #+#    #+#              #
+#    Updated: 2019/10/15 16:24:46 by yoribeir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-RED = \033[0;31m
-GREEN = \033[0;32m
-L_GREEN = \033[1;32m
-BLUE = \033[0;34m
-L_BLUE = \033[0;34m
-WHITE = \033[1;37m
-
 NAME = libft.a
 
-MISC_SRCS = ft_atoi.c \
-	   ft_toupper.c \
-	   ft_tolower.c \
-	   ft_itoa.c \
-	   get_next_line.c \
-	   ft_nblen.c \
-	   ft_abs.c \
-	   ft_wstrlen.c \
-	   ft_tabdel.c \
+FLAGS = -Wall -Wextra -Werror -I.
 
-LST_SRCS = ft_lstadd.c \
-		   ft_lstdelone.c \
-		   ft_lstmap.c \
-		   ft_lstdel.c \
-		   ft_lstiter.c \
-		   ft_lstnew.c
+FILES =	ft_memset.c \
+		ft_bzero.c \
+		ft_memcpy.c \
+		ft_memccpy.c \
+		ft_memmove.c \
+		ft_memchr.c \
+		ft_memcmp.c \
+		ft_strlen.c \
+		ft_strdup.c \
+		ft_strcpy.c \
+		ft_strncpy.c \
+		ft_strcat.c \
+		ft_strncat.c \
+		ft_strlcat.c \
+		ft_strchr.c \
+		ft_strrchr.c \
+		ft_strstr.c \
+		ft_strnstr.c \
+		ft_strcmp.c \
+		ft_strncmp.c \
+		ft_atoi.c \
+		ft_isalpha.c \
+		ft_isdigit.c \
+		ft_isalnum.c \
+		ft_isascii.c \
+		ft_isprint.c \
+		ft_toupper.c \
+		ft_tolower.c \
+		ft_memalloc.c \
+		ft_memdel.c \
+		ft_strnew.c \
+		ft_strdel.c \
+		ft_strclr.c \
+		ft_striter.c \
+		ft_striteri.c \
+		ft_strmap.c \
+		ft_strmapi.c \
+		ft_strequ.c \
+		ft_strnequ.c \
+		ft_strsub.c \
+		ft_strjoin.c \
+		ft_strtrim.c \
+		ft_strsplit.c \
+		ft_itoa.c \
+		ft_putchar.c \
+		ft_putstr.c \
+		ft_putendl.c \
+		ft_putnbr.c \
+		ft_putchar_fd.c \
+		ft_putendl_fd.c \
+		ft_putstr_fd.c \
+		ft_putnbr_fd.c \
+		ft_islower.c \
+		ft_isupper.c \
+		ft_isblanko.c \
+		ft_lstnew.c \
+		ft_lstdelone.c \
+		ft_lstdel.c \
+		ft_lstadd.c \
+		ft_lstiter.c \
+		ft_lstmap.c \
+		ft_lstpushback.c \
+		ft_lstsize.c \
+		ft_lstat.c \
+		ft_strndup.c \
+		get_next_line.c \
+		ft_printf.c \
+		handlers.c \
+		parsers.c \
+		utils.c \
+		handle_int.c \
+		handle_unsigned.c \
+		handle_char.c \
+		handle_pointer.c \
+		handle_escape.c \
+		handle_string.c \
+		handle_wchar.c \
+		handle_float.c \
+		ft_nblen.c \
+		ft_tabdel.c \
+		ft_strtoupper.c \
+		ft_wstrlen.c \
+		ft_abs.c \
+		ft_strdigit.c
 
-STR_SRCS = ft_strcat.c \
-			ft_strchr.c \
-			ft_strclr.c \
-			ft_strcmp.c \
-			ft_strcpy.c \
-			ft_strdel.c \
-			ft_strdup.c \
-			ft_strequ.c \
-			ft_striter.c \
-			ft_striteri.c \
-			ft_strjoin.c \
-			ft_strlcat.c \
-			ft_strlen.c \
-			ft_strmap.c \
-			ft_strmapi.c \
-			ft_strncat.c \
-			ft_strncmp.c \
-			ft_strncpy.c \
-			ft_strndup.c \
-			ft_strnequ.c \
-			ft_strnew.c \
-			ft_strnstr.c \
-			ft_strrchr.c \
-			ft_strsplit.c \
-			ft_strstr.c \
-			ft_strsub.c \
-			ft_strtrim.c \
-			ft_strtoupper.c \
-			ft_strdigit.c \
+OBJ	= $(FILES:%.c=%.o)
 
-IS_SRCS = ft_isalpha.c \
-			ft_isdigit.c \
-			ft_isupper.c \
-			ft_islower.c \
-			ft_isalnum.c \
-			ft_isascii.c \
-			ft_isprint.c
+.SILENT:
 
-PUT_SRCS = ft_putchar.c \
-			ft_putstr.c \
-			ft_putendl.c \
-			ft_putnbr.c \
-			ft_putchar_fd.c \
-			ft_putstr_fd.c \
-			ft_putendl_fd.c \
-			ft_putnbr_fd.c
+all: $(NAME)
 
-MEM_SRCS = ft_memset.c \
-			ft_bzero.c \
-			ft_memcpy.c \
-			ft_memccpy.c \
-			ft_memmove.c \
-			ft_memchr.c \
-			ft_memcmp.c \
-			ft_memalloc.c \
-			ft_memdel.c \
-
-PRINTF_SRCS = ft_printf.c handlers.c parsers.c utils.c handle_int.c handle_unsigned.c \
-handle_char.c handle_pointer.c handle_escape.c handle_string.c handle_wchar.c \
-handle_float.c
-
-OBJECTS =  $(patsubst %.c,%.o,$(MISC_SRCS))
-OBJECTS += $(patsubst %.c,%.o,$(LST_SRCS))
-OBJECTS += $(patsubst %.c,%.o,$(STR_SRCS))
-OBJECTS += $(patsubst %.c,%.o,$(IS_SRCS))
-OBJECTS += $(patsubst %.c,%.o,$(PUT_SRCS))
-OBJECTS += $(patsubst %.c,%.o,$(MEM_SRCS))
-OBJECTS += $(patsubst %.c,%.o,$(PRINTF_SRCS))
-
-INCLUDES = includes/
-
-all:	$(NAME)
-
-$(NAME):
-	@mkdir build
-	@echo "$(L_BLUE)Making ft_printf...$(WHITE)"
-	@gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(addprefix printf/,$(PRINTF_SRCS))
-	@echo "$(L_BLUE)Making PUT_SRCS...$(WHITE)"
-	@gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(addprefix put/,$(PUT_SRCS))
-	@echo "$(L_BLUE)Making STR_SRCS...$(WHITE)"
-	@gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(addprefix str/,$(STR_SRCS))
-	@echo "$(L_BLUE)Making MEM_SRCS...$(WHITE)"
-	@gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(addprefix mem/,$(MEM_SRCS))
-	@echo "$(L_BLUE)Making LST_SRCS...$(WHITE)"
-	@gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(addprefix lst/,$(LST_SRCS))
-	@echo "$(L_BLUE)Making IS_SRCS...$(WHITE)"
-	@gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(addprefix is/,$(IS_SRCS))
-	@echo "$(L_BLUE)Making MISC_SRCS...$(WHITE)"
-	@gcc -Wall -Wextra -Werror -I $(INCLUDES) -c $(addprefix misc/,$(MISC_SRCS))
-	@mv $(OBJECTS) build/
-	@echo "$(L_GREEN)Objects made!$(WHITE)"
-	@echo "$(L_BLUE)Making library...$(WHITE)"
-	@ar -rcs $(NAME) $(addprefix build/,$(OBJECTS))
-	@echo "$(L_GREEN)Library made!$(WHITE)"
+$(NAME): $(OBJ)
+	ar rcs $(NAME) $?
+	@echo "\033[1;34mLibft\t\033[1;33mCompilation\t\033[0;32m[OK]\033[0m"
 
 clean:
-	@echo "$(L_BLUE)Deleting objects...$(WHITE)"
-	@rm -rf build
-	@echo "$(RED)Objects deleted!$(WHITE)"
+	rm -f $(OBJ)
+	@echo "\033[1;34mLibft\t\033[1;33mCleaning Objects\t\033[0;32m[OK]\033[0m"
 
 fclean: clean
-	@echo "$(L_BLUE)Cleaning up...$(WHITE)"
-	@rm -rf $(NAME)
-	@echo "$(RED)Objects and library deleted$(WHITE)"
+	rm -f $(NAME)
+	@echo "\033[1;34mLibft\t\033[1;33mCleaning Lib\t\033[0;32m[OK]\033[0m"
 
 re: fclean all
+
+.PHONY: clean fclean all re
