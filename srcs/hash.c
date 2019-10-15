@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 14:11:33 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 18:56:13 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/15 11:06:43 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ void				free_table(t_room **table)
 	free(table);
 }
 
+/*
+***		FREE ROOM STRUCTURE
+*/
+
 void				free_rooms(t_room *rooms)
 {
 	t_room *tmp;
@@ -90,7 +94,11 @@ void				free_rooms(t_room *rooms)
 	}
 }
 
-void	free_links(t_link *links)
+/*
+***		FREE LINK STRUCTURE
+*/
+
+void				free_links(t_link *links)
 {
 	t_link	*tmp;
 	t_link	*tmp1;

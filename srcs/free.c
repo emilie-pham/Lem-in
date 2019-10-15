@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 17:12:42 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 19:13:29 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/15 11:38:40 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	free_path(t_path *path)
 ***		FREE SOL
 */
 
-void	free_sol(t_sol **sol)
+int		free_sol(t_sol **sol)
 {
 	t_sol	*tmp;
 	t_sol	**head;
@@ -48,15 +48,18 @@ void	free_sol(t_sol **sol)
 			free_path((*sol)->path);
 			tmp = *sol;
 			*sol = (*sol)->next;
-			// (*sol)->next = NULL;
 			tmp->next = NULL;
 			free(tmp);
-			// *sol =tmp;
 		}
+		*head = NULL;
+		head = NULL;
 	}
-	*head = NULL;
-	head = NULL;
+	return (1);
 }
+
+/*
+***		FREE QUEUE FROM BFS
+*/
 
 void	free_queue(t_env *env)
 {
@@ -80,6 +83,10 @@ void	free_queue(t_env *env)
 	env->queue = NULL;
 	env->end_queue = NULL;
 }
+
+/*
+***		FREE ENVIRONMENT CONTENT
+*/
 
 void	free_env(t_env *env)
 {

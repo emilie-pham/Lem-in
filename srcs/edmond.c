@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 18:04:23 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/15 11:40:03 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,14 @@ static int		find_sol_paths(t_env *env)
 	{
 		if (link->flow == 1)
 		{
-			if (i == 0 && (env->current_sol = create_solution(env, link->dest, 0, NULL)))
+			if (i == 0 && (env->current_sol =
+			create_solution(env, link->dest, 0, NULL)))
 			{
 				i = 1;
 				env->path_nb += 1;
 			}
-			else if (i == 1 && (current_sol = create_solution(env, link->dest, 0, NULL)))
+			else if (i == 1 && (current_sol =
+			create_solution(env, link->dest, 0, NULL)))
 				append_sol(env, current_sol, env->current_sol);
 		}
 		link = link->next;
@@ -117,11 +119,8 @@ int				edmond(t_env *env)
 		else if (env->current_sol && first)
 		{
 			reset_inpath(env->current_sol);
-			if ((steps = check_steps(env)) < 0)
-			{
-				free_sol(&env->current_sol);
+			if ((steps = check_steps(env)) < 0 && free_sol(&env->current_sol))
 				continue ;
-			}
 			env->current_sol->steps = steps;
 			if (env->current_sol->steps <= env->steps)
 				update_solution(env);

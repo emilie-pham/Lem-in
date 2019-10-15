@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 19:08:57 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/15 11:37:11 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@
 
 # include <stdio.h>
 
-#define TABLE_SIZE 10007
+# define TABLE_SIZE 10007
 
-#define RED 	"\x1B[31m"
-#define GRN 	"\x1B[32m"
-#define YEL 	"\x1B[33m"
-#define BLU 	"\x1B[34m"
-#define MAG 	"\x1B[35m"
-#define CYN 	"\x1B[36m"
-#define WHT 	"\x1B[37m"
-#define RESET 	"\x1B[0m"
+# define RED 	"\x1B[31m"
+# define GRN 	"\x1B[32m"
+# define YEL 	"\x1B[33m"
+# define BLU 	"\x1B[34m"
+# define MAG 	"\x1B[35m"
+# define CYN 	"\x1B[36m"
+# define WHT 	"\x1B[37m"
+# define RESET 	"\x1B[0m"
 
 /*
-***		NEXT POUR HASH, PREV POUR BFS
+***		ROOM STRUCTURE
 */
 
 typedef	struct		s_room
@@ -44,14 +44,14 @@ typedef	struct		s_room
 	int				inqueue;
 	int				prev_flow;
 	int				weight;
-	struct 	s_link	*linked_rooms;
-	struct	s_link	*from;
-	struct	s_room	*prev;
-	struct	s_room	*next;      // separate chaining
+	struct s_link	*linked_rooms;
+	struct s_link	*from;
+	struct s_room	*prev;
+	struct s_room	*next;
 }					t_room;
 
 /*
-***		FLOW MODIFIED BY EDMUND KARP ALGO
+***		LINK STRUCTURE
 */
 
 typedef struct		s_link
@@ -59,42 +59,61 @@ typedef struct		s_link
 	t_room			*dest;
 	t_room			*from;
 	int				flow;
-	struct 	s_link	*rev;
-	struct	s_link	*next;
+	struct s_link	*rev;
+	struct s_link	*next;
 }					t_link;
 
-typedef struct 		s_solution
+/*
+***		SOLUTION STRUCTURE
+*/
+
+typedef struct		s_sol
 {
-	struct	s_path	*path;
+	struct s_path	*path;
 	int				ants;
 	int				ants_sent;
 	int				ants_arrived;
 	int				pathlen;
 	int				steps;
-	struct	s_solution	*next;
+	struct s_sol	*next;
 }					t_sol;
 
+/*
+***		PATH STRUCTURE WITHIN SOLUTION
+*/
 
 typedef struct		s_path
 {
 	t_room			*room;
 	int				ant_index;
-	struct	s_path	*prev;
-	struct	s_path	*next;
+	struct s_path	*prev;
+	struct s_path	*next;
 }					t_path;
 
-typedef	struct 		s_queue
+/*
+***		QUEUE STRUCTURE FOR BFS
+*/
+
+typedef	struct		s_queue
 {
 	t_room			*room;
 	int				prev_flow;
-	struct 	s_queue	*next;
+	struct s_queue	*next;
 }					t_queue;
+
+/*
+***		LINE FOR READER
+*/
 
 typedef struct		s_line
 {
 	char			*line;
-	struct	s_line	*next;
+	struct s_line	*next;
 }					t_line;
+
+/*
+***		ENVIRONMENT VARIABLE
+*/
 
 typedef struct		s_env
 {
@@ -125,7 +144,6 @@ typedef struct		s_env
 
 t_env				*init_env(void);
 
-
 void				parse(t_env *env);
 
 /*
@@ -142,8 +160,8 @@ void				get_line(t_env *env);
 */
 
 unsigned long long	hash_value(char *key);
-void 				init_hashtable(t_room **table);
-void 				insert_hash_table(t_room **table, t_room *room);
+void				init_hashtable(t_room **table);
+void				insert_hash_table(t_room **table, t_room *room);
 void				print_hash(t_room **table, size_t size);
 
 /*
@@ -153,13 +171,13 @@ void				print_hash(t_room **table, size_t size);
 t_room				*create_room(char *line);
 void				add_room(t_env *env, t_room *room);
 void				parse_startend(t_env *env, t_room **table);
-t_room 				*find_room(t_room **table, char *room_name);
+t_room				*find_room(t_room **table, char *room_name);
 
 /*
 ***		links
 */
 
-void 				add_link(t_room *room, t_link *link);
+void				add_link(t_room *room, t_link *link);
 void				*get_link(t_env *env, t_room **table, char *line);
 void				parse_links(t_env *env);
 
@@ -177,7 +195,7 @@ int					command_type(char *line);
 ***		BFS
 */
 
-int  				bfs(t_env *env);
+int					bfs(t_env *env);
 void				print_sol(t_env *env, t_sol *solution);
 
 /*
@@ -220,11 +238,11 @@ void				free_path(t_path *path);
 ***		SOLUTIONS.C
 */
 
-t_sol				*create_solution(t_env *env, t_room *next, int copy, t_sol *path);
+t_sol				*create_solution(t_env *env, t_room *n, int c, t_sol *pth);
 void				append_sol(t_env *env, t_sol *new, t_sol *to);
 t_sol				*dispatch_ants(t_env *env, t_sol *head);
 void				update_solution(t_env *env);
-void				free_sol(t_sol **sol);
+int					free_sol(t_sol **sol);
 
 /*
 ***		utils
@@ -238,12 +256,12 @@ void				printqueue(t_queue *queue);
 void				print_links(t_room *room);
 void				print_link(t_link *link);
 void				free_table(t_room **table);
-void 				free_links(t_link *links);
-void 				free_rooms(t_room *rooms);
-void 				free_lines(t_line *line);
-void 				free_2darray(char **arr);
+void				free_links(t_link *links);
+void				free_rooms(t_room *rooms);
+void				free_lines(t_line *line);
+void				free_2darray(char **arr);
 void				free_queue(t_env *env);
-void 				print_bfs(t_env *env);
+void				print_bfs(t_env *env);
 void				free_env(t_env *env);
 
 #endif

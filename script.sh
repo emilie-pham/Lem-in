@@ -2,10 +2,12 @@
 diff=0
 best=50
 worst=0
-limit=10
+limit=3
+lower=-10
 result=0
 gen=0
-loop=100
+iterations=100
+loop=iterations
 sum=0
 set -e
 set -o pipefail
@@ -17,7 +19,10 @@ do
 	diff=$(( result - gen ))
 	if [ $diff -gt $limit ]
 		then
-			cp file maps/"perfalban"$diff
+			cp file maps/"flowone_bad_diff"$diff
+	elif [ $diff -lt $lower ]
+		then
+			cp file maps/"flowone_good_diff"$diff
 	fi
 	if [ $diff -gt $worst ]
 		then
@@ -32,8 +37,8 @@ do
 	loop=$(( loop - 1 ))
 done
 echo ""
-printf "Average on 100 iterations : "
-echo "scale=1; $sum / 100" | bc
+printf "Average on $iterations iterations : "
+echo "scale=1; $sum / $iterations" | bc
 echo "best score : $best"
 echo "worst score : $worst"
 rm file
