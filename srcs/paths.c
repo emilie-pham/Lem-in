@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 14:36:38 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 17:24:07 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/15 14:42:32 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,9 @@ int			remove_path(t_env *env, t_sol *remove)
 {
 	t_sol	*current;
 	t_sol	*prev;
-	int		pathlen;
 
 	current = env->current_sol;
 	prev = env->current_sol;
-	pathlen = remove->pathlen;
 	while (current != remove && current->next)
 	{
 		prev = current;
