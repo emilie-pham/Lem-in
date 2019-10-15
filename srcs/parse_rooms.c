@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 18:25:56 by anonymous         #+#    #+#             */
-/*   Updated: 2019/10/14 18:06:09 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/15 15:43:25 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+/*
+***		CREATE ROOM
+*/
 
 t_room	*create_room(char *line)
 {
@@ -37,6 +41,10 @@ t_room	*create_room(char *line)
 	return (room);
 }
 
+/*
+***		PARSE START ROOM AFTER COMMAND
+*/
+
 void	parse_start(t_env *env, t_room **table)
 {
 	t_room	*room;
@@ -45,7 +53,7 @@ void	parse_start(t_env *env, t_room **table)
 	if (env->start != NULL)
 	{
 		ft_strdel(&env->line);
-		ft_error(6);
+		ft_error(6, env);
 	}
 	ft_strdel(&env->line);
 	get_line(env);
@@ -58,12 +66,16 @@ void	parse_start(t_env *env, t_room **table)
 	if (!is_room(env->line))
 	{
 		ft_strdel(&env->line);
-		ft_error(4);
+		ft_error(4, env);
 	}
 	room = create_room(env->line);
-	insert_hash_table(table, room);
+	insert_hash_table(table, room, env);
 	env->start = room;
 }
+
+/*
+***		PARSE END ROOM AFTER COMMAND
+*/
 
 void	parse_end(t_env *env, t_room **table)
 {
@@ -73,7 +85,7 @@ void	parse_end(t_env *env, t_room **table)
 	if (env->end != NULL)
 	{
 		ft_strdel(&env->line);
-		ft_error(6);
+		ft_error(6, env);
 	}
 	ft_strdel(&env->line);
 	get_line(env);
@@ -86,12 +98,16 @@ void	parse_end(t_env *env, t_room **table)
 	if (!is_room(env->line))
 	{
 		ft_strdel(&env->line);
-		ft_error(4);
+		ft_error(4, env);
 	}
 	room = create_room(env->line);
-	insert_hash_table(table, room);
+	insert_hash_table(table, room, env);
 	env->end = room;
 }
+
+/*
+***		PARSE START OR END
+*/
 
 void	parse_startend(t_env *env, t_room **table)
 {

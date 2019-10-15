@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parse_links.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 16:18:14 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 17:20:29 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/15 15:43:46 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+/*
+***		ADD LINK TO ROOM
+*/
 
 void	add_link(t_room *room, t_link *link)
 {
@@ -26,6 +30,10 @@ void	add_link(t_room *room, t_link *link)
 		tail = tail->next;
 	tail->next = link;
 }
+
+/*
+***		CHECK THAT LINK DOESNT ALREADY EXISTS
+*/
 
 int		check_links(t_room *start, t_room *end)
 {
@@ -44,6 +52,10 @@ int		check_links(t_room *start, t_room *end)
 	start->linked_rooms = links;
 	return (1);
 }
+
+/*
+***		CREATE LINK
+*/
 
 void	*create_links(t_env *env, t_room *start, t_room *end)
 {
@@ -72,6 +84,10 @@ void	*create_links(t_env *env, t_room *start, t_room *end)
 	return (firstlink);
 }
 
+/*
+***		CHECK THAT ROOMS FROM LINK EXIST
+*/
+
 t_room	*find_room(t_room **table, char *room_name)
 {
 	t_room	*current;
@@ -89,6 +105,10 @@ t_room	*find_room(t_room **table, char *room_name)
 	}
 	return (NULL);
 }
+
+/*
+***		PARSE LINK
+*/
 
 void	*get_link(t_env *env, t_room **table, char *line)
 {
@@ -112,9 +132,9 @@ void	*get_link(t_env *env, t_room **table, char *line)
 		if (start_room && end_room && (start_room != end_room))
 			return (create_links(env, start_room, end_room));
 		if (start_room == end_room)
-			ft_error(9);
+			ft_error(9, env);
 		else
-			ft_error(2);
+			ft_error(2, env);
 	}
 	return (NULL);
 }

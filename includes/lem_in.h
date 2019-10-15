@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/10/15 11:37:11 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/15 16:21:28 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,64 +139,16 @@ typedef struct		s_env
 }					t_env;
 
 /*
-***		INIT.C
-*/
-
-t_env				*init_env(void);
-
-void				parse(t_env *env);
-
-/*
-***		print
-*/
-
-t_line				*create_line(char *content);
-void				add_line(t_env *env, t_line	*line);
-void				print_map(t_env *env);
-void				get_line(t_env *env);
-
-/*
-***		hash
-*/
-
-unsigned long long	hash_value(char *key);
-void				init_hashtable(t_room **table);
-void				insert_hash_table(t_room **table, t_room *room);
-void				print_hash(t_room **table, size_t size);
-
-/*
-***		rooms
-*/
-
-t_room				*create_room(char *line);
-void				add_room(t_env *env, t_room *room);
-void				parse_startend(t_env *env, t_room **table);
-t_room				*find_room(t_room **table, char *room_name);
-
-/*
-***		links
-*/
-
-void				add_link(t_room *room, t_link *link);
-void				*get_link(t_env *env, t_room **table, char *line);
-void				parse_links(t_env *env);
-
-/*
-***		checkers
-*/
-
-int					is_room(char *line);
-int					is_command(char *line);
-int					is_comment(char *line);
-int					is_link(char *line);
-int					command_type(char *line);
-
-/*
 ***		BFS
 */
 
 int					bfs(t_env *env);
-void				print_sol(t_env *env, t_sol *solution);
+
+/*
+***		CHECK STEPS
+*/
+
+int					check_steps(t_env *env);
 
 /*
 ***		EDMOND
@@ -204,6 +156,119 @@ void				print_sol(t_env *env, t_sol *solution);
 
 void				reset_inpath(t_sol *solution);
 int					edmond(t_env *env);
+
+/*
+***		ERROR
+*/
+
+void				error_invalid_file(t_env *env);
+void				invalid_ants(t_env *env);
+void				room_problems(t_env *env, int i);
+void				no_path(t_env *env);
+void				link_to_itself(t_env *env);
+
+/*
+***		FREE
+*/
+
+void				free_path(t_path *path);
+int					free_sol(t_sol **sol);
+void				free_queue(t_env *env);
+void				free_env(t_env *env);
+void				ft_error(int error, t_env *env);
+
+/*
+***		HASH
+*/
+
+unsigned long long	hash_value(char *key);
+void				insert_hash_table(t_room **table, t_room *room, t_env *e);
+void				free_table(t_room **table);
+void				free_rooms(t_room *rooms);
+void				free_links(t_link *links);
+
+/*
+***		INIT
+*/
+
+t_env				*init_env(void);
+void				init_hashtable(t_room **table);
+
+/*
+***		IS COMMANDS
+*/
+
+int					is_command(char *line);
+int					is_comment(char *line);
+int					command_type(char *line);
+
+/*
+***		IS LINK
+*/
+
+int					is_link(char *line);
+
+/*
+***		IS ROOM
+*/
+
+int					is_room(char *line);
+
+/*
+***		OPTI
+*/
+
+int					check_change_source(t_env *env, t_room *room, t_room *new);
+void				change_source(t_env *e, t_room *r, t_link *l, t_room *new);
+int					remontada(t_env *env, t_room *curr, t_link *curr_link);
+void				depthfirst_queue(t_env *env, t_room *room);
+
+/*
+***		PARSE LINKS
+*/
+
+void				add_link(t_room *room, t_link *link);
+t_room				*find_room(t_room **table, char *room_name);
+void				*get_link(t_env *env, t_room **table, char *line);
+void				parse_links(t_env *env);
+
+/*
+***		PARSE ROOMS
+*/
+
+t_room				*create_room(char *line);
+void				parse_startend(t_env *env, t_room **table);
+
+/*
+***		PARSER
+*/
+
+void				parse(t_env *env);
+
+/*
+***		PATHS
+*/
+
+t_path				*create_pathlink(t_env *env, t_room *room);
+t_path				*get_path(t_env *env, t_room *next, t_sol *sol);
+int					remove_path(t_env *env, t_sol *sol);
+t_path				*copy_path(t_env *env, t_sol *solution);
+
+/*
+***		PRINT MAP
+*/
+
+t_line				*create_line(char *content);
+void				add_line(t_env *env, t_line	*line);
+void				get_line(t_env *env);
+void				print_map(t_env *env);
+void				free_lines(t_line *line);
+
+/*
+***		PRINT SOL
+*/
+
+void				print_sol(t_env *env, t_sol *solution);
 
 /*
 ***		QUEUE
@@ -215,53 +280,23 @@ void				insert_before_queue(t_env *env, t_link *link, t_room *prev);
 void				get_queue(t_env *env, t_room *room);
 
 /*
-***		OPTI BFS
-*/
-
-int					check_change_source(t_env *env, t_room *room, t_room *new);
-void				change_source(t_env *e, t_room *r, t_link *l, t_room *new);
-int					remontada(t_env *env, t_room *curr, t_link *curr_link);
-void				depthfirst_queue(t_env *env, t_room *room);
-
-/*
-***		PATHS
-*/
-
-t_path				*create_pathlink(t_env *env, t_room *room);
-t_path				*get_path(t_env *env, t_room *next, t_sol *sol);
-int					remove_path(t_env *env, t_sol *sol);
-t_path				*copy_path(t_env *env, t_sol *solution);
-int					check_steps(t_env *env);
-void				free_path(t_path *path);
-
-/*
-***		SOLUTIONS.C
+***		SOLUTIONS
 */
 
 t_sol				*create_solution(t_env *env, t_room *n, int c, t_sol *pth);
 void				append_sol(t_env *env, t_sol *new, t_sol *to);
 t_sol				*dispatch_ants(t_env *env, t_sol *head);
 void				update_solution(t_env *env);
-int					free_sol(t_sol **sol);
 
 /*
-***		utils
+***		UTILS
 */
 
-void				ft_error(int error);
 void				print_paths(t_sol *current_sol);
 void				print_path(t_path *head);
 void				print_queue(t_env *env);
-void				printqueue(t_queue *queue);
+void				print_hash(t_room **table, size_t size);
 void				print_links(t_room *room);
-void				print_link(t_link *link);
-void				free_table(t_room **table);
-void				free_links(t_link *links);
-void				free_rooms(t_room *rooms);
-void				free_lines(t_line *line);
-void				free_2darray(char **arr);
-void				free_queue(t_env *env);
 void				print_bfs(t_env *env);
-void				free_env(t_env *env);
 
 #endif

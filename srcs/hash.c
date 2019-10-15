@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 14:11:33 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/15 11:06:43 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/15 15:41:25 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ unsigned long long	hash_value(char *key)
 ***		INSERT ROOM IN HASH TABLE
 */
 
-void				insert_hash_table(t_room **table, t_room *room)
+void				insert_hash_table(t_room **table, t_room *room, t_env *env)
 {
 	t_room *newnode;
 	t_room *tmp;
 	size_t hashedvalue;
 
 	if (find_room(table, room->name))
-		ft_error(8);
+		ft_error(8, env);
 	hashedvalue = hash_value(room->name);
 	if (table[hashedvalue] == NULL)
 		table[hashedvalue] = room;

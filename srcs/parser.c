@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 18:05:59 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/15 15:42:36 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	parse_ants(t_env *env)
 	if (get_next_line(0, &env->line) < 1)
 	{
 		ft_strdel(&env->line);
-		ft_error(1);
+		ft_error(1, env);
 	}
 	else
 		add_line(env, create_line(env->line));
@@ -26,13 +26,13 @@ void	parse_ants(t_env *env)
 	if (!ft_strdigit(env->line))
 	{
 		ft_strdel(&env->line);
-		ft_error(3);
+		ft_error(3, env);
 	}
 	env->ant_nb = ft_atoi(env->line);
 	if (env->ant_nb <= 0)
 	{
 		ft_strdel(&env->line);
-		ft_error(3);
+		ft_error(3, env);
 	}
 	ft_strdel(&env->line);
 }
@@ -47,7 +47,7 @@ void	reader(t_env *env, t_room **table)
 		if (is_room(env->line))
 		{
 			room = create_room(env->line);
-			insert_hash_table(table, room);
+			insert_hash_table(table, room, env);
 		}
 		else if (is_command(env->line))
 			parse_startend(env, table);
@@ -72,9 +72,9 @@ void	parse(t_env *env)
 	parse_ants(env);
 	reader(env, table);
 	if (!env->start || !env->end)
-		ft_error(4);
+		ft_error(4, env);
 	if (!env->flag_link)
-		ft_error(1);
+		ft_error(1, env);
 	if (!bfs(env))
-		ft_error(5);
+		ft_error(5, env);
 }

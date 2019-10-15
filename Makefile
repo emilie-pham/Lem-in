@@ -19,6 +19,7 @@ DFLAGS		=	-g3 -fsanitize=address,undefined
 SRCS		= 	bfs.c			\
 				check_steps.c	\
 				edmond.c		\
+				error.c			\
 				free.c			\
 				hash.c			\
 				init.c			\

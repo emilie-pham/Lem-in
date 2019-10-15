@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 14:28:40 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/14 17:40:56 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/15 15:34:53 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+/*
+***		CREATE LINE FROM GNL
+*/
 
 t_line		*create_line(char *content)
 {
@@ -22,6 +26,10 @@ t_line		*create_line(char *content)
 	line->next = NULL;
 	return (line);
 }
+
+/*
+***		ADD LINE TO ENV LINE
+*/
 
 void		add_line(t_env *env, t_line *line)
 {
@@ -41,11 +49,19 @@ void		add_line(t_env *env, t_line *line)
 	}
 }
 
+/*
+***		GET LINE FROM MAP
+*/
+
 void		get_line(t_env *env)
 {
 	get_next_line(0, &env->line);
 	add_line(env, create_line(env->line));
 }
+
+/*
+***		PRINT MAP
+*/
 
 void		print_map(t_env *env)
 {
@@ -59,6 +75,10 @@ void		print_map(t_env *env)
 	}
 	write(1, "\n", 1);
 }
+
+/*
+***		FREE LINES
+*/
 
 void		free_lines(t_line *line)
 {
