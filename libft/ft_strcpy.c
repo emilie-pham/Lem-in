@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 14:21:36 by yoribeir          #+#    #+#             */
-/*   Updated: 2018/11/14 17:09:50 by yoribeir         ###   ########.fr       */
+/*   Created: 2018/11/07 18:41:21 by yoribeir          #+#    #+#             */
+/*   Updated: 2019/10/15 17:10:40 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strcpy(char *dst, const char *src)
 {
-	char	*str;
+	int i;
 
-	if (!s1 || !s2)
-		return (0);
-	if (!(str = ft_strnew(ft_strlen(s1) + ft_strlen(s2))))
-		return (0);
-	ft_strcpy(str, s1);
-	ft_strcat(str, s2);
-	return (str);
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }
