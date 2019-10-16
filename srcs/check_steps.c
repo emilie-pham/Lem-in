@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_steps.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 13:58:29 by epham             #+#    #+#             */
-/*   Updated: 2019/10/14 17:25:42 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/16 16:12:55 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int			negative_ants(t_env *env, t_sol **negants)
 {
 	t_sol	*newhead;
 
+	newhead = NULL;
 	if ((*negants)->next)
 		newhead = (*negants)->next;
 	env->total_len -= (*negants)->pathlen;
