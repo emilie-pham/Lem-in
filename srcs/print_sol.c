@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 16:42:11 by epham             #+#    #+#             */
-/*   Updated: 2019/10/16 19:08:42 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/16 19:59:03 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void	print_sol(t_env *env, t_sol *solution)
 
 	env->next_ant = 1;
 	sol = solution;
-	env->countsteps = env->steps;
 	while (env->steps)
 	{
 		solution = sol;
