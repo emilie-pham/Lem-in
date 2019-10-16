@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 16:38:10 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/15 17:11:31 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/16 18:52:58 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,21 @@ char	*read_line(char *str, char *buffer, int sz)
 	char	*ret;
 
 	buffer[sz] = '\0';
+	if (ft_strlen(buffer) != sz)
+		return (NULL);
 	tmp = str;
 	ret = ft_strjoin(str, buffer);
+	free(tmp);
+	return (ret);
+}
+
+char	*save_rest(char *str, int sz)
+{
+	char *tmp;
+	char *ret;
+
+	tmp = str;
+	ret = ft_strdup(str + sz);
 	free(tmp);
 	return (ret);
 }
@@ -37,7 +50,8 @@ int		get_next_line(const int fd, char **line)
 		str = ft_strdup("");
 	while ((readsz = read(fd, buffer, BUFF_SIZE)))
 	{
-		str = read_line(str, buffer, readsz);
+		if (!(str = read_line(str, buffer, readsz)))
+			return (-1);
 		if (ft_strchr(str, '\n'))
 			break ;
 	}
@@ -47,8 +61,6 @@ int		get_next_line(const int fd, char **line)
 	*line = ft_strndup(str, readsz);
 	if (str[readsz] == '\n')
 		readsz++;
-	tmp = str;
-	str = ft_strdup(str + readsz);
-	free(tmp);
+	str = save_rest(str, readsz);
 	return (readsz > 0 ? 1 : 0);
 }

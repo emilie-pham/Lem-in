@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/15 17:22:29 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/16 19:13:43 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	parse_ants(t_env *env)
 		ft_error(3, env);
 	}
 	env->ant_nb = ft_atoi(env->line);
+	if (ft_strlen(env->line) != ft_nblen(env->ant_nb, 10))
+		ft_error(3, env);
 	if (env->ant_nb <= 0)
 	{
 		ft_strdel(&env->line);
