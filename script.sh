@@ -2,8 +2,8 @@
 diff=0
 best=50
 worst=0
-limit=3
-lower=-10
+limit=5
+lower=0
 result=0
 gen=0
 iterations=100
@@ -13,16 +13,16 @@ set -e
 set -o pipefail
 while [[ $loop != "0" ]]
 do
-	./generator --big > file
+	./generator --big-superposition > file
 	result="$( ./lem-in < file | grep L | wc -l )"
 	gen=$( tail -2 file | grep '#' | cut -d":" -f2 )
 	diff=$(( result - gen ))
 	if [ $diff -gt $limit ]
 		then
-			cp file maps/"flowone_bad_diff"$diff
+			cp file maps/"bigsup_bad_diff"$diff
 	elif [ $diff -lt $lower ]
 		then
-			cp file maps/"flowone_good_diff"$diff
+			cp file maps/"bigsup_good_diff"$diff
 	fi
 	if [ $diff -gt $worst ]
 		then

@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 17:12:42 by epham             #+#    #+#             */
-/*   Updated: 2019/10/15 16:19:29 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/15 22:20:30 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,13 @@ void	free_queue(t_env *env)
 		head = env->queue;
 		while (head)
 		{
-			head->room->prev = NULL;
-			head->room->visited = 0;
-			head->room->inqueue = 0;
-			head->room->weight = 0;
 			tmp = head;
 			head = head->next;
 			free(tmp);
 		}
+		env->queue = NULL;
+		env->end_queue = NULL;
 	}
-	env->queue = NULL;
-	env->end_queue = NULL;
 }
 
 /*

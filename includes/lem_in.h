@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/10/15 17:22:46 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/16 13:25:22 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# include <stdio.h>
-
 # define TABLE_SIZE 10007
-
-# define RED 	"\x1B[31m"
-# define GRN 	"\x1B[32m"
-# define YEL 	"\x1B[33m"
-# define BLU 	"\x1B[34m"
-# define MAG 	"\x1B[35m"
-# define CYN 	"\x1B[36m"
-# define WHT 	"\x1B[37m"
-# define RESET 	"\x1B[0m"
 
 /*
 ***		ROOM STRUCTURE

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+         #
+#    By: epham <epham@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/10 11:13:42 by yoribeir          #+#    #+#              #
-#    Updated: 2019/10/15 16:24:46 by yoribeir         ###   ########.fr        #
+#    Updated: 2019/10/16 13:22:49 by epham            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,7 +107,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $?
-	@echo "\033[1;34mLibft\t\033[1;33mCompilation\t\033[0;32m[OK]\033[0m"
+	@echo "\033[1;34mLibft\t\033[1;33mCompilation\t\t\033[0;32m[OK]\033[0m"
 
 clean:
 	rm -f $(OBJ)
@@ -115,7 +115,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	@echo "\033[1;34mLibft\t\033[1;33mCleaning Lib\t\033[0;32m[OK]\033[0m"
+	@echo "\033[1;34mLibft\t\033[1;33mCleaning Lib\t\t\033[0;32m[OK]\033[0m"
 
 re: fclean all
 

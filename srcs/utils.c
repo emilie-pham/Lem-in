@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/15 15:27:17 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/16 11:34:51 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,10 @@ void	print_queue(t_env *env)
 		ft_printf("\nQUEUE : ");
 		while (queue->next)
 		{
-			ft_printf("[room %s] , ", queue->room->name);
+			ft_printf("[room %s] , ", queue->room->name, queue);
 			queue = queue->next;
 		}
-		ft_printf("[room %s]\n\n", queue->room->name);
+		ft_printf("[room %s]\n\n", queue->room->name, queue);
 	}
 }
 
