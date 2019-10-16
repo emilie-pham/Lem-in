@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/16 19:13:43 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/16 21:12:04 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	reader(t_env *env, t_room **table)
 		add_line(env, create_line(env->line));
 		if (is_room(env->line))
 		{
+			if (env->flag_link == 1)
+				ft_error(10, env);
 			room = create_room(env->line);
 			insert_hash_table(table, room, env);
 		}
