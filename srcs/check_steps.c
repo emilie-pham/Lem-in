@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 13:58:29 by epham             #+#    #+#             */
-/*   Updated: 2019/10/16 16:12:55 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/16 19:04:13 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 ***		KEEP PATH WITH SMALLEST STEP
 */
 
-void		find_smallest_step_path(t_env *env)
+void			find_smallest_step_path(t_env *env)
 {
-	int			smallest;
-	t_sol		*sol;
+	unsigned long	smallest;
+	t_sol			*sol;
 
 	sol = env->current_sol;
-	smallest = 2147483647;
+	smallest = 4294967295;
 	while (sol)
 	{
 		sol->steps = sol->pathlen + sol->ants - 1;
@@ -42,7 +42,7 @@ void		find_smallest_step_path(t_env *env)
 ***		NEGATIVE ANTS
 */
 
-int			negative_ants(t_env *env, t_sol **negants)
+int				negative_ants(t_env *env, t_sol **negants)
 {
 	t_sol	*newhead;
 
@@ -64,11 +64,11 @@ int			negative_ants(t_env *env, t_sol **negants)
 ***		GET NUMBER OF STEPS FOR THIS SOLUTION SYSTEM
 */
 
-int			check_steps(t_env *env)
+unsigned long	check_steps(t_env *env)
 {
-	t_sol	*sol;
-	t_sol	*negants;
-	int		steps;
+	t_sol				*sol;
+	t_sol				*negants;
+	unsigned long		steps;
 
 	sol = env->current_sol;
 	steps = 0;

@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/10/16 13:25:22 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/16 19:08:13 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ typedef struct		s_link
 typedef struct		s_sol
 {
 	struct s_path	*path;
-	int				ants;
-	int				ants_sent;
-	int				ants_arrived;
-	int				pathlen;
-	int				steps;
+	unsigned long	ants;
+	unsigned long	ants_sent;
+	unsigned long	ants_arrived;
+	unsigned long	pathlen;
+	unsigned long	steps;
 	struct s_sol	*next;
 }					t_sol;
 
@@ -74,7 +74,7 @@ typedef struct		s_sol
 typedef struct		s_path
 {
 	t_room			*room;
-	int				ant_index;
+	unsigned long	ant_index;
 	struct s_path	*prev;
 	struct s_path	*next;
 }					t_path;
@@ -107,13 +107,14 @@ typedef struct		s_line
 typedef struct		s_env
 {
 	char			*line;
-	int				ant_nb;
-	int				next_ant;
+	unsigned long	ant_nb;
+	unsigned long	next_ant;
 	int				flag_link;
 	int				path_nb;
-	int				total_len;
-	int				ants_sent;
-	int				steps;
+	unsigned long	total_len;
+	unsigned long	ants_sent;
+	unsigned long	steps;
+	unsigned long	countsteps;
 	t_line			*read;
 	t_link			*links;
 	t_room			**table;
@@ -137,7 +138,7 @@ int					bfs(t_env *env);
 ***		CHECK STEPS
 */
 
-int					check_steps(t_env *env);
+unsigned long		check_steps(t_env *env);
 
 /*
 ***		EDMOND

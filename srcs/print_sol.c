@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 16:42:11 by epham             #+#    #+#             */
-/*   Updated: 2019/10/16 16:09:58 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/16 19:08:42 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,34 @@
 ***		CASE OF START END
 */
 
-void	print_end(t_sol *sol)
+void	print_end(t_env *env, t_sol *sol)
 {
-	int i;
+	unsigned long	i;
+	int				first;
 
 	i = 1;
+	first = 0;
 	while (i <= sol->ants)
 	{
-		ft_printf("L%d-%s\n", i, sol->path->room->name);
+		if (!first)
+		{
+			ft_printf("L%lu-%s", i, sol->path->room->name);
+			first = 1;
+		}
+		else
+			ft_printf(" L%lu-%s", i, sol->path->room->name);
 		i++;
 	}
+	env->steps = 1;
+	env->countsteps = 1;
+	ft_putchar('\n');
 }
 
 /*
 ***		MOVE ANTS
 */
 
-void	print_ants(t_env *env, t_sol *sol, int *i)
+void	print_ants(t_env *env, t_sol *sol, unsigned long *i)
 {
 	if (!ft_strcmp(sol->path->room->name, env->end->name))
 	{
@@ -40,7 +51,7 @@ void	print_ants(t_env *env, t_sol *sol, int *i)
 		{
 			if ((*i)++ != 0)
 				ft_printf(" ");
-			ft_printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
+			ft_printf("L%lu-%s", sol->path->ant_index, sol->path->room->name);
 			sol->ants_arrived++;
 		}
 	}
@@ -48,7 +59,7 @@ void	print_ants(t_env *env, t_sol *sol, int *i)
 	{
 		if ((*i)++ != 0)
 			ft_printf(" ");
-		ft_printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
+		ft_printf("L%lu-%s", sol->path->ant_index, sol->path->room->name);
 	}
 	sol->path = sol->path->prev;
 }
@@ -57,7 +68,7 @@ void	print_ants(t_env *env, t_sol *sol, int *i)
 ***		UPDATING ANT INDEX FOR EACH NODE
 */
 
-void	move_ants(t_env *env, t_sol *sol, t_path *head, int *i)
+void	move_ants(t_env *env, t_sol *sol, t_path *head, unsigned long *i)
 {
 	while (ft_strcmp(sol->path->room->name, head->next->room->name))
 	{
@@ -72,7 +83,7 @@ void	move_ants(t_env *env, t_sol *sol, t_path *head, int *i)
 		sol->ants_sent++;
 		if ((*i)++ != 0)
 			ft_printf(" ");
-		ft_printf("L%d-%s", sol->path->ant_index, sol->path->room->name);
+		ft_printf("L%lu-%s", sol->path->ant_index, sol->path->room->name);
 		(env->next_ant)++;
 	}
 	sol->path = head;
@@ -84,12 +95,13 @@ void	move_ants(t_env *env, t_sol *sol, t_path *head, int *i)
 
 void	print_sol(t_env *env, t_sol *solution)
 {
-	int			i;
-	t_sol		*sol;
-	t_path		*head;
+	unsigned long	i;
+	t_sol			*sol;
+	t_path			*head;
 
 	env->next_ant = 1;
 	sol = solution;
+	env->countsteps = env->steps;
 	while (env->steps)
 	{
 		solution = sol;
@@ -102,7 +114,7 @@ void	print_sol(t_env *env, t_sol *solution)
 			while (solution->path->ant_index && solution->path->next)
 				solution->path = solution->path->next;
 			if (!ft_strcmp(head->next->room->name, env->end->name))
-				return (print_end(solution));
+				return (print_end(env, solution));
 			move_ants(env, solution, head, &i);
 			solution = solution->next;
 		}

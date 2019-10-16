@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/10/16 16:30:26 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/16 19:14:17 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int				main(int ac, char **av)
 {
 	t_env	*env;
-	(void)ac;
-	(void)av;
 
 	if (!(env = init_env()))
 		return (0);
@@ -24,6 +22,8 @@ int				main(int ac, char **av)
 	print_map(env);
 	if (edmond(env) != 0)
 		print_sol(env, env->optimal_sol);
+	if (ac == 2 && !ft_strcmp(av[1], "-c"))
+		ft_printf("\nnumber of lines : %lu\n", env->countsteps);
 	free_table(env->table);
 	free_lines(env->read);
 	free_env(env);
