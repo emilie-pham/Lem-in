@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/10/16 13:20:25 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/16 16:30:26 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int				main(int ac, char **av)
 {
 	t_env	*env;
-
 	(void)ac;
 	(void)av;
+
 	if (!(env = init_env()))
 		return (0);
 	parse(env);
