@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_sol.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 16:42:11 by epham             #+#    #+#             */
-/*   Updated: 2019/10/16 19:59:03 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/17 14:33:23 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_end(t_env *env, t_sol *sol)
 
 	i = 1;
 	first = 0;
-	while (i <= sol->ants)
+	while ((long)i <= sol->ants)
 	{
 		if (!first)
 		{
@@ -77,7 +77,7 @@ void	move_ants(t_env *env, t_sol *sol, t_path *head, unsigned long *i)
 		print_ants(env, sol, i);
 	}
 	if (!ft_strcmp(sol->path->room->name, head->next->room->name)
-	&& sol->ants_sent < sol->ants)
+	&& (long)sol->ants_sent < sol->ants)
 	{
 		sol->path->ant_index = env->next_ant;
 		sol->ants_sent++;

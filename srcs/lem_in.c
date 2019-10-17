@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/10/17 09:51:42 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/17 14:49:49 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,7 @@ int				main(int ac, char **av)
 		env->countsteps = env->steps;
 		print_sol(env, env->optimal_sol);
 	}
-	if (ac == 2 && !ft_strcmp(av[1], "-c"))
-		ft_printf("\nnumber of lines : %lu\n", env->countsteps);
-	else if (ac == 2 && !ft_strcmp(av[1], "-p"))
-		print_paths(env->optimal_sol);
-	else if (ac == 3
-	&& ((!ft_strcmp(av[1], "-c") && !ft_strcmp(av[2], "-p"))
-	|| (!ft_strcmp(av[2], "-c") && !ft_strcmp(av[1], "-p"))))
-	{
-		print_paths(env->optimal_sol);
-		ft_printf("\nTotal number of lines : %lu\n", env->countsteps);
-	}
+	options(env, ac, av);
 	free_env(env);
 	free(env);
 	return (0);

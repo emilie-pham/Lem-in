@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/10/16 19:08:13 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/17 14:49:39 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct		s_link
 typedef struct		s_sol
 {
 	struct s_path	*path;
-	unsigned long	ants;
+	long			ants;
 	unsigned long	ants_sent;
 	unsigned long	ants_arrived;
 	unsigned long	pathlen;
@@ -212,6 +212,12 @@ int					check_change_source(t_env *env, t_room *room, t_room *new);
 void				change_source(t_env *e, t_room *r, t_link *l, t_room *new);
 int					remontada(t_env *env, t_room *curr, t_link *curr_link);
 void				depthfirst_queue(t_env *env, t_room *room);
+
+/*
+***		OPTIONS
+*/
+
+void				options(t_env *env, int ac, char **av);
 
 /*
 ***		PARSE LINKS

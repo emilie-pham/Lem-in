@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 18:08:25 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/04/11 17:12:56 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/17 14:21:17 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*itoa_base_ulong(t_parser *p, uintmax_t n, int base, char *s_base)
 		p->f |= ZEROVALUE;
 		str[0] = '0';
 	}
-	str[p->slen + 1] = '\0';
+	str[p->slen] = '\0';
 	i = 0;
 	while (nb)
 	{
