@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 16:38:10 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/16 18:52:58 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/17 09:41:07 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*read_line(char *str, char *buffer, int sz)
+char	*read_line(char *str, char *buffer, size_t sz)
 {
 	char	*tmp;
 	char	*ret;
@@ -42,7 +42,6 @@ int		get_next_line(const int fd, char **line)
 	int				readsz;
 	char			buffer[BUFF_SIZE + 1];
 	static	char	*str;
-	char			*tmp;
 
 	if (fd < 0 || !line || read(fd, buffer, 0) < 0)
 		return (-1);

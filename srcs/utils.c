@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/16 11:34:51 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/17 09:42:13 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	print_paths(t_sol *current_sol)
 	t_path		*start;
 
 	head = current_sol;
-	ft_printf("SOLUTION SET :\n");
+	ft_printf("\nSOLUTION SET :\n");
 	while (current_sol)
 	{
 		ft_printf("PATHLEN : %d\n", current_sol->pathlen);

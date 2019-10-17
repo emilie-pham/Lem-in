@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 17:12:42 by epham             #+#    #+#             */
-/*   Updated: 2019/10/16 21:10:25 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/17 09:35:55 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	free_queue(t_env *env)
 
 void	free_env(t_env *env)
 {
+	free_table(env->table);
+	free_lines(env->read);
 	ft_strdel(&env->line);
 	if (env->queue)
 		free_queue(env);
