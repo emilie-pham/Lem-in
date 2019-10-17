@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:59:33 by epham             #+#    #+#             */
-/*   Updated: 2019/10/17 09:35:58 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/17 09:51:42 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int				main(int ac, char **av)
 	|| (!ft_strcmp(av[2], "-c") && !ft_strcmp(av[1], "-p"))))
 	{
 		print_paths(env->optimal_sol);
-		ft_printf("\nnumber of lines : %lu\n", env->countsteps);
+		ft_printf("\nTotal number of lines : %lu\n", env->countsteps);
 	}
 	free_env(env);
 	free(env);
