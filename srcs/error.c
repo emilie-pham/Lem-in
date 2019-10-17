@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:46:02 by epham             #+#    #+#             */
-/*   Updated: 2019/10/15 16:21:39 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/16 21:10:44 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void		room_problems(t_env *env, int i)
 		ft_putstr_fd("DOUBLE ROOM\n", 2);
 	else if (i == 4)
 		ft_putstr_fd("ROOM START OR END MISSING\n", 2);
+	else if (i == 5)
+		ft_putstr_fd("ROOM AFTER LINKS\n", 2);
 }
 
 void		no_path(t_env *env)

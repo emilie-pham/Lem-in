@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 17:12:42 by epham             #+#    #+#             */
-/*   Updated: 2019/10/15 22:20:30 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/16 21:10:25 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ void	ft_error(int error, t_env *env)
 		room_problems(env, 3);
 	if (error == 9)
 		link_to_itself(env);
+	if (error == 10)
+		room_problems(env, 5);
 	free(env);
 	exit(1);
 }
