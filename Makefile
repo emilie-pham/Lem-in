@@ -136,8 +136,8 @@ YELLOW		=	\x1b[38;5;228m
 
 all: $(NAME)
 
-%.o: $(SRCSREP)/%.c
-	@gcc $(FLAGS) -I$(INCLUDES) -c $^
+%.o: $(SRCSREP)/%.c $(HEADER)
+	@gcc $(FLAGS) -I$(INCLUDES) -o $@ -c $<
 
 debug:
 	@gcc $(DFLAGS) srcs/*.c libft/*.c -o $(NAME)
