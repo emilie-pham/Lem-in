@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 14:36:38 by epham             #+#    #+#             */
-/*   Updated: 2019/10/15 14:42:32 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/18 12:00:40 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			check_flows(t_env *env, t_path **path, t_link **link, t_path **head)
 		*link = (*link)->next;
 	if (!(*link && ((*path)->next = create_pathlink(env, (*link)->dest))))
 	{
-		free_path(*head);
+		free_path(head);
 		return (-1);
 	}
 	(*path)->next->prev = *path;
@@ -99,7 +99,7 @@ int			remove_path(t_env *env, t_sol *remove)
 		prev = current;
 		current = current->next;
 	}
-	free_path(remove->path);
+	free_path(&(remove->path));
 	if (current == env->current_sol && current->next)
 		env->current_sol = current->next;
 	else if (current->next)
@@ -133,7 +133,7 @@ t_path		*copy_path(t_env *env, t_sol *solution)
 		head = head ? head : new;
 		if (current)
 			current->next = new;
-		current = new ? new : head;
+		current = new;
 		path = path->next;
 	}
 	return (head);

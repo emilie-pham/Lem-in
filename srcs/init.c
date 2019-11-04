@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 16:12:56 by epham             #+#    #+#             */
-/*   Updated: 2019/10/16 19:08:02 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/18 18:24:27 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_env		*init_env(void)
 	env->path_nb = 0;
 	env->total_len = 0;
 	env->ants_sent = 0;
-	env->steps = 2147483647;
+	env->steps = 2147483648;
 	env->countsteps = 0;
 	env->shortest_path = NULL;
 	env->second_shortest = NULL;

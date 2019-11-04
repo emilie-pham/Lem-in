@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:42:39 by epham             #+#    #+#             */
-/*   Updated: 2019/10/15 11:40:03 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/18 18:28:39 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ static int		find_sol_paths(t_env *env)
 
 int				edmond(t_env *env)
 {
-	int			first;
-	int			steps;
+	int				first;
+	unsigned long	steps;
 
 	while (bfs(env) == 1)
 	{

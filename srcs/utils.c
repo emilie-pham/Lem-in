@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:46 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/17 09:42:13 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/17 16:22:15 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,31 +59,33 @@ void	print_path(t_path *head)
 ***		PRINT SET OF SOLUTION PATHS
 */
 
-void	print_paths(t_sol *current_sol)
+void	print_paths(t_sol *sol)
 {
 	t_sol		*head;
 	t_path		*start;
 
-	head = current_sol;
+	head = sol;
+	if (!sol)
+		return ;
 	ft_printf("\nSOLUTION SET :\n");
-	while (current_sol)
+	while (sol)
 	{
-		ft_printf("PATHLEN : %d\n", current_sol->pathlen);
-		ft_printf("ANTS TO SEND IN THIS PATH : %d\n", current_sol->ants);
-		start = current_sol->path;
-		while (current_sol->path)
+		ft_printf("PATHLEN : %d, STEPS %lu\n", sol->pathlen, sol->steps);
+		ft_printf("ANTS TO SEND IN THIS PATH : %d\n", sol->ants);
+		start = sol->path;
+		while (sol->path)
 		{
-			if (current_sol->path->next)
-				ft_printf("[%s] => ", current_sol->path->room->name);
+			if (sol->path->next)
+				ft_printf("[%s] => ", sol->path->room->name);
 			else
-				ft_printf("[%s]", current_sol->path->room->name);
-			current_sol->path = current_sol->path->next;
+				ft_printf("[%s]", sol->path->room->name);
+			sol->path = sol->path->next;
 		}
-		current_sol->path = start;
+		sol->path = start;
 		ft_printf("\n\n");
-		current_sol = current_sol->next;
+		sol = sol->next;
 	}
-	current_sol = head;
+	sol = head;
 }
 
 /*

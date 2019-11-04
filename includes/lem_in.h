@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 13:43:08 by epham             #+#    #+#             */
-/*   Updated: 2019/10/17 14:49:39 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/18 11:50:26 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void				link_to_itself(t_env *env);
 ***		FREE
 */
 
-void				free_path(t_path *path);
+void				free_path(t_path **path);
 int					free_sol(t_sol **sol);
 void				free_queue(t_env *env);
 void				free_env(t_env *env);
@@ -264,7 +264,7 @@ void				free_lines(t_line *line);
 ***		PRINT SOL
 */
 
-void				print_sol(t_env *env, t_sol *solution);
+void				print_sol(t_env *env, t_sol *solution, unsigned long i);
 
 /*
 ***		QUEUE

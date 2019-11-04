@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_steps.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 13:58:29 by epham             #+#    #+#             */
-/*   Updated: 2019/10/16 19:04:13 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/17 15:57:41 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ unsigned long	check_steps(t_env *env)
 		find_smallest_step_path(env);
 	while (sol)
 	{
-		sol->steps = sol->pathlen + sol->ants - 1;
+		sol->steps = sol->pathlen == 1
+		? 1 : sol->pathlen + sol->ants - 1;
 		if (sol->steps > steps)
 			steps = sol->steps;
 		sol = sol->next;

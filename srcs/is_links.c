@@ -6,7 +6,7 @@
 /*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 19:21:29 by epham             #+#    #+#             */
-/*   Updated: 2019/10/15 16:29:38 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/17 15:25:47 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int		is_link(char *line)
 	count = 0;
 	ret = 0;
 	if (is_comment(line))
+		return (0);
+	if (count_letter(line, '-') != 1)
 		return (0);
 	if (!(split = ft_strsplit(line, '-')))
 		return (0);

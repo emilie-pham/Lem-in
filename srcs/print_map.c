@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 14:28:40 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/16 12:40:21 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/18 15:10:21 by yoribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ void		add_line(t_env *env, t_line *line)
 
 void		get_line(t_env *env)
 {
-	get_next_line(0, &env->line);
-	add_line(env, create_line(env->line));
+	if (get_next_line(0, &env->line) == -1)
+		ft_error(1, env);
+	else
+		add_line(env, create_line(env->line));
 }
 
 /*

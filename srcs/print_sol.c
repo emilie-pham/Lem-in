@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_sol.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 16:42:11 by epham             #+#    #+#             */
-/*   Updated: 2019/10/17 14:33:23 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/18 18:28:54 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,23 @@
 ***		CASE OF START END
 */
 
-void	print_end(t_env *env, t_sol *sol)
+void	print_end(t_env *env, t_sol *sol, t_path *head)
 {
 	unsigned long	i;
 	int				first;
 
 	i = 1;
 	first = 0;
+	sol->path = head;
 	while ((long)i <= sol->ants)
 	{
 		if (!first)
 		{
-			ft_printf("L%lu-%s", i, sol->path->room->name);
+			ft_printf("L%lu-%s", i, env->end->name);
 			first = 1;
 		}
 		else
-			ft_printf(" L%lu-%s", i, sol->path->room->name);
+			ft_printf(" L%lu-%s", i, env->end->name);
 		i++;
 	}
 	env->steps = 1;
@@ -93,9 +94,8 @@ void	move_ants(t_env *env, t_sol *sol, t_path *head, unsigned long *i)
 ***		PRINT SOLUTION
 */
 
-void	print_sol(t_env *env, t_sol *solution)
+void	print_sol(t_env *env, t_sol *solution, unsigned long i)
 {
-	unsigned long	i;
 	t_sol			*sol;
 	t_path			*head;
 
@@ -113,8 +113,9 @@ void	print_sol(t_env *env, t_sol *solution)
 			while (solution->path->ant_index && solution->path->next)
 				solution->path = solution->path->next;
 			if (!ft_strcmp(head->next->room->name, env->end->name))
-				return (print_end(env, solution));
+				return (print_end(env, solution, head));
 			move_ants(env, solution, head, &i);
+			solution->path = head;
 			solution = solution->next;
 		}
 		(env->steps)--;

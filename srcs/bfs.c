@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 11:57:31 by epham             #+#    #+#             */
-/*   Updated: 2019/10/15 22:20:57 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/18 13:52:17 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			check_start_end(t_env *env)
 	fullstart = 1;
 	while (start && end)
 	{
-		fullstart = start->rev->flow != 1 ? 0 : 1;
+		fullstart = start->flow != 1 ? 0 : 1;
 		fullend = end->rev->flow != 1 ? 0 : 1;
 		if (fullstart)
 			start = start->next;
@@ -81,6 +81,8 @@ int			bfs(t_env *env)
 	t_queue		*queue;
 
 	current = env->start;
+	if (env->optimal_sol && env->optimal_sol->pathlen == 1)
+		return (0);
 	if (init_bfs(env))
 	{
 		current->visited = 1;
@@ -92,10 +94,9 @@ int			bfs(t_env *env)
 		while (ft_strcmp(current->name, env->end->name))
 		{
 			get_queue(env, current);
-			if (queue->next)
-				queue = queue->next;
-			else
+			if (!queue->next)
 				return (0);
+			queue = queue->next;
 			current = queue->room;
 		}
 		return (1);

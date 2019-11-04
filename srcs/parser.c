@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoribeir <yoribeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 20:26:13 by yoribeir          #+#    #+#             */
-/*   Updated: 2019/10/16 21:12:04 by yoribeir         ###   ########.fr       */
+/*   Updated: 2019/10/18 17:23:35 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 
 void	parse_ants(t_env *env)
 {
-	if (get_next_line(0, &env->line) < 1)
+	get_line(env);
+	while (is_comment(env->line))
 	{
 		ft_strdel(&env->line);
-		ft_error(1, env);
-	}
-	else
-		add_line(env, create_line(env->line));
-	while (is_comment(env->line))
 		get_line(env);
+	}
 	if (!ft_strdigit(env->line))
 	{
 		ft_strdel(&env->line);
 		ft_error(3, env);
 	}
 	env->ant_nb = ft_atoi(env->line);
-	if (ft_strlen(env->line) != ft_nblen(env->ant_nb, 10))
+	if (ft_strlen(env->line) != ft_nblen(env->ant_nb, 10)
+	|| ft_strlen(env->line) > 10)
 		ft_error(3, env);
 	if (env->ant_nb <= 0)
 	{
@@ -60,7 +58,7 @@ void	reader(t_env *env, t_room **table)
 				break ;
 		if ((!is_room(env->line)) && !(is_link(env->line))
 		&& !(is_comment(env->line)) && !is_command(env->line))
-			break ;
+			ft_error(11, env);
 		ft_strdel(&env->line);
 	}
 }
@@ -75,6 +73,7 @@ void	parse(t_env *env)
 	init_hashtable(table);
 	parse_ants(env);
 	reader(env, table);
+	ft_strdel(&env->line);
 	if (!env->start || !env->end)
 		ft_error(4, env);
 	if (!env->flag_link)

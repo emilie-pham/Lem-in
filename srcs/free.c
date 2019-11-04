@@ -6,7 +6,7 @@
 /*   By: epham <epham@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 17:12:42 by epham             #+#    #+#             */
-/*   Updated: 2019/10/17 09:35:55 by epham            ###   ########.fr       */
+/*   Updated: 2019/10/18 11:55:59 by epham            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 ***		FREE PATH
 */
 
-void	free_path(t_path *path)
+void	free_path(t_path **path)
 {
 	t_path *tmp;
+	t_path *head;
 
-	while (path)
+	head = *path;
+	while (head)
 	{
-		tmp = path;
-		path->room = NULL;
-		path = path->next;
-		tmp->next = NULL;
+		tmp = (head);
+		(head) = (head)->next;
 		free(tmp);
-		tmp = NULL;
 	}
+	*path = NULL;
 }
 
 /*
@@ -38,21 +38,22 @@ void	free_path(t_path *path)
 int		free_sol(t_sol **sol)
 {
 	t_sol	*tmp;
-	t_sol	**head;
+	t_sol	*head;
 
-	head = sol;
-	if (*sol)
+	head = *sol;
+	if (head)
 	{
-		while (*sol)
+		while (head)
 		{
-			free_path((*sol)->path);
-			tmp = *sol;
-			*sol = (*sol)->next;
-			tmp->next = NULL;
+			if ((head)->path)
+			{
+				free_path(&((head)->path));
+			}
+			tmp = head;
+			head = (head)->next;
 			free(tmp);
 		}
-		*head = NULL;
-		head = NULL;
+		*sol = NULL;
 	}
 	return (1);
 }
@@ -86,15 +87,15 @@ void	free_queue(t_env *env)
 
 void	free_env(t_env *env)
 {
-	free_table(env->table);
 	free_lines(env->read);
 	ft_strdel(&env->line);
 	if (env->queue)
 		free_queue(env);
-	if (env->current_sol)
+	if (env->current_sol != NULL)
 		free_sol(&env->current_sol);
-	if (env->optimal_sol)
+	if (env->optimal_sol != NULL)
 		free_sol(&env->optimal_sol);
+	free_table(env->table);
 }
 
 /*
@@ -123,6 +124,8 @@ void	ft_error(int error, t_env *env)
 		link_to_itself(env);
 	if (error == 10)
 		room_problems(env, 5);
+	if (error == 11)
+		error_invalid_file(env);
 	free(env);
 	exit(1);
 }
